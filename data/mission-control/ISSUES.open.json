@@ -1,1 +1,81 @@
-[]
+[
+  {
+    "id": "issue-2026-05-22-001",
+    "title": "Vybrat první oblast online monetizace pro research sprint",
+    "status": "open",
+    "severity": "high",
+    "owner": "alexmorgan",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "strategy",
+      "research",
+      "first-loop"
+    ],
+    "question": "Kterou oblast má AgentMint rozebrat jako první, aby z ní vznikl malý bezpečný experiment s potenciálem příjmu?",
+    "impact": "Rozhodnutí nastaví první research schema, experiment checklist a budoucí modulovou strukturu.",
+    "options": [
+      {
+        "label": "B2B lead generation",
+        "summary": "Agent hledá firmy s konkrétním signálem potřeby a připravuje ručně schválený outbound.",
+        "tradeoff": "Dobře měřitelné a blízko peněz, ale vyžaduje přísné anti-spam a reputační guardrails."
+      },
+      {
+        "label": "Micro-SaaS ops automation",
+        "summary": "Agent hledá opakovaný provozní problém a prodává jednoduchou automatizaci nebo službu.",
+        "tradeoff": "Vyšší šance na skutečnou hodnotu, ale delší discovery a delivery cyklus."
+      },
+      {
+        "label": "Content-to-service funnel",
+        "summary": "Agent vytváří specializovaný obsah, měří poptávku a konvertuje ji na službu.",
+        "tradeoff": "Nižší riziko a levný test, ale pomalejší signál příjmů."
+      }
+    ],
+    "decision_needed_for": [
+      "first research sprint",
+      "first experiment",
+      "module priorities"
+    ],
+    "links": [
+      {
+        "label": "TODO tasks",
+        "path": "TODO.tasks.json"
+      },
+      {
+        "label": "First monetization experiments shortlist",
+        "path": "workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md"
+      },
+      {
+        "label": "First monetization test checklist",
+        "path": "workspace/experiments/checklists/first-monetization-test-checklist.md"
+      },
+      {
+        "label": "Agent Automation Desk spec",
+        "path": "workspace/experiments/specs/2026-05-23-agent-automation-desk.md"
+      },
+      {
+        "label": "Agent Automation Desk offer draft",
+        "path": "workspace/experiments/assets/agent-automation-desk-offer.md"
+      },
+      {
+        "label": "Agent Automation Desk outreach drafts",
+        "path": "workspace/experiments/assets/outreach-drafts.md"
+      },
+      {
+        "label": "Discovery call script",
+        "path": "workspace/experiments/templates/discovery-call-script.md"
+      },
+      {
+        "label": "Intake template",
+        "path": "workspace/experiments/templates/intake-template.md"
+      },
+      {
+        "label": "Run log template",
+        "path": "workspace/experiments/templates/run-log-template.md"
+      }
+    ],
+    "current_decision": "Jan schválil doporučení začít mechanismem DesignJoy-for-automation jako Agent Automation Desk. Issue zůstává open pro launch approvals: pilot cena, ICP, prospect list a outreach copy.",
+    "selected_option": "Micro-SaaS ops automation / productized agent automation service",
+    "imported_from": "ISSUES.open.json"
+  }
+]

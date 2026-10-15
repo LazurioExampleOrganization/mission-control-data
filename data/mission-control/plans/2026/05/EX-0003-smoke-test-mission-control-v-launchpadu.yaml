@@ -1,0 +1,37 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0003
+dev_code: EX-0003
+title: Smoke test Mission Control v Launchpadu
+status: archived
+owner: alexmorgan
+priority: medium
+priority_rank: 2
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: Ověřujeme, že Mission Control běží jako lokální plánovací centrum přes Launchpad a ukládá strategickou
+  agendu do YAML souborů ve workspace.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: '- Potvrdit čtení i zápis strategického plánu přes lokální UI.'
+scope:
+  in:
+  - Ověřit, že Launchpad spustí Mission Control.
+  - Ověřit, že UI vytvoří YAML plan.
+  out:
+  - Nepoužívat tento plan jako živou strategickou prioritu.
+acceptance_criteria:
+- V Mission Control je po odeslání vidět nový YAML plán.
+validation:
+- Check every acceptance criterion against recorded evidence.
+implementation_validation:
+- |
+  Outcome recorded in v1: Smoke test proběhl úspěšně. Mission Control se spustil přes Launchpad,
+  zobrazil bootstrap plan a vytvořil tento YAML plan. Plan je archivovaný,
+  aby nepřekážel mezi živými strategickými prioritami.
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-002 (mission-control/plans/2026/05/smoke-test-mission-control-v-launchpadu.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.
+  - The v1 outcome is kept in implementation_validation.

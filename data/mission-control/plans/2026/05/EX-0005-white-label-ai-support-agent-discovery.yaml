@@ -1,0 +1,76 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0005
+dev_code: EX-0005
+title: White-label AI support agent discovery
+status: shaping
+owner: alexmorgan
+priority: medium
+priority_rank: 4
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Druhý kandidát monetizačního experimentu: done-with-you nastavení
+  specializovaného AI support agentu pro agentury a jejich klienty.
+  Mechanismus vychází z poptávky po support chatbotech a knowledge-base
+  agentech, ale AgentMint adaptace musí být postavená na datech dodaných se
+  souhlasem, jasném scope a bezpečném handoffu.
+
+  Tento plán zatím nemá startovat delivery. Má zformovat discovery test, který
+  ověří, jestli agentury chtějí white-label nabídku a jsou ochotné nést část
+  support odpovědnosti vůči svým klientům.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Ověřit zájem agentur o white-label AI support setup.
+  - Zjistit, jaký minimální setup by šel prodat bez velkého technického závazku.
+  - Oddělit poptávku po jednorázovém setupu od dlouhodobého support retaineru.
+scope:
+  in:
+  - Discovery nabídka pro web/design/marketing agentury.
+  - Done-with-you setup nad veřejným webem nebo daty dodanými se souhlasem.
+  - Návrh bezpečného pilot scope, ceny a odpovědností.
+  out:
+  - Připojení na klientské účty bez explicitního approvalu.
+  - Práce s neveřejnými zákaznickými daty bez governance.
+  - Garance přesnosti odpovědí bez human review workflow.
+acceptance_criteria:
+- Existuje discovery script pro agentury a jejich obavy.
+- Existuje návrh minimálního pilot package.
+- Existuje rizikový checklist pro data, odpovědnost a hallucinations.
+- Plán má rozhodnutí, zda testovat po Agent Automation Desk nebo odložit.
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- Support bot může poškodit důvěru klienta, pokud odpovídá špatně.
+- White-label model rozmazává odpovědnost mezi AgentMintem, agenturou a koncovým klientem.
+- Technická delivery může rychle přerůst do custom integration projektu.
+decisions:
+- date: '2026-05-23'
+  decision: Netestovat jako první; připravit až jako druhý kandidát.
+  rationale: B2B signál je silný, ale integrační závazek je vyšší než u Agent Automation Desk.
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Připravit discovery brief pro white-label support agent
+  summary: Sepsat otázky, pilot package a risk checklist pro rozhovory s agenturami.
+  priority: medium
+  tags:
+  - discovery
+  - support-agent
+  - agency-channel
+  acceptance_criteria:
+  - Brief obsahuje buyer, pain, data requirements, liability a pricing otázky.
+  - Brief má guardrails pro zákaznická data a human review.
+  - Brief končí rozhodovacím kritériem testovat/odložit.
+links:
+- label: Experiment shortlist
+  path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md
+- label: Research scan
+  path: company/agents/reference/research-sprint-2026-05-22-copyable-online-projects.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-004 (mission-control/plans/2026/05/white-label-ai-support-agent-discovery.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

@@ -1,0 +1,91 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0012
+dev_code: EX-0012
+title: Mission Control jako root repo a work board pro agenty
+status: done
+owner: alexmorgan
+priority: medium
+priority_rank: 11
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Mission Control nemá být business modul v `modules/`, ale workspace control-plane vrstva vedle `launchpad/`. Uživatel chce, aby měl vlastní root-level repo podobně jako `infra/` a současně UI, kde Workspace Admin, Správce Workspace a Power Usery vidí nascanované `TODO.tasks.json`, `DONE.tasks.json` a `ISSUES.open.json` jako kanban přehled práce pro agenty.
+
+  Plán drží kontext a rozhodnutí. Task ledgery drží konkrétní vykonatelnou práci a každý TODO task má mít `planning` referenci zpět na Mission Control plán.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Povýšit Mission Control na root-level control-plane repo `mission-control/`.
+  - Zachovat Launchpad discovery a pevný port Mission Controlu.
+  - Přidat první read-only work board nad TODO/DONE/ISSUES ledgery.
+  - Zviditelnit, které TODO tasky ještě nemají Mission Control plán.
+scope:
+  in:
+  - Root-level přesun lokálního Mission Control repa.
+  - Launchpad discovery pro root-level manifest sloty.
+  - Read-only work board nad filesystem ledgery.
+  - Aktualizace dokumentace, skillů a plánovacích referencí.
+  out:
+  - Plné role-based oprávnění nebo autentizace.
+  - Drag-and-drop editace tasků.
+  - Automatické přepisování starých root TODO tasků bez plánovací reference.
+acceptance_criteria:
+- '`company/scripts/modules.manifest.json` ukazuje Mission Control na `mission-control/`.'
+- Launchpad registry umí objevit app-bearing manifest slot mimo `modules/`.
+- Mission Control API poskytuje work board nad `TODO.tasks.json`, `DONE.tasks.json` a `ISSUES.open.json`.
+- UI ukazuje kanban sloupce planned, in progress, review, blocked, done a issues.
+- Work board ukazuje planning coverage pro TODO tasky.
+- Export do TODO počítá workspace root správně po přesunu z `modules/mission-control`.
+validation:
+- Check every acceptance criterion against recorded evidence.
+implementation_validation:
+- |
+  Outcome recorded in v1: Mission Control byl přesunut z `modules/mission-control/` na root-level `mission-control/` a inicializovaný jako lokální nested Git repo. Launchpad registry umí objevit root-level manifest slot a Mission Control běží na původním portu 5693.
+
+  V1 UI má novou Work board sekci pro Workspace Admina, Správce Workspace a Power Usery. Server endpoint `/api/work-board` skenuje `TODO.tasks.json`, `DONE.tasks.json` a `ISSUES.open.json` napříč workspace, skládá kanban sloupce a ukazuje planning coverage. Smoke test potvrdil 11 validních plánů, 14 TODO položek, 2 open issues a žádné invalidní UI bloky.
+risk_notes:
+- Super-repo nesmí začít trackovat obsah nested repa ani gitlink pointer.
+- Scanner ledgerů nesmí procházet build/cache/runtime složky.
+- Starší TODO tasky bez Mission Control plánů se mají nejdřív zviditelnit, ne potichu přepsat.
+decisions:
+- date: '2026-05-23'
+  decision: Mission Control patří do rootu workspace jako control-plane repo.
+  rationale: Role Mission Controlu je plánování a orchestrace celé agendy workspace, takže je stejné vrstvy
+    jako Launchpad nebo Infra, ne doménový business modul.
+- date: '2026-05-23'
+  decision: První work board bude read-only scanner filesystem ledgerů.
+  rationale: Nejdřív potřebujeme pravdivě vidět stav práce a planning coverage; editace a role-based pravidla
+    můžou přijít až po ověření core modelu.
+todo_outputs:
+- task-2026-05-23-007
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Dovést root-level Mission Control work board migraci do ověřeného stavu
+  summary: Dokončit přesun Mission Controlu na root-level repo, přidat work board nad task ledgery, aktualizovat
+    reference a ověřit Launchpad smoke test.
+  priority: high
+  tags:
+  - root-repo
+  - work-board
+  - launchpad
+  acceptance_criteria:
+  - Launchpad objeví Mission Control z root-level manifest slotu.
+  - Work board API vrací TODO/DONE/ISSUES sloupce.
+  - UI ukazuje planning coverage a odkazy na plány.
+  - Build, registry testy a workspace task validace projdou.
+links:
+- label: Mission Control architecture
+  path: mission-control/ARCHITECTURE.md
+- label: Launchpad app registry
+  path: launchpad/app/v1/core/apps/registry.ts
+- label: Work board scanner
+  path: mission-control/app/v1/src/work-board.ts
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-011 (mission-control/plans/2026/05/mission-control-root-repo-work-board.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.
+  - The v1 outcome is kept in implementation_validation.

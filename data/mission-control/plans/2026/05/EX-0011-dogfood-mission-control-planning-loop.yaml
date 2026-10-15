@@ -1,0 +1,117 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0011
+dev_code: EX-0011
+title: Dogfood Mission Control planning loop
+status: in_progress
+owner: alexmorgan
+priority: medium
+priority_rank: 10
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Ověřujeme Mission Control tím, že v něm plánujeme další vývoj Mission Controlu. Cílem je projít celý loop: plán vznikne jako YAML, plán obsahuje rozhodnutí a navržené tasky, export vytvoří implementační TODO a výsledek se vrátí zpět do plánu jako evidence.
+
+  Tento dogfood test má ukázat, jestli Mission Control opravdu drží strategický kontext lépe než chat nebo ad hoc TODO zápis.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Použít Mission Control jako source of truth pro vlastní vývoj Mission Controlu.
+  - Ověřit, že plán se dá převést do konkrétních implementačních tasků bez ručního kopírování.
+  - Zachytit friction body, které brání agentům plánovat přes filesystem DB pohodlně.
+scope:
+  in:
+  - Založit dogfood plán v Mission Controlu.
+  - Vygenerovat a materializovat TODO tasky přes Mission Control export.
+  - Doplnit do plánu `todo_outputs` a outcome/evidence poznámku.
+  - Vyhodnotit, co chybí pro plánování strategie AgentMintu.
+  out:
+  - Stavět celý Linear-like core v jednom kroku.
+  - Řešit monetizační experimenty dřív než plánovací jádro.
+  - Zavádět externí planning tool jako source of truth.
+acceptance_criteria:
+- Plán existuje jako validní YAML v Mission Control `plans/`.
+- Dry-run export z plánu navrhne konkrétní implementační tasky.
+- Apply export zapíše tasky do `mission-control/TODO.tasks.json` s planning referencemi.
+- Plán má vyplněné `todo_outputs` na vytvořené tasky.
+- Vznikne krátké vyhodnocení friction bodů pro další iteraci Mission Controlu.
+validation:
+- Check every acceptance criterion against recorded evidence.
+implementation_validation:
+- |
+  Outcome recorded in v1: Dogfood loop proběhl v první iteraci úspěšně: plán byl založen přes Mission Control API, export dry-run vygeneroval tři konkrétní tasky a --apply je zapsal do mission-control/TODO.tasks.json s planning referencí zpět na tento YAML plán.
+
+  Friction zjištění: create API neumí doplnit decisions hned při založení, takže rozhodnutí bylo potřeba doplnit následným update krokem. To potvrzuje prioritu tasku na editorové pole pro decisions. Druhé zjištění: workflow je použitelné, ale strategické plánování bude potřebovat dedicated view pro initiatives/projects/issues, aby člověk nemusel vše hledat jen v listu planů.
+
+  Bug z dogfoodu: opakovaný export už materializovaného plánu původně navrhoval nové task IDs. Opraveno v export vrstvě: export teď rozpozná existující tasky podle mission-control planning reference a title, zachová jejich původní ID a --apply je znovu nepřidá.
+risk_notes:
+- Dogfood nesmí obejít vlastní pravidla; tasky musí vzniknout přes Mission Control export, ne jen ručním
+  zápisem.
+- Pokud se workflow ukáže nepohodlný, je to validní výsledek testu a má se zapsat jako friction, ne zamaskovat.
+- Neplánovat business strategii AgentMintu, dokud planning core není dost stabilní pro zachycení rozhodnutí.
+decisions:
+- date: '2026-05-23'
+  decision: Mission Control vývoj bude plánovaný v Mission Controlu samotném.
+  rationale: Dogfood loop ověřuje, že nástroj umí držet strategický kontext, materializovat TODO a vracet
+    evidence zpět do plánu.
+- date: '2026-05-23'
+  decision: Před monetizační prací má prioritu planning core.
+  rationale: AgentMint potřebuje nejdřív stabilní místo pro strategii, rozhodnutí a rozpad práce, jinak
+    se business kontext rozpadne mezi chat, research a task ledgery.
+todo_outputs:
+- task-2026-05-23-003
+- task-2026-05-23-004
+- task-2026-05-23-005
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Vyhodnotit dogfood plánovací smyčku Mission Controlu
+  summary: Projít plán -> export -> TODO -> zpětná evidence a zapsat, které části jsou plynulé a které
+    agenty zpomalují.
+  priority: high
+  tags:
+  - dogfood
+  - planning
+  - friction
+  acceptance_criteria:
+  - Je popsáno, co fungovalo v plan -> TODO flow.
+  - Je popsáno, co vyžadovalo ruční zásah mimo UI nebo API.
+  - Vznikne doporučení pro nejbližší zlepšení Mission Controlu.
+- title: Navrhnout minimální strategický planning view pro AgentMint
+  summary: Z dogfood zkušenosti navrhnout první view, ve kterém půjde plánovat AgentMint strategii před
+    monetizační prací.
+  priority: high
+  tags:
+  - strategy
+  - view
+  - mission-control
+  acceptance_criteria:
+  - View má jasně oddělit initiatives, projects, issues a decisions.
+  - View ukáže ready/in_progress strategické plány a jejich TODO outputs.
+  - Návrh nevyžaduje externí databázi ani cloud službu.
+- title: Doplnit chybějící editorové pole pro decisions
+  summary: UI detail už decisions zobrazuje, ale edit modal je neumí pohodlně upravit; doplnit minimální
+    textové pole nebo YAML-friendly editor pattern.
+  priority: medium
+  tags:
+  - ui
+  - decisions
+  - editor
+  acceptance_criteria:
+  - Agent nebo člověk může přes UI doplnit decision s datem a rationale.
+  - Uložení zachová validní YAML schema.
+  - Existing plans UI zůstane funkční.
+links:
+- label: Linear-like core plan
+  path: mission-control/plans/2026/05/mission-control-linear-filesystem-core.yaml
+- label: Mission Control architecture
+  path: mission-control/ARCHITECTURE.md
+- label: Mission Control TODO
+  path: mission-control/TODO.tasks.json
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-010 (mission-control/plans/2026/05/dogfood-mission-control-planning-loop.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.
+  - The v1 outcome is kept in implementation_validation.

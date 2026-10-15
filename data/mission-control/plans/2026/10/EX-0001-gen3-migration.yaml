@@ -1,0 +1,65 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0001
+dev_code: EX-0001
+title: Migrate the Organization from GEN2 to GEN3
+status: in_progress
+owner: organization-admin
+priority: high
+priority_rank: 1
+created_at: 2026-10-16
+updated_at: 2026-10-16
+context: |
+  Lazurio Example Organization is Lazurio's public reference Organization. All
+  of its data is fictional. It started from a cleaned snapshot of a GEN2
+  baseline and migrates to the current GEN3 model in public pull requests, so
+  that the migration doubles as a benchmark for other Organizations. The
+  benchmark ledger lives in the root's MIGRATION.md.
+current_problem: |
+  The GEN2 baseline used the abolished modules/ layout, a GEN2 doctor and
+  Organization guide, pre-standard module Apps with ports outside the pool, an
+  in-tree Mission Control v1, and Czech content under a borrowed display name.
+target_state: |
+  - A thin English root with a verified GitHub binding, the pool
+    25300-25399, the flat workspace/ layer and root CI.
+  - Every module with an App conforms to the Lazurio Module Standard.
+  - Mission Control v3 from the public upstream with this data repository.
+  - Every repository is English; the benchmark ledger records every step.
+scope:
+  in:
+    - Root steps R1-R5 (plan, identity, workspace layout, GEN2 tooling, guide).
+    - Module Standard for the knowledgebase (M1) and the design system (O1a, O1b).
+    - Mission Control data (O2), the v3 App (O3) and the slot activation (O4).
+    - Translation of every repository (T1-T7).
+    - A fresh install and close-out (A1).
+  out:
+    - New Apps or modules beyond the migration.
+    - Changes to shared Lazurio code; gaps found there become issues upstream.
+    - Forking the Mission Control UI for an English locale.
+acceptance_criteria:
+  - lazurio organization check passes with projection parity on the root.
+  - Every module with an App reports current (13/13) in lazurio module setup and renders in a browser.
+  - Mission Control v3 shows the imported plans and tasks.
+  - A Czech-diacritics grep over every repository finds nothing outside upstream code and the known compiler gap.
+  - MIGRATION.md has a benchmark row for every pull request.
+validation:
+  - lazurio organization check, lazurio migrate organization-manifest and the root CI on every root pull request.
+  - lazurio module setup and lazurio module start for the knowledgebase, the design system and Mission Control.
+  - A fresh lazurio organization install on a clean Lazurio Folder.
+decisions:
+  - date: 2026-10-16
+    decision: Hand-convert the knowledgebase and the design system; they have no public template upstream.
+  - date: 2026-10-16
+    decision: Display name Lazurio Example Organization; fictional people get international names without diacritics.
+  - date: 2026-10-16
+    decision: Keep the fictional business concepts and translate them; prices stay placeholders.
+  - date: 2026-10-16
+    decision: Module port pool 25300-25399.
+  - date: 2026-10-16
+    decision: Mission Control v3 comes from the public upstream Lazurio/mission-control at v3.0.0; its Czech-only UI is a known gap.
+open_questions:
+  - Whether a public read-only install path for people outside the Organization is wanted.
+links:
+  - label: Migration plan and benchmark ledger
+    url: https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/blob/main/MIGRATION.md
+  - label: Mission Control upstream
+    url: https://github.com/Lazurio/mission-control

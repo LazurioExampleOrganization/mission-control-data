@@ -1,0 +1,94 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0013
+dev_code: EX-0013
+title: Claude Code workspace entrypoints
+status: done
+owner: alexmorgan
+priority: medium
+priority_rank: 12
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  AgentMint už má sdílenou `.claude/skills` knihovnu, Codex symlink `.agents/skills` a root `AGENTS.md` psaný tak, aby ho četl i Claude Code. Chybí ale nativní root entrypoint `CLAUDE.md`, který Claude Code okamžitě navede na GEN2 kaskádu místo toho, aby agent duplikoval pravidla nebo přeskočil preflight.
+
+  Cílem je udělat workspace pro Claude Code čitelný bez zavedení druhé agentní pravdy. `AGENTS.md` zůstává autoritativní operační příručka, `CLAUDE.md` má být tenký adapter pro Claude Code.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Přidat Claude Code nativní vstup, který odkazuje na `AGENTS.md` a povinný preflight.
+  - Udržet jeden source of truth pro agentní pravidla a skills.
+  - Doplnit doctor kontrolu, která upozorní na chybějící nebo driftující Claude Code entrypoint.
+  - Srovnat onboarding texty, aby Claude Code nebyl popsaný jako vedlejší nebo cizí nástroj.
+scope:
+  in:
+  - Root Claude Code entrypoint.
+  - Dokumentace vztahu Claude Code, Codex, `.claude/skills` a `AGENTS.md`.
+  - Doctor guard pro entrypoint a skill symlink.
+  - Onboarding lekce, která už popisuje Codex, Cursor a Claude Code.
+  out:
+  - Spouštět nebo měnit Claude Code MCP konfiguraci v user `~/.claude`.
+  - Otevírat externí účty, instalovat Claude Code nebo měnit globální nastavení.
+  - Aktivovat Claude backend v Launchpadu.
+acceptance_criteria:
+- Root obsahuje `CLAUDE.md` jako tenký Claude Code adapter bez duplicit dlouhých pravidel.
+- '`.claude/README.md`, root docs a guide vysvětlují vztah `CLAUDE.md` -> `AGENTS.md`.'
+- '`company/scripts/doctor.sh check` ověří existenci a základní obsah `CLAUDE.md`.'
+- PowerShell varianta doctoru má stejný guardrail pro Windows kolegy.
+- Změny projdou relevantní validací task ledgeru, doctor checkem a guide buildem.
+validation:
+- Check every acceptance criterion against recorded evidence.
+implementation_validation:
+- |
+  Outcome recorded in v1: Workspace má nově root `CLAUDE.md`, který Claude Code navádí na `AGENTS.md`, povinný preflight, doctor context check a sdílenou `.claude/skills` knihovnu. Root dokumenty a `.claude/README.md` popisují, že `CLAUDE.md` je jen adapter, ne druhý source of truth.
+
+  Doctor v shell i PowerShell variantě nově kontroluje existenci `CLAUDE.md` a základní obsah (`AGENTS.md` + `check-my-context`). Guide lekce 11 vysvětluje rozdíl mezi Codexem, Claude Code a Cursorem v AgentMint kontextu.
+risk_notes:
+- '`CLAUDE.md` nesmí být druhá kopie `AGENTS.md`, jinak vznikne drift mezi agenty.'
+- Do sdíleného repa nesmí přijít tokeny, MCP session data ani osobní absolutní cesty.
+- 'Doctor guard musí zůstat cross-platform: shell i PowerShell varianta.'
+decisions:
+- date: '2026-05-23'
+  decision: '`CLAUDE.md` bude tenký adapter na `AGENTS.md`, ne paralelní agentní manuál.'
+  rationale: AgentMint potřebuje podporovat Claude Code nativně, ale zachovat jednu operační pravdu pro
+    všechny agenty.
+todo_outputs:
+- task-2026-05-23-008
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Optimalizovat root entrypointy pro Claude Code
+  summary: Přidat nativní `CLAUDE.md`, sladit dokumentaci a doctor kontroly tak, aby Claude Code používal
+    stejnou GEN2 kaskádu jako Codex bez druhé kopie pravidel.
+  priority: high
+  tags:
+  - claude-code
+  - agent-entrypoints
+  - doctor
+  - guide
+  acceptance_criteria:
+  - '`CLAUDE.md` existuje a ukazuje na `AGENTS.md` jako autoritativní příručku.'
+  - Root docs a `.claude/README.md` popisují `CLAUDE.md` jako adapter, ne nový source of truth.
+  - Doctor check hlídá `CLAUDE.md` v shell i PowerShell variantě.
+  - Guide lekce 11 je opravena pro AgentMint a vysvětluje, kdy použít Claude Code.
+  - Validace potvrdí JSON/YAML syntaxi, doctor check a guide build.
+  risk_notes:
+  - Nevytvořit druhou dlouhou sadu pravidel mimo `AGENTS.md`.
+  - Nemigrovat secrets nebo per-person Claude settings do Gitu.
+  - Nemíchat tuto změnu s Launchpad Claude backendem.
+links:
+- label: Root agent rules
+  path: AGENTS.md
+- label: Workspace architecture
+  path: ARCHITECTURE.md
+- label: Claude runtime README
+  path: .claude/README.md
+- label: Guide lesson
+  path: guide/content/lekce/11-claude-code-codex/lekce.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-012 (mission-control/plans/2026/05/claude-code-workspace-entrypoints.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.
+  - The v1 outcome is kept in implementation_validation.

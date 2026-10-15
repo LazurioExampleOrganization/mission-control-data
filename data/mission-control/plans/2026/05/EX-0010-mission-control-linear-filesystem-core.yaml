@@ -1,0 +1,130 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0010
+dev_code: EX-0010
+title: Mission Control Linear-like filesystem core
+status: ready
+owner: alexmorgan
+priority: medium
+priority_rank: 9
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Mission Control má být postavený po vzoru Linearu: rychlé operační jádro
+  pro issues, projects, initiatives, cycles, triage, labels, views a stavové
+  workflow. Rozdíl je backend. AgentMint nechce cloud task tracker jako source
+  of truth; chce filesystem DB v Git workspace, kde jsou všechna data YAML
+  soubory a agenti s nimi umí pracovat nativně.
+
+  Cílem není kopie Linearu. Cílem je přenést jeho core mentální model do
+  AgentMint prostředí: lokálně, auditovatelně, diffovatelně, validovaně a bez
+  externí databáze.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Navrhnout filesystem DB core pro Linear-like práci v AgentMintu.
+  - Oddělit strategické plány od vykonatelných issues a časově ohraničených projects.
+  - Připravit model, který UI i agenti umí používat přes stejné YAML soubory.
+  - Zachovat compatibility bridge na `TODO.tasks.json`, dokud nebude issue model plnohodnotný.
+scope:
+  in:
+  - YAML entity pro workspace, teams/workstreams, workflows, labels a views.
+  - YAML entity pro initiatives, projects, issues, triage, cycles a updates.
+  - Schema validace pro každou core entitu.
+  - Index/query vrstva, která čte filesystem a generuje views bez duplicitních dat.
+  - 'UI patterny inspirované Linearem: list/detail, command-like actions, filters, board a timeline.'
+  out:
+  - Kopírování Linear brandu, UI textů, designu nebo cloud architektury.
+  - Externí databáze jako source of truth.
+  - Multi-tenant SaaS, billing, permissions a týmové účty v první iteraci.
+  - Automatické přepisování root task ledgerů bez explicitního apply režimu.
+acceptance_criteria:
+- Existuje dokumentovaný filesystem DB model pro Linear-like core entity.
+- Existují první JSON Schemas pro `issue`, `project`, `initiative`, `view` a `workflow`.
+- App umí načíst filesystem DB a zobrazit issues/projects bez ručního JSON seedování.
+- Views jsou definované jako filtry, ne jako kopie issue dat.
+- Agent může založit issue/projekt úpravou YAML souboru a UI to po reloadu uvidí.
+- '`TODO.tasks.json` bridge zůstane funkční pro zpětnou kompatibilitu.'
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- Příliš rychlé přidání všech Linear funkcí by z Mission Control udělalo těžký klon místo jednoduchého
+  agentního operačního nástroje.
+- Filesystem DB musí řešit stabilní ID, validaci a konflikty v Git diffech, jinak bude horší než jednoduchý
+  task ledger.
+- Views nesmí materializovat kopie dat, protože by agenti museli synchronizovat duplicity.
+- Issue model musí respektovat workspace hranice a nesmí do Gitu ukládat secrets ani citlivá zákaznická
+  data.
+decisions:
+- date: '2026-05-23'
+  decision: Mission Control core bude Linear-like, ale filesystem-first.
+  rationale: Linear má dobrý pracovní model pro rychlou koordinaci práce; AgentMint potřebuje stejnou
+    ergonomii s YAML daty, aby agenti mohli pracovat přímo v Git workspace.
+- date: '2026-05-23'
+  decision: '`plans/` zůstává strategická vrstva, nové `issues/` budou execution vrstva.'
+  rationale: Strategický plán a vykonatelná issue mají jinou granularitu; jejich smíchání by zhoršilo
+    plánování i agentní execution.
+todo_outputs:
+- task-2026-05-23-006
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Navrhnout Mission Control filesystem DB schema v0
+  summary: Připravit první core YAML schema pro issue, project, initiative, workflow, view a label podle
+    Linear-like modelu AgentMintu.
+  priority: high
+  tags:
+  - schema
+  - filesystem-db
+  - mission-control
+  acceptance_criteria:
+  - Každá core entita má `schema_version`, stabilní `id`, `status`, `owner`, timestamps a `links`.
+  - Issue schema podporuje team/workstream, workflow status, priority, labels, relations, project, cycle
+    a planning reference.
+  - View schema ukládá filtr a sort/group nastavení bez kopírování výsledků.
+  - Schemas jsou validovatelná lokálně bez externí služby.
+- title: Připravit filesystem index/query vrstvu pro Mission Control
+  summary: Implementovat reader, který projde YAML entity v DB složkách, validuje je a vrátí normalizované
+    kolekce pro UI views.
+  priority: high
+  tags:
+  - app
+  - query
+  - filesystem-db
+  acceptance_criteria:
+  - Reader načítá entity z `data/v1/` nebo cílové core struktury.
+  - Nevalidní soubory se zobrazí s konkrétní chybou a neshodí celou appku.
+  - Views se dopočítávají z filtrů nad normalizovanými daty.
+  - Není potřeba externí DB ani server state.
+- title: Udělat první Linear-like issue/project UI nad YAML DB
+  summary: Přidat do Mission Control první list/detail view pro issues a projects s rychlou změnou statusu,
+    filtrací a vazbou na plán.
+  priority: medium
+  tags:
+  - ui
+  - issues
+  - projects
+  acceptance_criteria:
+  - UI zobrazí issues z YAML souborů.
+  - Detail issue ukazuje status, priority, labels, owner, project, relations a links.
+  - Změna statusu uloží YAML a je vidět v Git diffu.
+  - Existing plans UI zůstane funkční.
+links:
+- label: Mission Control architecture
+  path: mission-control/ARCHITECTURE.md
+- label: Linear Concepts
+  url: https://linear.app/docs/conceptual-model
+- label: Linear Teams
+  url: https://linear.app/docs/teams
+- label: Linear Triage
+  url: https://linear.app/docs/triage
+- label: Linear Initiatives
+  url: https://linear.app/docs/initiatives
+- label: Linear Timeline
+  url: https://linear.app/docs/timeline
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-009 (mission-control/plans/2026/05/mission-control-linear-filesystem-core.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

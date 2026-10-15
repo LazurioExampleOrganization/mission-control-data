@@ -1,0 +1,99 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0008
+dev_code: EX-0008
+title: Mission Control V1 implementation
+status: in_progress
+owner: alexmorgan
+priority: medium
+priority_rank: 7
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Mission Control má přestat být jen smoke-tested Launchpad appka a stát se
+  reálným místem, kde AgentMint plánuje strategické kroky firmy. V1 musí držet
+  YAML source of truth, použitelné UI pro list/detail/create/edit, validaci
+  podle schema a bezpečný dry-run export do TODO.tasks.json.
+
+  Stav k 2026-05-23: skeleton běží, YAML databáze existuje, app má oddělené
+  moduly pro plans, validation, export a UI. Tento plán drží implementační
+  definici a navazuje na zadání pro V1.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Udělat z Mission Control použitelný planning cockpit pro strategické kroky.
+  - Udržet YAML jako autoritativní databázi bez externí služby.
+  - Umožnit převod plánů na konkrétní TODO tasky bez ručního kopírování.
+scope:
+  in:
+  - Plan list, detail, create a edit přes lokální Launchpad UI.
+  - Validace YAML planů podle JSON Schema.
+  - Dashboard s počty podle statusu.
+  - Dry-run export navržených tasků do TODO.tasks.json.
+  - Zobrazení scope, rizik, rozhodnutí, links a proposed_tasks.
+  out:
+  - Externí task manager nebo cloud databáze.
+  - Automatická materializace tasků bez explicitního režimu.
+  - Role/permission systém nebo multi-user server.
+acceptance_criteria:
+- Mission Control jde spustit přes Launchpad na portu 5693.
+- UI umí založit a upravit strategický plán bez ztráty YAML dat.
+- Nevalidní plán je v UI označený a ukáže schema chyby.
+- Export script ve výchozím režimu jen vypíše dry-run návrh.
+- Každý exportovaný task obsahuje planning referenci zpět na YAML plan.
+- Smoke test pro list, detail, create, edit, validation a export projde.
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- UI nesmí být jediný source of truth; ruční editace YAML musí zůstat bezpečná.
+- Export nesmí přepisovat existující TODO tasky bez explicitního apply režimu.
+- Příliš chytrá appka by mohla nahradit jednoduchý souborový workflow; V1 má zůstat malá.
+decisions:
+- date: '2026-05-23'
+  decision: Mission Control zůstává file-system-first modul.
+  rationale: Agenti mají umět pracovat s plány nativně jako se soubory, bez vendor lock-in a bez skryté
+    DB.
+todo_outputs:
+- task-2026-05-23-002
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Dokončit detailní zobrazení strategických polí v UI
+  summary: Ujistit se, že Mission Control detail ukazuje scope, risk_notes, decisions, links, todo_outputs,
+    planning_target a proposed_tasks.
+  priority: high
+  tags:
+  - ui
+  - mission-control
+  - planning
+  acceptance_criteria:
+  - Detail plánu ukazuje všechna hlavní schema pole.
+  - Mobile layout zůstává čitelný.
+  - Nevalidní plán ukáže konkrétní chyby.
+- title: Ověřit dry-run export na reálném plánu
+  summary: Spustit export-todo-tasks.mjs nad Agent Automation Desk plánem a ověřit, že výstup je validní
+    TODO návrh s planning referencemi.
+  priority: high
+  tags:
+  - export
+  - todo
+  - validation
+  acceptance_criteria:
+  - Dry-run vrátí minimálně jeden navržený task.
+  - Každý task má source mission-control a planning.plan_id.
+  - Script bez --apply nezapisuje do TODO.tasks.json.
+links:
+- label: Mission Control README
+  path: mission-control/README.md
+- label: Mission Control architecture
+  path: mission-control/ARCHITECTURE.md
+- label: Feature plan schema
+  path: mission-control/schemas/feature-plan.schema.json
+- label: Export script
+  path: mission-control/scripts/export-todo-tasks.mjs
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-007 (mission-control/plans/2026/05/mission-control-v1-implementation.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

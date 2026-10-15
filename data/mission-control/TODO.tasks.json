@@ -1,1 +1,800 @@
-[]
+[
+  {
+    "id": "task-2026-05-22-001",
+    "title": "Navrhnout research schema pro mapování online výdělečných mechanismů",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 10,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "AgentMint potřebuje jednotný záznam, aby agenti nesbírali náhodné nápady bez porovnatelné evidence.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-22",
+    "tags": [
+      "research",
+      "schema",
+      "mechanisms"
+    ],
+    "summary": "Definovat minimální pole pro mechanism scan: nabídka, zákazník, kanál, důkaz, rizika, ToS/legal poznámky, odhad nákladů, první experiment a zdroje s datem ověření.",
+    "risk_notes": [
+      "Research nesmí kopírovat cizí brand, databáze, zákaznická data ani neveřejné know-how.",
+      "Online market data rychle zastarává; každý scan musí mít datum ověření a odkazy na zdroje."
+    ],
+    "acceptance_criteria": [
+      "Existuje návrh JSON/Markdown šablony pro jeden mechanism scan.",
+      "Šablona obsahuje guardrail sekci a pole pro zdroje.",
+      "Je jasné, zda má být první verze v root task ledgeru, nebo v budoucím `modules/research/`."
+    ],
+    "links": [
+      {
+        "label": "Glossary",
+        "path": "GLOSSARY.md"
+      },
+      {
+        "label": "Module manifest",
+        "path": "company/scripts/modules.manifest.json"
+      }
+    ],
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-22-004",
+    "title": "Vytvořit longlist existujících online projektů s ověřitelným příjmem",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 11,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "První research krok má najít reálné projekty, které už vydělávají, aby AgentMint neplánoval podle domněnek nebo virálních claimů bez důkazu.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-22",
+    "tags": [
+      "research",
+      "market-scan",
+      "revenue-evidence",
+      "copyable-mechanisms"
+    ],
+    "summary": "Najít 25-40 existujících online projektů, produktů, agentur, solo operators nebo agent-enabled firem, které veřejně ukazují signál monetizace: revenue/MRR, ceny, placené produkty, klienty, marketplace sales, case studies, veřejné účetní/traffic signály nebo jiné ověřitelné důkazy. U každého kandidáta zapsat zdroj, datum ověření, typ důkazu, stručný mechanismus a první odhad, jestli je mechanismus adaptovatelný pro AgentMint.",
+    "risk_notes": [
+      "Nekopírovat brand, obsah, databáze, zákaznická data, neveřejné know-how ani identitu cizí firmy; zkoumat jen mechanismus a legální adaptaci.",
+      "Revenue claimy můžou být zastaralé nebo přikrášlené; každý kandidát musí mít zdroj, datum ověření a confidence level.",
+      "Nepoužívat scraping, spam, fake engagement ani obcházení ToS jako součást navrhovaného mechanismu."
+    ],
+    "acceptance_criteria": [
+      "Existuje longlist aspoň 25 kandidátů s odkazy na zdroje a datem ověření.",
+      "Každý kandidát má zapsaný monetizační signál, mechanismus, cílového zákazníka, kanál a confidence level.",
+      "Kandidáti jsou rozdělení do kategorií podle typu mechanismu, například lead-gen, micro-SaaS, obsah-to-service, marketplace arbitrage, agentní služby nebo data product.",
+      "U každého kandidáta je poznámka, co by AgentMint směl legálně adaptovat a co nesmí kopírovat."
+    ],
+    "links": [
+      {
+        "label": "Agent rules",
+        "path": "AGENTS.md"
+      },
+      {
+        "label": "Glossary",
+        "path": "GLOSSARY.md"
+      },
+      {
+        "label": "Open decisions",
+        "path": "ISSUES.open.json"
+      },
+      {
+        "label": "Online projects longlist",
+        "path": "company/archive/derived/research-sprints/2026-05-22-online-projects-longlist.md"
+      },
+      {
+        "label": "Agentic monetization scan",
+        "path": "company/archive/derived/research-sprints/2026-05-22-agentic-monetization-scan.md"
+      },
+      {
+        "label": "Copyable online projects scan",
+        "path": "company/agents/reference/research-sprint-2026-05-22-copyable-online-projects.md"
+      },
+      {
+        "label": "B2B lead-gen and service scan",
+        "path": "company/archive/derived/2026-05-22-agentmint-research-sprint-online-projects.md"
+      }
+    ],
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-22-005",
+    "title": "Zúžit longlist na mechanismy vhodné pro legální adaptaci",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 12,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "AgentMint potřebuje rychle oddělit zajímavé příběhy od mechanismů, které jde skutečně zopakovat s našimi zdroji, agentní výhodou a reputační bezpečností.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "research",
+      "scoring",
+      "selection",
+      "guardrails"
+    ],
+    "summary": "Longlist byl zúžen přes scoring 10 kandidátů podle revenue evidence, time-to-first-dollar, agent leverage, dostupnosti distribuce, rizik a delivery marginu. Doporučení: Agent Automation Desk jako první test; white-label AI support agent a AI visibility audit jako další kandidáti.",
+    "risk_notes": [
+      "Mechanismus s vysokým revenue signálem může být nevhodný, pokud stojí na důvěře, brandu, kapitálu, publiku nebo datech, které AgentMint nemá.",
+      "Neposouvat kandidáta do shortlistu, pokud jeho hlavní výhoda stojí na klamání, platformním spamu nebo těžko obhajitelné imitaci.",
+      "Scoring má oddělit ověřené důkazy od hypotéz; virální popularita sama o sobě není monetizační důkaz."
+    ],
+    "acceptance_criteria": [
+      "Existuje scoring tabulka nebo JSON/Markdown zápis s kritérii a váhami.",
+      "Vznikne shortlist 8-12 kandidátů s nejvyšším potenciálem pro AgentMint.",
+      "Vznikne reject/parking list s jasnými důvody odložení.",
+      "Top kandidáti mají označené největší riziko a nejrychlejší možný test."
+    ],
+    "links": [
+      {
+        "label": "Research schema task",
+        "path": "TODO.tasks.json"
+      },
+      {
+        "label": "Open decisions",
+        "path": "ISSUES.open.json"
+      },
+      {
+        "label": "Research sprint 2026-05-22",
+        "path": "company/archive/derived/2026-05-22-agentmint-research-sprint-online-projects.md"
+      },
+      {
+        "label": "First monetization experiments shortlist",
+        "path": "workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md"
+      }
+    ],
+    "next_action": "Review scoring a případně upravit váhy před další research iterací.",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-22-006",
+    "title": "Rozebrat top kandidáty na kopírovatelný mechanismus bez kopírování identity",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 13,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Cílem firmy není opis cizího povrchu, ale pochopení peněžního mechanismu a návrh vlastní verze, která může fungovat legálně a s agentní výhodou.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "research",
+      "mechanism-analysis",
+      "adaptation",
+      "business-model"
+    ],
+    "summary": "Top kandidáti byli rozebraní na úrovni mechanismu a legální AgentMint adaptace. Agent Automation Desk má detailní experiment spec; white-label AI support agent a AI visibility audit mají experiment cards a důvody odložení.",
+    "risk_notes": [
+      "Analýza nesmí vytvářet návod na porušení autorských práv, ToS, ochranných známek, privacy nebo důvěry zákazníků.",
+      "Nezaměňovat viditelný frontend projektu za skutečný ekonomický motor; u každého kandidáta hledat, kde přesně vznikají peníze.",
+      "U regulovaných nebo vysoce citlivých oborů označit právní nejistotu místo falešné jistoty."
+    ],
+    "acceptance_criteria": [
+      "Každý deep-dive má strukturovaný rozbor: zákazník, nabídka, kanál, pricing, delivery, důkaz, rizika, adaptace a první test.",
+      "Každý kandidát má pojmenovanou vlastní AgentMint verzi, která nekopíruje cizí identitu.",
+      "U každého kandidáta je explicitní verdikt: testovat hned, odložit, nebo zahodit.",
+      "Nejméně tři kandidáti mají dostatečný signál pro návrh experimentu."
+    ],
+    "links": [
+      {
+        "label": "Agent rules",
+        "path": "AGENTS.md"
+      },
+      {
+        "label": "Glossary",
+        "path": "GLOSSARY.md"
+      },
+      {
+        "label": "Research sprint 2026-05-22",
+        "path": "company/archive/derived/2026-05-22-agentmint-research-sprint-online-projects.md"
+      },
+      {
+        "label": "First monetization experiments shortlist",
+        "path": "workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md"
+      },
+      {
+        "label": "Agent Automation Desk spec",
+        "path": "workspace/experiments/specs/2026-05-23-agent-automation-desk.md"
+      }
+    ],
+    "next_action": "Po review doplnit hlubší deep dive pro druhý a třetí kandidát, pokud první pilot nezíská signál.",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-22-007",
+    "title": "Připravit shortlist prvních monetizačních experimentů",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 14,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Research má rychle skončit ve zkoušce na trhu; shortlist experimentů propojí existující důkazy s konkrétním prvním krokem AgentMint.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "experiments",
+      "shortlist",
+      "monetization",
+      "first-loop"
+    ],
+    "summary": "Vznikl shortlist prvních monetizačních experimentů se třemi experiment cards a jasným doporučením prvního testu. Agent Automation Desk je připravený jako spec čekající na lidské schválení. Připravené jsou také offer draft, outreach drafty, discovery script, intake template a run log template.",
+    "risk_notes": [
+      "Experiment card nesmí automaticky spouštět externí akce; spuštění testu vyžaduje explicitní lidské potvrzení.",
+      "Nezačínat experiment, dokud není jasné, jak se pozná signál zájmu, příjem nebo kvalifikovaná poptávka.",
+      "Preferovat malé testy s reputačně bezpečným výstupem před agresivní distribucí."
+    ],
+    "acceptance_criteria": [
+      "Existují 3-5 experiment cards připravených k rozhodnutí.",
+      "Každý experiment má metriku, minimální budget, stop condition a očekávaný čas do prvního signálu.",
+      "Je doporučen jeden první experiment a vysvětleno, proč má nejlepší poměr rychlosti, důkazu a rizika.",
+      "Je jasné, které kroky smí udělat agent lokálně a které čekají na lidské potvrzení."
+    ],
+    "links": [
+      {
+        "label": "Experiment checklist task",
+        "path": "TODO.tasks.json"
+      },
+      {
+        "label": "Open decisions",
+        "path": "ISSUES.open.json"
+      },
+      {
+        "label": "Research sprint 2026-05-22",
+        "path": "company/archive/derived/2026-05-22-agentmint-research-sprint-online-projects.md"
+      },
+      {
+        "label": "First monetization experiments shortlist",
+        "path": "workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md"
+      },
+      {
+        "label": "First monetization test checklist",
+        "path": "workspace/experiments/checklists/first-monetization-test-checklist.md"
+      },
+      {
+        "label": "Agent Automation Desk spec",
+        "path": "workspace/experiments/specs/2026-05-23-agent-automation-desk.md"
+      },
+      {
+        "label": "Agent Automation Desk offer draft",
+        "path": "workspace/experiments/assets/agent-automation-desk-offer.md"
+      },
+      {
+        "label": "Agent Automation Desk outreach drafts",
+        "path": "workspace/experiments/assets/outreach-drafts.md"
+      },
+      {
+        "label": "Discovery call script",
+        "path": "workspace/experiments/templates/discovery-call-script.md"
+      },
+      {
+        "label": "Intake template",
+        "path": "workspace/experiments/templates/intake-template.md"
+      },
+      {
+        "label": "Run log template",
+        "path": "workspace/experiments/templates/run-log-template.md"
+      }
+    ],
+    "next_action": "Jan má schválit spuštění: pilot cenu, ICP, prospect list a outreach message.",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-001",
+    "title": "Založit Mission Control jako lokální plánovací vrstvu AgentMintu",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 15,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "AgentMint potřebuje plánovací místo typu control centre, ale data mají být lokální YAML soubory ve workspace, aby s nimi agenti pracovali nativně a bez závislosti na externím task manageru.",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "mission-control",
+      "planning",
+      "workspace-governance",
+      "yaml-first",
+      "EX-0002"
+    ],
+    "summary": "Mission Control byl zvolen jako název a plánovaný modul `modules/mission-control/`. Workspace pravidla popisují YAML-first planning model a flow Mission Control plan -> TODO.tasks.json.",
+    "risk_notes": [
+      "Mission Control nesmí zavést druhou neprůhlednou databázi; YAML soubory musí zůstat autoritativní.",
+      "Do plánů nesmí přijít secrets, tokeny, zákaznická data ani osobní credentials.",
+      "UI nesmí být jediný source of truth; agenti musí umět plán číst a upravovat jako běžný soubor."
+    ],
+    "acceptance_criteria": [
+      "Manifest obsahuje planned slot `modules/mission-control/`.",
+      "Root pravidla říkají, že nové feature plány patří do Mission Control.",
+      "Existuje skill `mission-control-planning` pro převod plánu do implementačních TODO.",
+      "Existuje reference model pro YAML feature plány a mapování na `TODO.tasks.json`.",
+      "`check-workspace-tasks.mjs` validuje volitelnou `planning` referenci v tasku.",
+      "Guide lekce o první práci vysvětluje Mission Control planning a TODO execution."
+    ],
+    "links": [
+      {
+        "label": "Mission Control planning model",
+        "path": "company/agents/reference/mission-control-planning-model.md"
+      },
+      {
+        "label": "Mission Control planning skill",
+        "path": ".claude/skills/mission-control-planning/SKILL.md"
+      },
+      {
+        "label": "Module manifest",
+        "path": "company/scripts/modules.manifest.json"
+      },
+      {
+        "label": "Agent rules",
+        "path": "AGENTS.md"
+      },
+      {
+        "label": "Workspace manual",
+        "path": "WORKSPACE_MANUAL.md"
+      },
+      {
+        "label": "Task validator",
+        "path": "company/scripts/check-workspace-tasks.mjs"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0002",
+      "dev_code": "EX-0002",
+      "path": "data/mission-control/plans/2026/05/EX-0002-mission-control-bootstrap.yaml"
+    },
+    "next_action": "Po potvrzení založit `modules/mission-control/` jako nested repo a vytvořit první YAML schema + lokální editor skeleton.",
+    "dev_code": "EX-0002",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-22-002",
+    "title": "Připravit experiment checklist pro první monetizační test",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 20,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "První test má být měřitelný, levný a bezpečný; bez checklistu se snadno sklouzne k neurčité aktivitě bez důkazu.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "experiments",
+      "guardrails",
+      "validation"
+    ],
+    "summary": "Vznikl první experiment checklist v modules/experiments/checklists/. Checklist definuje hypotézu, nabídku, ICP, metriku, budget, stop/scale rozhodnutí, reputační guardrails a evidence požadavky pro první monetizační test.",
+    "risk_notes": [
+      "Experiment nesmí spouštět spam, phishing, fake engagement, scraping proti ToS ani klamavé claimy.",
+      "Akce, které opouští lokální prostředí, musí předem potvrdit člověk."
+    ],
+    "acceptance_criteria": [
+      "Checklist je použitelný pro první ruční i agentní test.",
+      "Obsahuje explicitní stop/scale rozhodnutí.",
+      "Výsledek experimentu má jasné místo pro zápis."
+    ],
+    "links": [
+      {
+        "label": "Agent rules",
+        "path": "AGENTS.md"
+      },
+      {
+        "label": "Issues",
+        "path": "ISSUES.open.json"
+      },
+      {
+        "label": "First monetization test checklist",
+        "path": "workspace/experiments/checklists/first-monetization-test-checklist.md"
+      },
+      {
+        "label": "Agent Automation Desk spec",
+        "path": "workspace/experiments/specs/2026-05-23-agent-automation-desk.md"
+      },
+      {
+        "label": "Intake template",
+        "path": "workspace/experiments/templates/intake-template.md"
+      },
+      {
+        "label": "Run log template",
+        "path": "workspace/experiments/templates/run-log-template.md"
+      }
+    ],
+    "next_action": "Jan má potvrdit, že checklist stačí jako gate před spuštěním Agent Automation Desk pilotu.",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-22-003",
+    "title": "Vybrat první mechanismus k detailnímu rozboru",
+    "status": "review",
+    "priority": "medium",
+    "priority_rank": 30,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Firma potřebuje první konkrétní learning loop, ale výběr má přijít až po minimálním srovnání variant a rizik.",
+    "created_at": "2026-05-22",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "strategy",
+      "selection",
+      "first-loop"
+    ],
+    "summary": "První mechanismus k detailnímu rozboru je vybraný: DesignJoy-for-automation adaptovaný jako Agent Automation Desk, tedy produktizovaná agentní automation služba s jednou aktivní request frontou.",
+    "risk_notes": [
+      "Výběr nesmí být jen podle virálního claimu; musí existovat ověřitelný důkaz poptávky nebo monetizace.",
+      "Mechanismus musí být adaptovatelný legálně a reputačně bezpečně."
+    ],
+    "acceptance_criteria": [
+      "Každý kandidát má stručný model a rizika.",
+      "Vybraný kandidát má důvod výběru a další krok.",
+      "Nevybrané kandidáty mají zapsané důvody odložení."
+    ],
+    "links": [
+      {
+        "label": "Open decision",
+        "path": "ISSUES.open.json"
+      },
+      {
+        "label": "First monetization experiments shortlist",
+        "path": "workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md"
+      },
+      {
+        "label": "Agent Automation Desk spec",
+        "path": "workspace/experiments/specs/2026-05-23-agent-automation-desk.md"
+      },
+      {
+        "label": "Agent Automation Desk offer draft",
+        "path": "workspace/experiments/assets/agent-automation-desk-offer.md"
+      },
+      {
+        "label": "Agent Automation Desk outreach drafts",
+        "path": "workspace/experiments/assets/outreach-drafts.md"
+      },
+      {
+        "label": "Discovery call script",
+        "path": "workspace/experiments/templates/discovery-call-script.md"
+      }
+    ],
+    "next_action": "Potvrdit pilot cenu, ICP a první outreach scope před spuštěním externích akcí.",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-008",
+    "title": "Optimalizovat root entrypointy pro Claude Code",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 50,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "AgentMint už má sdílenou `.claude/skills` knihovnu, Codex symlink `.agents/skills` a root `AGENTS.md` psaný tak, aby ho četl i Claude Code. Chyběl ale nativní root entrypoint `CLAUDE.md`.",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "claude-code",
+      "workspace-governance",
+      "agent-entrypoints",
+      "doctor",
+      "guide",
+      "mission-control",
+      "EX-0013"
+    ],
+    "summary": "Přidán nativní `CLAUDE.md`, sladěna dokumentace a doctor kontroly tak, aby Claude Code používal stejnou GEN2 kaskádu jako Codex bez druhé kopie pravidel.",
+    "risk_notes": [
+      "Nevytvořit druhou dlouhou sadu pravidel mimo `AGENTS.md`.",
+      "Nemigrovat secrets nebo per-person Claude settings do Gitu.",
+      "Nemíchat tuto změnu s Launchpad Claude backendem."
+    ],
+    "acceptance_criteria": [
+      "`CLAUDE.md` existuje a ukazuje na `AGENTS.md` jako autoritativní příručku.",
+      "Root docs a `.claude/README.md` popisují `CLAUDE.md` jako adapter, ne nový source of truth.",
+      "Doctor check hlídá `CLAUDE.md` v shell i PowerShell variantě.",
+      "Guide lekce 11 je opravena pro AgentMint a vysvětluje, kdy použít Claude Code.",
+      "Validace potvrdí JSON/YAML syntaxi, doctor check a guide build."
+    ],
+    "links": [
+      {
+        "label": "Plán Mission Controlu",
+        "path": "mission-control/plans/2026/05/claude-code-workspace-entrypoints.yaml"
+      },
+      {
+        "label": "Root agent rules",
+        "path": "AGENTS.md"
+      },
+      {
+        "label": "Workspace architecture",
+        "path": "ARCHITECTURE.md"
+      },
+      {
+        "label": "Claude runtime README",
+        "path": ".claude/README.md"
+      },
+      {
+        "label": "Guide lesson",
+        "path": "guide/content/lekce/11-claude-code-codex/lekce.md"
+      },
+      {
+        "label": "Claude Code entrypoint",
+        "path": "CLAUDE.md"
+      },
+      {
+        "label": "Doctor shell",
+        "path": "company/scripts/doctor.sh"
+      },
+      {
+        "label": "Doctor PowerShell",
+        "path": "company/scripts/doctor.ps1"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0013",
+      "dev_code": "EX-0013",
+      "path": "data/mission-control/plans/2026/05/EX-0013-claude-code-workspace-entrypoints.yaml"
+    },
+    "source": "mission-control",
+    "next_action": "Review diff a po schválení commitnout/pushnout super-repo i Mission Control plán podle doctor flow.",
+    "dev_code": "EX-0013",
+    "imported_from": "TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-002",
+    "title": "Doplnit export Mission Control planu do TODO.tasks.json",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 10,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Mission Control má držet plánovací kontext, ale implementační práce má vznikat jako konkrétní tasky v Git-native task ledgeru.",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "planning",
+      "todo-export",
+      "yaml"
+    ],
+    "summary": "Navrhnout a implementovat první bezpečný export nebo návrhový generátor, který z YAML planu připraví task položky pro nejbližší TODO.tasks.json.",
+    "risk_notes": [
+      "Export nesmí přepisovat existující tasky bez explicitního schválení.",
+      "Plan může obsahovat strategický kontext; TODO má držet jen konkrétní implementační kroky."
+    ],
+    "acceptance_criteria": [
+      "Existuje návrh mappingu z plan YAML na TODO.tasks.json.",
+      "Export má dry-run režim.",
+      "Výstup obsahuje `planning` referenci zpět na YAML plan."
+    ],
+    "links": [
+      {
+        "label": "Architecture",
+        "path": "ARCHITECTURE.md"
+      },
+      {
+        "label": "First plan",
+        "path": "plans/2026/05/mission-control-bootstrap.yaml"
+      }
+    ],
+    "imported_from": "mission-control/TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-006",
+    "title": "Navrhnout Linear-like filesystem DB core pro Mission Control",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 20,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Mission Control má převzít core workflow Linearu, ale držet data jako YAML soubory v Git workspace, aby s nimi agenti mohli pracovat nativně.",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "linear-like",
+      "filesystem-db",
+      "yaml-first",
+      "mission-control",
+      "EX-0010"
+    ],
+    "summary": "Připravit první architekturu a schema pro Mission Control core entity: issues, projects, initiatives, cycles, triage, labels, views, workflows a updates. Výsledkem má být jednoduchý filesystem DB kontrakt, který může číst UI i agenti.",
+    "risk_notes": [
+      "Nekopírovat Linear brand, UI texty, design ani cloud architekturu.",
+      "Views nesmí materializovat kopie dat; mají být uložené filtry nad YAML entitami.",
+      "Core model nesmí obejít současnou validaci ani bezpečný bridge do `TODO.tasks.json`."
+    ],
+    "acceptance_criteria": [
+      "Existuje dokumentovaný mapping Linear-like pojmů na Mission Control YAML entity.",
+      "Je navržena cílová složková struktura filesystem DB.",
+      "Je jasná V1/V2 hranice mezi současným `plans/` modelem a budoucím `issues/projects` core.",
+      "Vznikne návrh prvních schemas pro issue, project, initiative, workflow a view."
+    ],
+    "links": [
+      {
+        "label": "Linear-like core plan",
+        "path": "plans/2026/05/mission-control-linear-filesystem-core.yaml"
+      },
+      {
+        "label": "Architecture",
+        "path": "ARCHITECTURE.md"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0010",
+      "dev_code": "EX-0010",
+      "path": "data/mission-control/plans/2026/05/EX-0010-mission-control-linear-filesystem-core.yaml"
+    },
+    "dev_code": "EX-0010",
+    "imported_from": "mission-control/TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-003",
+    "title": "Vyhodnotit dogfood plánovací smyčku Mission Controlu",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 50,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Ověřujeme Mission Control tím, že v něm plánujeme další vývoj Mission Controlu. Cílem je projít celý loop: plán vznikne jako YAML, plán obsahuje rozhodnutí a navržené tasky, export vytvoří implemen…",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "mission-control",
+      "dogfood",
+      "planning-loop",
+      "filesystem-db",
+      "planning",
+      "friction",
+      "EX-0011"
+    ],
+    "summary": "Projít plán -> export -> TODO -> zpětná evidence a zapsat, které části jsou plynulé a které agenty zpomalují.",
+    "risk_notes": [
+      "Dogfood nesmí obejít vlastní pravidla; tasky musí vzniknout přes Mission Control export, ne jen ručním zápisem.",
+      "Pokud se workflow ukáže nepohodlný, je to validní výsledek testu a má se zapsat jako friction, ne zamaskovat.",
+      "Neplánovat business strategii AgentMintu, dokud planning core není dost stabilní pro zachycení rozhodnutí."
+    ],
+    "acceptance_criteria": [
+      "Je popsáno, co fungovalo v plan -> TODO flow.",
+      "Je popsáno, co vyžadovalo ruční zásah mimo UI nebo API.",
+      "Vznikne doporučení pro nejbližší zlepšení Mission Controlu."
+    ],
+    "links": [
+      {
+        "label": "Mission Control plan",
+        "path": "mission-control/plans/2026/05/dogfood-mission-control-planning-loop.yaml"
+      },
+      {
+        "label": "Linear-like core plan",
+        "path": "mission-control/plans/2026/05/mission-control-linear-filesystem-core.yaml"
+      },
+      {
+        "label": "Mission Control architecture",
+        "path": "mission-control/ARCHITECTURE.md"
+      },
+      {
+        "label": "Mission Control TODO",
+        "path": "mission-control/TODO.tasks.json"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0011",
+      "dev_code": "EX-0011",
+      "path": "data/mission-control/plans/2026/05/EX-0011-dogfood-mission-control-planning-loop.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0011",
+    "imported_from": "mission-control/TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-005",
+    "title": "Doplnit chybějící editorové pole pro decisions",
+    "status": "open",
+    "priority": "medium",
+    "priority_rank": 102,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Ověřujeme Mission Control tím, že v něm plánujeme další vývoj Mission Controlu. Cílem je projít celý loop: plán vznikne jako YAML, plán obsahuje rozhodnutí a navržené tasky, export vytvoří implemen…",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "mission-control",
+      "dogfood",
+      "planning-loop",
+      "filesystem-db",
+      "ui",
+      "decisions",
+      "editor",
+      "EX-0011"
+    ],
+    "summary": "UI detail už decisions zobrazuje, ale edit modal je neumí pohodlně upravit; doplnit minimální textové pole nebo YAML-friendly editor pattern.",
+    "risk_notes": [
+      "Dogfood nesmí obejít vlastní pravidla; tasky musí vzniknout přes Mission Control export, ne jen ručním zápisem.",
+      "Pokud se workflow ukáže nepohodlný, je to validní výsledek testu a má se zapsat jako friction, ne zamaskovat.",
+      "Neplánovat business strategii AgentMintu, dokud planning core není dost stabilní pro zachycení rozhodnutí."
+    ],
+    "acceptance_criteria": [
+      "Agent nebo člověk může přes UI doplnit decision s datem a rationale.",
+      "Uložení zachová validní YAML schema.",
+      "Existing plans UI zůstane funkční."
+    ],
+    "links": [
+      {
+        "label": "Mission Control plan",
+        "path": "mission-control/plans/2026/05/dogfood-mission-control-planning-loop.yaml"
+      },
+      {
+        "label": "Linear-like core plan",
+        "path": "mission-control/plans/2026/05/mission-control-linear-filesystem-core.yaml"
+      },
+      {
+        "label": "Mission Control architecture",
+        "path": "mission-control/ARCHITECTURE.md"
+      },
+      {
+        "label": "Mission Control TODO",
+        "path": "mission-control/TODO.tasks.json"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0011",
+      "dev_code": "EX-0011",
+      "path": "data/mission-control/plans/2026/05/EX-0011-dogfood-mission-control-planning-loop.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0011",
+    "imported_from": "mission-control/TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-05-23-007",
+    "title": "Dovést root-level Mission Control work board migraci do ověřeného stavu",
+    "status": "review",
+    "priority": "high",
+    "priority_rank": 15,
+    "assignee": "agent",
+    "priority_decider": "alexmorgan",
+    "priority_reason": "Mission Control má být root-level control-plane repo a zároveň hlavní přehled plánované práce agentů nad filesystem ledgery.",
+    "created_at": "2026-05-23",
+    "updated_at": "2026-05-23",
+    "tags": [
+      "mission-control",
+      "root-repo",
+      "work-board",
+      "launchpad",
+      "filesystem-db",
+      "EX-0012"
+    ],
+    "summary": "Dokončit přesun Mission Controlu na root-level repo, přidat work board nad task ledgery, aktualizovat reference a ověřit Launchpad smoke test.",
+    "risk_notes": [
+      "Super-repo nesmí začít trackovat obsah nested repa ani gitlink pointer.",
+      "Scanner ledgerů nesmí procházet build/cache/runtime složky.",
+      "Starší TODO tasky bez Mission Control plánů se mají nejdřív zviditelnit, ne potichu přepsat."
+    ],
+    "acceptance_criteria": [
+      "Launchpad objeví Mission Control z root-level manifest slotu.",
+      "Work board API vrací TODO/DONE/ISSUES sloupce.",
+      "UI ukazuje planning coverage a odkazy na plány.",
+      "Build, registry testy a workspace task validace projdou."
+    ],
+    "links": [
+      {
+        "label": "Mission Control plan",
+        "path": "mission-control/plans/2026/05/mission-control-root-repo-work-board.yaml"
+      },
+      {
+        "label": "Work board scanner",
+        "path": "mission-control/app/v1/src/work-board.ts"
+      },
+      {
+        "label": "Launchpad registry",
+        "path": "launchpad/app/v1/core/apps/registry.ts"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0012",
+      "dev_code": "EX-0012",
+      "path": "data/mission-control/plans/2026/05/EX-0012-mission-control-root-repo-work-board.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0012",
+    "imported_from": "mission-control/TODO.tasks.json"
+  }
+]

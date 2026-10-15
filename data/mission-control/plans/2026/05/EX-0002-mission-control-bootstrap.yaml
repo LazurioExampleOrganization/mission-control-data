@@ -1,0 +1,53 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0002
+dev_code: EX-0002
+title: Mission Control jako strategické centrum AgentMintu
+status: shaping
+owner: alexmorgan
+priority: medium
+priority_rank: 1
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  AgentMint potřebuje jedno lokální místo, kde vzniká strategická agenda,
+  feature plány a orchestrace práce. Data mají být obyčejné YAML soubory ve
+  workspace, aby je agenti mohli číst, diffovat, upravovat a generovat z nich
+  implementační TODO bez závislosti na externí službě.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Spustit Mission Control jako Launchpad aplikaci.
+  - Držet strategické kroky firmy v YAML souborech.
+  - Napojit plánovací vrstvu na `TODO.tasks.json`.
+  - Zachovat plnou čitelnost a editovatelnost pro agenty.
+scope:
+  in:
+  - YAML feature/strategy plans
+  - lokální Launchpad UI
+  - seznam a detail strategických plánů
+  - vytvoření nového planu přes UI
+  out:
+  - externí task manager
+  - serverová databáze
+  - automatické přepisování TODO bez schválení
+acceptance_criteria:
+- Launchpad umí Mission Control najít v seznamu aplikací.
+- Mission Control se spustí na lokálním portu.
+- UI zobrazí tento YAML plan.
+- UI umí vytvořit nový YAML plan ve workspace.
+- TODO tasky umí nést `planning` referenci na YAML plan.
+validation:
+- Check every acceptance criterion against recorded evidence.
+todo_outputs:
+- task-2026-05-23-001
+links:
+- label: Root task
+  path: TODO.tasks.json
+- label: Planning model reference
+  path: company/agents/reference/mission-control-planning-model.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-001 (mission-control/plans/2026/05/mission-control-bootstrap.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

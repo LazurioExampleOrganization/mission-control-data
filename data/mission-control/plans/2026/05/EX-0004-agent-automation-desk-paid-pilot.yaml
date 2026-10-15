@@ -1,0 +1,157 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0004
+dev_code: EX-0004
+title: Agent Automation Desk paid pilot
+status: ready
+owner: alexmorgan
+priority: medium
+priority_rank: 3
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  První doporučený monetizační experiment AgentMintu je produktizovaná
+  agentní automation služba: jeden aktivní request, rychlé dodání malých
+  operativních výstupů a lidské schválení před každou externí akcí.
+
+  Mechanismus je inspirovaný productized-service modelem typu DesignJoy,
+  ale AgentMint nekopíruje brand, delivery, claims ani identitu. Adaptace je
+  vlastní: agentní research, enrichment, SOP, reporty, no-code blueprinty a
+  lokální workflow prototypy pro malé B2B týmy.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Získat první placený pilot nebo písemný buying signal.
+  - Ověřit, jestli cílový zákazník rozumí modelu one-active-request.
+  - Zjistit, které requesty mají nejvyšší opakovatelnost pro budoucí playbook.
+  - Udržet celý test reputačně bezpečný a ručně schválený.
+scope:
+  in:
+  - 14denní placený pilot za fiktivní ilustrativní cenu [CENA PILOTU].
+  - Ručně schválený kontakt s fiktivními ukázkovými zájemci (ilustrativní kanál).
+  - Fiverr jako sekundární inbound kanál pro úzký workflow triage gig po samostatném schválení publikace.
+  - One-page offer, ICP, prospect criteria, outreach drafts, discovery script a intake.
+  - Delivery max 8 hodin pro první pilot před stop/renegotiate rozhodnutím.
+  out:
+  - Masový outbound, spam, fake urgency nebo fake engagement.
+  - Garantovaný počet leadů, sales calls nebo revenue.
+  - Produkční automatizace připojená na klientské účty bez samostatného approvalu.
+  - Práce s neveřejnými zákaznickými daty bez explicitního souhlasu.
+  - Fiverr gig slibující revenue, plně autonomní AI agenty, scraping proti ToS nebo obcházení platformních
+    plateb.
+acceptance_criteria:
+- Existuje schválená pilot cena a ICP pro prvních 20 oslovení.
+- Existuje one-page offer a dvě outreach message varianty připravené k lidskému schválení.
+- Existuje prospect list nebo jasná prospect kritéria bez neveřejných dat.
+- Fiverr inbound varianta má launch sheet, guardrails a stop/scale metriku před případným publikováním.
+- Do 14 dní od schválení outreach fáze vznikne 1 placený pilot, buying signal nebo 3 kvalifikované discovery
+  cally.
+- Po testu je zapsaný run log s výsledkem, learnings a stop/scale rozhodnutím.
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- Externí oslovení a odeslání zpráv vyžaduje lidské schválení.
+- Nabídka nesmí slibovat revenue ani výsledky, které nejsou pod kontrolou AgentMintu.
+- První klient může tlačit na custom software projekt; to je mimo pilot scope.
+- Delivery se musí hlídat proti překročení 8 hodin bez šance na vyšší cenu.
+decisions:
+- date: '2026-05-23'
+  decision: Testovat jako první monetizační experiment.
+  rationale: Nejkratší cesta k první fakturaci bez stavby SaaS, vysoká agentní leverage a nízký technický
+    budget.
+- date: '2026-05-23'
+  decision: Přidat Fiverr workflow triage gig jako sekundární inbound kanál, ne jako hlavní overnight
+    first-dollar bet.
+  rationale: Fiverr má viditelnou poptávku po automation/workflow službách, ale nový seller bez reputace
+    nemá spolehlivou noční distribuci. Úzký gig proto může běžet paralelně po schválení, zatímco hlavní
+    first-dollar test zůstává direct checkout a warm outreach.
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Schválit parametry Agent Automation Desk pilotu
+  summary: Připravit rozhodovací podklad pro cenu, ICP, prospect kritéria a hranice ručního outreach testu.
+  priority: high
+  tags:
+  - monetization
+  - approval
+  - pilot
+  acceptance_criteria:
+  - Je zapsaná finální pilot cena nebo explicitní price test.
+  - Je zapsaný první ICP segment a exclusion criteria.
+  - Je jasné, kdo může být osloven v první vlně.
+  - Je zapsáno, které externí akce čekají na lidské potvrzení.
+  risk_notes:
+  - Bez schválení se nesmí odeslat žádný outreach.
+  - Cena nesmí být prezentovaná jako garantovaný business výsledek.
+- title: Připravit první ručně schválený prospect shortlist
+  summary: Vytvořit seznam 10-20 vhodných B2B kontaktů nebo firem podle schválených kritérií, bez neveřejných
+    dat a bez odesílání zpráv.
+  priority: high
+  tags:
+  - prospects
+  - outreach-prep
+  - first-dollar
+  acceptance_criteria:
+  - Každý prospect má důvod fitu a veřejný zdroj signálu.
+  - Seznam neobsahuje neveřejná zákaznická data ani credentials.
+  - U každého prospectu je návrh nejbezpečnějšího kanálu kontaktu.
+  - Výstup čeká na lidské schválení před odesláním.
+- title: Připravit run log pro první pilotní iteraci
+  summary: Založit konkrétní run log z template a připravit pole pro odpovědi, cally, buying signals,
+    delivery čas a stop/scale rozhodnutí.
+  priority: medium
+  tags:
+  - run-log
+  - experiment
+  - evidence
+  acceptance_criteria:
+  - Run log má datum startu, hypotézu, metriku, stop condition a scale condition.
+  - Run log odděluje anonymizovanou evidenci od citlivých dat.
+  - Je jasné, kam se zapisuje outcome po 14 dnech.
+- title: Schválit a případně publikovat Fiverr workflow triage gig
+  summary: Použít připravený Fiverr launch sheet k ručnímu založení úzkého gig pro AI automation workflow
+    triage, bez off-platform plateb, spam automatizací a revenue slibů.
+  priority: medium
+  tags:
+  - fiverr
+  - inbound
+  - marketplace
+  - first-dollar
+  acceptance_criteria:
+  - Jan potvrdí Fiverr seller onboarding a explicitně schválí publikaci.
+  - Gig používá tři fiktivní package ceny [BASIC] / [STANDARD] / [PREMIUM].
+  - Gig neobsahuje off-platform payment/contact linky ani zakázané automation claims.
+  - Prvních 14 dní má měřit impressions, clicks, kvalifikované zprávy, orders a out-of-scope poptávky.
+  risk_notes:
+  - Nový seller bez reputace může dostávat šum nebo žádné objednávky; Fiverr není hlavní overnight kanál.
+  - Buyer requesty mohou mířit na spam, scraping nebo práci s citlivými daty; tyto requesty se odmítají
+    nebo scopeují až po samostatném approvalu.
+links:
+- label: Experiment shortlist
+  path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md
+- label: Experiment spec
+  path: workspace/experiments/specs/2026-05-23-agent-automation-desk.md
+- label: Offer draft
+  path: workspace/experiments/assets/agent-automation-desk-offer.md
+- label: Outreach drafts
+  path: workspace/experiments/assets/outreach-drafts.md
+- label: Discovery call script
+  path: workspace/experiments/templates/discovery-call-script.md
+- label: Intake template
+  path: workspace/experiments/templates/intake-template.md
+- label: Run log template
+  path: workspace/experiments/templates/run-log-template.md
+- label: First dollar channel feasibility
+  path: workspace/experiments/shortlists/2026-05-23-first-dollar-channel-feasibility.md
+- label: First dollar overnight run log
+  path: workspace/experiments/runs/2026-05-23-agent-automation-desk-first-dollar-overnight.md
+- label: Fiverr gig draft
+  path: workspace/experiments/assets/fiverr-agent-automation-gig-draft.md
+- label: Fiverr launch sheet
+  path: workspace/experiments/assets/fiverr-agent-automation-launch-sheet.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-003 (mission-control/plans/2026/05/agent-automation-desk-paid-pilot.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

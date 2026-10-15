@@ -1,0 +1,76 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0006
+dev_code: EX-0006
+title: AI visibility audit guardrailed offer
+status: shaping
+owner: alexmorgan
+priority: medium
+priority_rank: 5
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Třetí kandidát: placený audit toho, jak značka vypadá ve vyhledávání,
+  komunitách a AI odpovědích, plus transparentní doporučení obsahu a
+  positioning změn. Agentní výhoda je ve sběru signálů, citacích zdrojů a
+  rychlé syntéze.
+
+  Tento směr má vyšší reputační citlivost než Agent Automation Desk. Před
+  testem musí být jasně zakázané fake accounts, stealth posting, manipulace
+  komunit a neoznačené promo.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Navrhnout placený audit, který je užitečný bez manipulativních taktik.
+  - Zapsat guardrails pro zdroje, citace, komunitní data a doporučené akce.
+  - Ověřit, jestli buyer platí za audit, ne jen za free insight.
+scope:
+  in:
+  - Audit veřejných signálů značky a konkurence.
+  - Transparentní report se zdroji, datem ověření a confidence.
+  - Doporučení content/opportunity backlogu bez fake engagement.
+  out:
+  - Stealth posting, fake accounts, astroturfing nebo review manipulation.
+  - Scraping proti ToS.
+  - Tvrzení, že AgentMint umí garantovat AI odpovědi nebo ranking.
+acceptance_criteria:
+- Existuje guardrail dokument pro audit a doporučené akce.
+- Existuje ukázková report struktura s citations-first stylem.
+- Existuje cena a stop condition pro prvních 5 auditů.
+- Před outreach je rozhodnuto, jestli reputační riziko odpovídá AgentMint brandu.
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- Směr je blízko SEO/PR gray zones; bez guardrails se snadno posune k manipulaci.
+- AI odpovědi jsou nestabilní a nelze je garantovat.
+- Potenciální zákazník může chtít taktiky, které AgentMint nemá dělat.
+decisions:
+- date: '2026-05-23'
+  decision: Připravit guardrails před jakýmkoliv testem.
+  rationale: Revenue signál je zajímavý, ale reputační riziko je vyšší než u service pilotu.
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Sepsat guardrails pro AI visibility audit
+  summary: Definovat povolené zdroje, zakázané taktiky, citace, confidence a hranice doporučení před návrhem
+    nabídky.
+  priority: medium
+  tags:
+  - guardrails
+  - visibility-audit
+  - reputational-risk
+  acceptance_criteria:
+  - Guardrails explicitně zakazují fake accounts, stealth posting a manipulaci recenzí.
+  - Každé doporučení v reportu musí mít zdroj nebo být označené jako hypotéza.
+  - Dokument obsahuje rozhodovací kritérium, kdy audit odmítnout.
+links:
+- label: Experiment shortlist
+  path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md
+- label: Copyable projects scan
+  path: company/agents/reference/research-sprint-2026-05-22-copyable-online-projects.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-005 (mission-control/plans/2026/05/ai-visibility-audit-guardrailed-offer.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

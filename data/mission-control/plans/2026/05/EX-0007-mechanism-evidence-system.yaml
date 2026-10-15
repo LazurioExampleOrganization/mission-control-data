@@ -1,0 +1,95 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0007
+dev_code: EX-0007
+title: Mechanism evidence system
+status: ready
+owner: alexmorgan
+priority: medium
+priority_rank: 6
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  AgentMint má existující research sprint s kandidáty jako Remote Leaf,
+  ScrapingBee, Bannerbear, Carrd, BuiltWith, GummySearch, Easlo, ShipFast,
+  Text Blaze, TLDR Newsletter a HeadshotPro. Aby se z toho nestala hromada
+  zajímavých příběhů, potřebujeme opakovatelný evidence systém pro mechanismy:
+  co vydělává, komu, jakým kanálem, s jakým důkazem, jaké jsou guardrails a
+  jaký je nejmenší první test.
+
+  Mission Control má držet strategické rozhodnutí a cíle; detailní scans
+  pravděpodobně patří do research modulu nebo knowledgebase, až bude jasná
+  finální struktura.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Definovat jednotný mechanism scan pro online projekty s monetizačním signálem.
+  - Oddělit revenue evidence, adaptovatelný mechanismus a zakázané kopírování identity.
+  - Připravit shortlist tak, aby šel přímo převést na experiment cards.
+scope:
+  in:
+  - Schema nebo Markdown šablona pro jeden mechanism scan.
+  - Pole pro revenue signal, source URL, datum ověření, confidence a ToS/legal risk.
+  - Scoring kritéria pro time-to-first-dollar, agent leverage a reputační fit.
+  out:
+  - Kopírování cizích databází, copy, brand assets nebo zákaznických listů.
+  - Automatické označování revenue claimů jako pravdy bez zdroje a data.
+  - Sběr dat způsobem, který obchází ToS nebo privacy hranice.
+acceptance_criteria:
+- Existuje šablona mechanism scan použitelná pro 25-40 kandidátů.
+- Každý scan má explicitní část "co adaptovat" a "co nekopírovat".
+- Scoring umí vybrat top kandidáty pro experiment bez ručního dohadování.
+- Výstup odkazuje na původní research sprinty a jejich data ověření.
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- Online revenue data rychle zastarává a může být marketingově přikrášlené.
+- Silný revenue signál neznamená, že AgentMint umí mechanismus bezpečně zopakovat.
+- Agent nesmí vygenerovat plán založený na spam, scraping abuse nebo klamavých claims.
+decisions:
+- date: '2026-05-23'
+  decision: Mechanism scans mají být evidence-first a legální adaptace má být samostatné pole.
+  rationale: Cílem AgentMintu je kopírovat mechanismus, ne identitu ani neověřené příběhy.
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Navrhnout mechanism scan šablonu
+  summary: Definovat YAML nebo Markdown šablonu pro kandidáty s revenue evidence, mechanismem, legální
+    adaptací, guardrails a prvním testem.
+  priority: high
+  tags:
+  - research
+  - schema
+  - mechanisms
+  acceptance_criteria:
+  - Šablona obsahuje revenue signal, source URL, verified_at a confidence.
+  - Šablona odděluje mechanism, customer, channel, pricing, delivery a risk.
+  - Šablona obsahuje povolenou adaptaci i zakázané kopírování.
+- title: Převést shortlist top kandidátů do mechanism scans
+  summary: Vzít nejdůležitější kandidáty z research sprintu a přepsat je do jednotného evidence formátu.
+  priority: medium
+  tags:
+  - research
+  - shortlist
+  - evidence
+  acceptance_criteria:
+  - Minimálně 10 kandidátů má jednotný scan.
+  - U každého kandidáta je první AgentMint test nebo důvod odložení.
+  - Výstup je uložený v module scope, který se stane source of truth pro research.
+links:
+- label: Copyable projects scan
+  path: company/agents/reference/research-sprint-2026-05-22-copyable-online-projects.md
+- label: Online projects longlist
+  path: company/archive/derived/research-sprints/2026-05-22-online-projects-longlist.md
+- label: Agentic monetization scan
+  path: company/archive/derived/research-sprints/2026-05-22-agentic-monetization-scan.md
+- label: B2B lead-gen and service scan
+  path: company/archive/derived/2026-05-22-agentmint-research-sprint-online-projects.md
+- label: Experiments shortlist
+  path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-006 (mission-control/plans/2026/05/mechanism-evidence-system.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.
