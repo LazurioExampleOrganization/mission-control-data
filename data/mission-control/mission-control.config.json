@@ -1,0 +1,49 @@
+{
+  "schema_version": "companiesascode.mission_control.config.v1",
+  "plan_prefix": "EX",
+  "data_mode": "repository-db",
+  "repository_db_config_path": "repository-db.yaml",
+  "organization_admin": "alexmorgan",
+  "plans_dir": "data/mission-control/plans",
+  "roadmaps_dir": "data/mission-control/roadmaps",
+  "reports_dir": "data/mission-control/reports",
+  "import_reviews_dir": "data/mission-control/import-reviews",
+  "issues_open_path": "data/mission-control/ISSUES.open.json",
+  "issues_resolved_path": "data/mission-control/ISSUES.resolved.json",
+  "todo_tasks_path": "data/mission-control/TODO.tasks.json",
+  "done_tasks_path": "data/mission-control/DONE.tasks.json",
+  "schema_path": "schemas/mission-control-plan.schema.json",
+  "roadmap_schema_path": "schemas/mission-control-roadmap.schema.json",
+  "publish_policy": {
+    "writer_mode": "local-principal-v1",
+    "pending_changesets_dir": "data/mission-control/changesets/pending",
+    "published_changesets_dir": "data/mission-control/changesets/published",
+    "superseded_changesets_dir": "data/mission-control/changesets/superseded",
+    "legacy_changeset_quarantine": [],
+    "protected_paths": [
+      "data/mission-control/**"
+    ],
+    "notes": [
+      "Local drafts stay under Git metadata and are not canonical truth.",
+      "Missing or empty protected_paths blocks every Mission Control write surface.",
+      "Local publish validates every operation against protected_paths and binds confirmation to draft_revision.",
+      "GitHub repository grants are the only access authority; Mission Control does not maintain a second roster, approval-role gate or writer credential.",
+      "GitHub authenticates the Builder over SSH (agent) or HTTPS (Git credential helper, e.g. Git Credential Manager); plaintext credentials in the remote URL are forbidden.",
+      "Publish creates one ordinary single-parent commit and one non-force fast-forward push to v3; GitHub rejects principals without live write access.",
+      "The changeset directories are read-only compatibility history for older deployments and are not part of the default local publish flow."
+    ]
+  },
+  "compatibility_bridge": {
+    "legacy_read_paths_allowed": true,
+    "legacy_write_paths_allowed": false,
+    "notes": [
+      "The Organization's former in-tree Mission Control layer was imported into this repository once (plan EX-0001); it is not read or written by the runtime.",
+      "All writes go to this repository-db data checkout."
+    ]
+  },
+  "notes": [
+    "Organization-owned Mission Control data of Lazurio Example Organization (fictional reference Organization).",
+    "The remote is LazurioExampleOrganization/mission-control-data on branch v3.",
+    "Do not store secrets or personal runtime state in Mission Control data."
+  ]
+}

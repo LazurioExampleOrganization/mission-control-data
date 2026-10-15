@@ -1,0 +1,12 @@
+{
+  "name": "mission-control-data",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-mission-control-data.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "yaml": "^2.9.0"
+  }
+}

@@ -1,0 +1,15 @@
+schema_version: repository-db.config.v1
+app: mission-control
+data_repo:
+  remote: git@github.com:LazurioExampleOrganization/mission-control-data.git
+  branch: v3
+schema:
+  name: mission-control-data
+  version: 3.0.0-alpha.0
+layout:
+  data: data
+  generated: generated
+  scripts: scripts
+generated_manifest: []
+validate:
+  - node scripts/validate-mission-control-data.mjs

@@ -1,0 +1,388 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "companiesascode.mission_control.roadmap.v1",
+  "title": "Mission Control roadmap v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "roadmap_code",
+    "title",
+    "status",
+    "owner",
+    "priority",
+    "created_at",
+    "updated_at",
+    "source_plan",
+    "summary",
+    "priorities",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "companiesascode.mission_control.roadmap.v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^mcroadmap-rm-[0-9]{4}$"
+    },
+    "roadmap_code": {
+      "type": "string",
+      "pattern": "^RM-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "shaping",
+        "ready",
+        "in_progress",
+        "review",
+        "blocked",
+        "done",
+        "archived"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "priority": {
+      "enum": [
+        "urgent",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "updated_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "source_plan": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,6}-[0-9]{4}$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_lane": {
+      "type": "object",
+      "properties": {
+        "reviewers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "execution_agents": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "escalation_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "reviewers",
+        "execution_agents",
+        "escalation_policy"
+      ]
+    },
+    "priorities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "rank"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^priority-[0-9]{3}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "rationale": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "status",
+          "executable"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^step-[0-9]{3}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "shaping",
+              "ready",
+              "in_progress",
+              "review",
+              "blocked",
+              "done",
+              "archived"
+            ]
+          },
+          "executable": {
+            "type": "boolean"
+          },
+          "priority_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^priority-[0-9]{3}$"
+            }
+          },
+          "plan_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]{2,6}-[0-9]{4}$"
+            }
+          },
+          "todo_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^task-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}$"
+            }
+          },
+          "issue_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^issue-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}$"
+            }
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "label",
+                "kind"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "kind": {
+                  "enum": [
+                    "decision",
+                    "doc",
+                    "plan",
+                    "pull_request",
+                    "commit",
+                    "report",
+                    "validation",
+                    "external"
+                  ]
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "url": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^https?://"
+                },
+                "verification": {
+                  "enum": [
+                    "external"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "oneOf": [
+                {
+                  "required": [
+                    "path"
+                  ],
+                  "not": {
+                    "required": [
+                      "url"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "url",
+                    "verification"
+                  ],
+                  "not": {
+                    "required": [
+                      "path"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "executable": {
+                  "const": true
+                }
+              },
+              "required": [
+                "executable"
+              ]
+            },
+            "then": {
+              "anyOf": [
+                {
+                  "required": [
+                    "plan_refs"
+                  ],
+                  "properties": {
+                    "plan_refs": {
+                      "minItems": 1
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "todo_refs"
+                  ],
+                  "properties": {
+                    "todo_refs": {
+                      "minItems": 1
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "issue_refs"
+                  ],
+                  "properties": {
+                    "issue_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "done"
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "required": [
+                "evidence_refs"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "path"
+            ]
+          },
+          {
+            "required": [
+              "url"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Structural schema for Mission Control roadmaps. scripts/check-mission-control.mjs is the authoritative enforcement layer for cross-document existence, uniqueness, and other repository-aware rules."
+}

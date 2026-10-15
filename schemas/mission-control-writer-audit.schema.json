@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://companiesascode.local/schemas/mission-control-writer-audit.schema.json",
+  "title": "Mission Control authenticated writer audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authorization_id",
+    "authorization_source",
+    "transaction",
+    "principal",
+    "scope",
+    "credential",
+    "application",
+    "runtime"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "companiesascode.mission_control.writer_audit.v1"
+    },
+    "authorization_id": {
+      "$ref": "#/$defs/concreteString"
+    },
+    "authorization_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "blob",
+        "approved_by",
+        "authorization_not_before",
+        "expires_at",
+        "approved_at",
+        "approval_reference",
+        "issue_id",
+        "issue_digest_sha256",
+        "authorized_data_base_commit",
+        "roster"
+      ],
+      "properties": {
+        "repository": {
+          "$ref": "#/$defs/repository"
+        },
+        "commit": {
+          "$ref": "#/$defs/gitObject"
+        },
+        "path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "blob": {
+          "$ref": "#/$defs/gitObject"
+        },
+        "approved_by": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "authorization_not_before": {
+          "$ref": "#/$defs/canonicalInstant"
+        },
+        "expires_at": {
+          "$ref": "#/$defs/canonicalInstant"
+        },
+        "approved_at": {
+          "$ref": "#/$defs/canonicalInstant"
+        },
+        "approval_reference": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "issue_id": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "issue_digest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "authorized_data_base_commit": {
+          "$ref": "#/$defs/gitObject"
+        },
+        "roster": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/concreteString"
+          }
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "starting_data_commit",
+        "starting_data_tree",
+        "captured_at",
+        "capture_evidence_digest_sha256",
+        "request_digest_sha256"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/machineIdentifier"
+        },
+        "starting_data_commit": {
+          "$ref": "#/$defs/gitObject"
+        },
+        "starting_data_tree": {
+          "$ref": "#/$defs/gitObject"
+        },
+        "captured_at": {
+          "$ref": "#/$defs/canonicalInstant"
+        },
+        "capture_evidence_digest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "request_digest_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "role": {
+          "enum": [
+            "admin",
+            "steward",
+            "user"
+          ]
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "data_repository",
+        "data_branch",
+        "path_allowlist",
+        "writer_id"
+      ],
+      "properties": {
+        "data_repository": {
+          "$ref": "#/$defs/repository"
+        },
+        "data_branch": {
+          "$ref": "#/$defs/machineIdentifier"
+        },
+        "path_allowlist": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repositoryPathPattern"
+          }
+        },
+        "writer_id": {
+          "$ref": "#/$defs/machineIdentifier"
+        }
+      }
+    },
+    "credential": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "provider_object_id",
+        "provider_title",
+        "public_fingerprint_sha256",
+        "custody_role",
+        "custodian",
+        "staged_at",
+        "staging_deadline"
+      ],
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/machineIdentifier"
+        },
+        "provider_object_id": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "$ref": "#/$defs/concreteString"
+            }
+          ]
+        },
+        "provider_title": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "public_fingerprint_sha256": {
+          "type": "string",
+          "pattern": "^SHA256:[A-Za-z0-9+/]{43}$"
+        },
+        "custody_role": {
+          "enum": [
+            "admin",
+            "steward"
+          ]
+        },
+        "custodian": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "staged_at": {
+          "$ref": "#/$defs/canonicalInstant"
+        },
+        "staging_deadline": {
+          "$ref": "#/$defs/canonicalInstant"
+        }
+      }
+    },
+    "application": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "validator_path",
+        "validator_digest_sha256",
+        "control_plane_tree_sha"
+      ],
+      "properties": {
+        "repository": {
+          "$ref": "#/$defs/repository"
+        },
+        "commit": {
+          "$ref": "#/$defs/gitObject"
+        },
+        "validator_path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "validator_digest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "control_plane_tree_sha": {
+          "$ref": "#/$defs/gitObject"
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os_identity",
+        "os_identity_evidence",
+        "git_config_allowlist_version",
+        "git_local_config_digest_sha256",
+        "activation_receipt_digest_sha256"
+      ],
+      "properties": {
+        "os_identity": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "os_identity_evidence": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "git_config_allowlist_version": {
+          "$ref": "#/$defs/concreteString"
+        },
+        "git_local_config_digest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "activation_receipt_digest_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "concreteString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!REPLACE_WITH_)(?!.*[\\u0000-\\u001f\\u007f])\\S(?:.*\\S)?$"
+    },
+    "machineIdentifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "gitObject": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "canonicalInstant": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.\\.?(?:/|$))[^\\u0000-\\u001f\\u007f*?\\[\\]{}]+$"
+    },
+    "repositoryPathPattern": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.\\.?(?:/|$))[^\\u0000-\\u001f\\u007f*?\\[\\]{}]+(?:/\\*\\*)?$"
+    }
+  }
+}

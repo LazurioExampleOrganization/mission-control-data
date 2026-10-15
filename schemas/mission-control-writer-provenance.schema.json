@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://companiesascode.local/schemas/mission-control-writer-provenance.schema.json",
+  "title": "Mission Control authenticated writer provenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "changeset_id",
+    "first_authenticated_phase",
+    "authorization_id",
+    "authorization_source_commit",
+    "authorization_source_blob",
+    "first_authorization_digest_sha256",
+    "changeset_payload_digest_sha256",
+    "recorded_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "companiesascode.mission_control.writer_provenance.v1"
+    },
+    "mode": {
+      "enum": [
+        "authenticated",
+        "legacy-transition"
+      ]
+    },
+    "changeset_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,127}$"
+    },
+    "first_authenticated_phase": {
+      "enum": [
+        "creation",
+        "approval",
+        "publication",
+        "supersession"
+      ]
+    },
+    "authorization_id": {
+      "$ref": "#/$defs/concreteString"
+    },
+    "authorization_source_commit": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "authorization_source_blob": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "first_authorization_digest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "changeset_payload_digest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "recorded_at": {
+      "$ref": "#/$defs/canonicalInstant"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "authenticated"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "first_authenticated_phase": {
+            "const": "creation"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "legacy-transition"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "first_authenticated_phase": {
+            "enum": [
+              "approval",
+              "publication",
+              "supersession"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "concreteString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!REPLACE_WITH_)(?!.*[\\u0000-\\u001f\\u007f])\\S(?:.*\\S)?$"
+    },
+    "gitObject": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "canonicalInstant": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+    }
+  }
+}
