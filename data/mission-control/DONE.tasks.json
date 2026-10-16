@@ -1,13 +1,13 @@
 [
   {
     "id": "task-2026-05-23-004",
-    "title": "Navrhnout minimální strategický planning view pro AgentMint",
+    "title": "Design a minimal strategic planning view for Lazurio Example Organization",
     "status": "done",
     "priority": "high",
     "priority_rank": 51,
     "assignee": "agent",
     "priority_decider": "alexmorgan",
-    "priority_reason": "Ověřujeme Mission Control tím, že v něm plánujeme další vývoj Mission Controlu. Cílem je projít celý loop: plán vznikne jako YAML, plán obsahuje rozhodnutí a navržené tasky, export vytvoří implemen…",
+    "priority_reason": "We are testing Mission Control by planning the further development of Mission Control in it. The goal is to walk the whole loop: a plan is created as YAML, the plan contains decisions and proposed tasks, the export creates implemen…",
     "created_at": "2026-05-23",
     "updated_at": "2026-05-23",
     "tags": [
@@ -19,16 +19,16 @@
       "view",
       "EX-0011"
     ],
-    "summary": "Z dogfood zkušenosti navrhnout první view, ve kterém půjde plánovat AgentMint strategii před monetizační prací.",
+    "summary": "From the dogfood experience, design the first view in which the company's strategy can be planned before monetization work.",
     "risk_notes": [
-      "Dogfood nesmí obejít vlastní pravidla; tasky musí vzniknout přes Mission Control export, ne jen ručním zápisem.",
-      "Pokud se workflow ukáže nepohodlný, je to validní výsledek testu a má se zapsat jako friction, ne zamaskovat.",
-      "Neplánovat business strategii AgentMintu, dokud planning core není dost stabilní pro zachycení rozhodnutí."
+      "The dogfood must not bypass its own rules; tasks must come from the Mission Control export, not just from manual entries.",
+      "If the workflow turns out to be uncomfortable, that is a valid test result and should be recorded as friction, not hidden.",
+      "Do not plan the company's business strategy until the planning core is stable enough to capture decisions."
     ],
     "acceptance_criteria": [
-      "View má jasně oddělit initiatives, projects, issues a decisions.",
-      "View ukáže ready/in_progress strategické plány a jejich TODO outputs.",
-      "Návrh nevyžaduje externí databázi ani cloud službu."
+      "The view clearly separates initiatives, projects, issues and decisions.",
+      "The view shows ready/in_progress strategic plans and their TODO outputs.",
+      "The design needs no external database or cloud service."
     ],
     "links": [
       {
@@ -57,7 +57,7 @@
     "source": "mission-control",
     "completed_at": "2026-05-23",
     "completed_by": "agent",
-    "outcome": "Strategický planning view navržen v rámci dogfood smyčky Mission Controlu.",
+    "outcome": "The strategic planning view was designed as part of the Mission Control dogfood loop.",
     "evidence": [
       "plans/2026/05/dogfood-mission-control-planning-loop.yaml"
     ],

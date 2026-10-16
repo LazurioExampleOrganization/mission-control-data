@@ -9,59 +9,60 @@ priority_rank: 5
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
 context: |
-  Třetí kandidát: placený audit toho, jak značka vypadá ve vyhledávání,
-  komunitách a AI odpovědích, plus transparentní doporučení obsahu a
-  positioning změn. Agentní výhoda je ve sběru signálů, citacích zdrojů a
-  rychlé syntéze.
+  The third candidate: a paid audit of how a brand appears in search,
+  communities and AI answers, plus transparent recommendations for content and
+  positioning changes. The agent advantage lies in collecting signals, citing
+  sources and fast synthesis.
 
-  Tento směr má vyšší reputační citlivost než Agent Automation Desk. Před
-  testem musí být jasně zakázané fake accounts, stealth posting, manipulace
-  komunit a neoznačené promo.
+  This direction is more reputationally sensitive than Agent Automation Desk.
+  Before any test, fake accounts, stealth posting, community manipulation and
+  unlabelled promotion must be clearly forbidden.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
 target_state: |
-  - Navrhnout placený audit, který je užitečný bez manipulativních taktik.
-  - Zapsat guardrails pro zdroje, citace, komunitní data a doporučené akce.
-  - Ověřit, jestli buyer platí za audit, ne jen za free insight.
+  - Design a paid audit that is useful without manipulative tactics.
+  - Record guardrails for sources, citations, community data and recommended actions.
+  - Check whether the buyer pays for the audit, not just for a free insight.
 scope:
   in:
-  - Audit veřejných signálů značky a konkurence.
-  - Transparentní report se zdroji, datem ověření a confidence.
-  - Doporučení content/opportunity backlogu bez fake engagement.
+  - An audit of the public signals of the brand and its competitors.
+  - A transparent report with sources, the verification date and confidence.
+  - Recommendations for a content/opportunity backlog without fake engagement.
   out:
-  - Stealth posting, fake accounts, astroturfing nebo review manipulation.
-  - Scraping proti ToS.
-  - Tvrzení, že AgentMint umí garantovat AI odpovědi nebo ranking.
+  - Stealth posting, fake accounts, astroturfing or review manipulation.
+  - Scraping against the ToS.
+  - Claims that the company can guarantee AI answers or rankings.
 acceptance_criteria:
-- Existuje guardrail dokument pro audit a doporučené akce.
-- Existuje ukázková report struktura s citations-first stylem.
-- Existuje cena a stop condition pro prvních 5 auditů.
-- Před outreach je rozhodnuto, jestli reputační riziko odpovídá AgentMint brandu.
+- There is a guardrail document for the audit and the recommended actions.
+- There is a sample report structure in a citations-first style.
+- There is a price and a stop condition for the first 5 audits.
+- Before outreach, it is decided whether the reputational risk fits the Lazurio Example Organization brand.
 validation:
 - Check every acceptance criterion against recorded evidence.
 risk_notes:
-- Směr je blízko SEO/PR gray zones; bez guardrails se snadno posune k manipulaci.
-- AI odpovědi jsou nestabilní a nelze je garantovat.
-- Potenciální zákazník může chtít taktiky, které AgentMint nemá dělat.
+- The direction is close to SEO/PR grey zones; without guardrails it easily drifts towards manipulation.
+- AI answers are unstable and cannot be guaranteed.
+- A potential customer may want tactics that the company should not use.
 decisions:
 - date: '2026-05-23'
-  decision: Připravit guardrails před jakýmkoliv testem.
-  rationale: Revenue signál je zajímavý, ale reputační riziko je vyšší než u service pilotu.
+  decision: Prepare guardrails before any test.
+  rationale: The revenue signal is interesting, but the reputational risk is higher than for the service
+    pilot.
 planning_target:
   scope: lazurio-example-organization
   todo_tasks_path: data/mission-control/TODO.tasks.json
 proposed_tasks:
-- title: Sepsat guardrails pro AI visibility audit
-  summary: Definovat povolené zdroje, zakázané taktiky, citace, confidence a hranice doporučení před návrhem
-    nabídky.
+- title: Write guardrails for the AI visibility audit
+  summary: Define the allowed sources, forbidden tactics, citations, confidence and the limits of recommendations
+    before designing the offer.
   priority: medium
   tags:
   - guardrails
   - visibility-audit
   - reputational-risk
   acceptance_criteria:
-  - Guardrails explicitně zakazují fake accounts, stealth posting a manipulaci recenzí.
-  - Každé doporučení v reportu musí mít zdroj nebo být označené jako hypotéza.
-  - Dokument obsahuje rozhodovací kritérium, kdy audit odmítnout.
+  - The guardrails explicitly forbid fake accounts, stealth posting and review manipulation.
+  - Every recommendation in the report must have a source or be marked as a hypothesis.
+  - The document contains a decision criterion for when to decline an audit.
 links:
 - label: Experiment shortlist
   path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md

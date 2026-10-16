@@ -1,0 +1,82 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0009
+dev_code: EX-0009
+title: Launchpad design pass for Lazurio Example Organization
+status: ready
+owner: alexmorgan
+priority: medium
+priority_rank: 8
+created_at: '2026-05-23'
+updated_at: '2026-05-23'
+context: |
+  Launchpad still looks like a generic GEN2 template. Lazurio Example
+  Organization needs the local control plane to look like the company's working
+  analytical tool: an operating desk for mechanisms, experiments, evidence,
+  Mission Control and workspace health.
+
+  The visual pass should not create a marketing hero. It should make the first
+  screen clearer and carry the company's brand baseline into an everyday tool.
+current_problem: The v1 plan recorded no separate problem statement; the context describes it.
+target_state: |
+  - Give Launchpad a clear Lazurio Example Organization character.
+  - Highlight Mission Control as the main planning entry point.
+  - Keep Launchpad's operational functions without breaking the start/stop/doctor flow.
+  - Make both the desktop and the mobile view professional and scannable.
+scope:
+  in:
+  - A topbar with the Lazurio Example Organization identity and a workspace control plane label.
+  - A home summary in the company's operational language.
+  - Mission Control as the primary/pinned app.
+  - App cards with clear status signals.
+  - CSS tokens aligned with the company's design baseline.
+  out:
+  - A marketing landing page.
+  - Decorative orbs, gradient blobs or generic hero illustrations.
+  - Changes to the core Launchpad API or the doctor behaviour.
+acceptance_criteria:
+- The first screen makes it clear that this is the Lazurio Example Organization workspace, not a template.
+- Mission Control is visible or clearly highlighted without searching.
+- Guide and Design System are secondary supporting tools.
+- Desktop and mobile screenshots have no text overflow or overlaps.
+- The start/stop app buttons still work.
+validation:
+- Check every acceptance criterion against recorded evidence.
+risk_notes:
+- Overly strong styling must not reduce the usability of the everyday dashboard.
+- Launchpad must not lose the generic core functions that the doctor and the workspace runtime will need.
+- Texts must be operational, not sales copy.
+decisions:
+- date: '2026-05-23'
+  decision: The design pass should create an operating desk for the company, not a landing page.
+  rationale: Launchpad is an internal tool for managing work repeatedly, not a public website.
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+- title: Do the Launchpad design pass for Lazurio Example Organization
+  summary: Adjust the Launchpad visuals and copy so that the first screen works as the company's operating
+    desk with Mission Control as the primary entry point.
+  priority: high
+  tags:
+  - launchpad
+  - design
+  - ui
+  acceptance_criteria:
+  - The topbar and the summary use the Lazurio Example Organization identity.
+  - Mission Control is the primary app card or a pinned action.
+  - The CSS does not use generic template comments as the main brand guide.
+  - The desktop and mobile smoke tests pass.
+links:
+- label: Launchpad CSS
+  path: launchpad/app/v1/web/style.css
+- label: Launchpad app JS
+  path: launchpad/app/v1/web/app.js
+- label: Lazurio Example Organization design baseline
+  path: design-system/BASELINE.md
+import_review:
+  path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
+  schema_fit: Imported from v1 plan plan-2026-05-23-008 (mission-control/plans/2026/05/launchpad-example-design-pass.yaml).
+  schema_changes:
+  - priority and priority_rank were not recorded in v1; set to medium and the v1 id order.
+  - current_problem and validation were not recorded in v1; filled with a neutral statement.
+  - target_state is the list of v1 goals.

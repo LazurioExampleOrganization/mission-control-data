@@ -9,53 +9,54 @@ priority_rank: 10
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
 context: |
-  Ověřujeme Mission Control tím, že v něm plánujeme další vývoj Mission Controlu. Cílem je projít celý loop: plán vznikne jako YAML, plán obsahuje rozhodnutí a navržené tasky, export vytvoří implementační TODO a výsledek se vrátí zpět do plánu jako evidence.
+  We are testing Mission Control by planning the further development of Mission Control in it. The goal is to walk the whole loop: a plan is created as YAML, the plan contains decisions and proposed tasks, the export creates implementation TODOs and the result returns to the plan as evidence.
 
-  Tento dogfood test má ukázat, jestli Mission Control opravdu drží strategický kontext lépe než chat nebo ad hoc TODO zápis.
+  This dogfood test should show whether Mission Control really holds the strategic context better than a chat or an ad hoc TODO entry.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
 target_state: |
-  - Použít Mission Control jako source of truth pro vlastní vývoj Mission Controlu.
-  - Ověřit, že plán se dá převést do konkrétních implementačních tasků bez ručního kopírování.
-  - Zachytit friction body, které brání agentům plánovat přes filesystem DB pohodlně.
+  - Use Mission Control as the source of truth for Mission Control's own development.
+  - Check that a plan can be turned into concrete implementation tasks without manual copying.
+  - Capture the friction points that keep agents from planning comfortably through the filesystem DB.
 scope:
   in:
-  - Založit dogfood plán v Mission Controlu.
-  - Vygenerovat a materializovat TODO tasky přes Mission Control export.
-  - Doplnit do plánu `todo_outputs` a outcome/evidence poznámku.
-  - Vyhodnotit, co chybí pro plánování strategie AgentMintu.
+  - Create a dogfood plan in Mission Control.
+  - Generate and materialize TODO tasks through the Mission Control export.
+  - Add `todo_outputs` and an outcome/evidence note to the plan.
+  - Evaluate what is missing for planning the company's strategy.
   out:
-  - Stavět celý Linear-like core v jednom kroku.
-  - Řešit monetizační experimenty dřív než plánovací jádro.
-  - Zavádět externí planning tool jako source of truth.
+  - Building the whole Linear-like core in one step.
+  - Working on monetization experiments before the planning core.
+  - Introducing an external planning tool as the source of truth.
 acceptance_criteria:
-- Plán existuje jako validní YAML v Mission Control `plans/`.
-- Dry-run export z plánu navrhne konkrétní implementační tasky.
-- Apply export zapíše tasky do `mission-control/TODO.tasks.json` s planning referencemi.
-- Plán má vyplněné `todo_outputs` na vytvořené tasky.
-- Vznikne krátké vyhodnocení friction bodů pro další iteraci Mission Controlu.
+- The plan exists as valid YAML in Mission Control `plans/`.
+- A dry-run export of the plan proposes concrete implementation tasks.
+- An apply export writes the tasks to `mission-control/TODO.tasks.json` with planning references.
+- The plan has `todo_outputs` filled in for the created tasks.
+- There is a short evaluation of the friction points for the next Mission Control iteration.
 validation:
 - Check every acceptance criterion against recorded evidence.
 implementation_validation:
 - |
-  Outcome recorded in v1: Dogfood loop proběhl v první iteraci úspěšně: plán byl založen přes Mission Control API, export dry-run vygeneroval tři konkrétní tasky a --apply je zapsal do mission-control/TODO.tasks.json s planning referencí zpět na tento YAML plán.
+  Outcome recorded in v1: The dogfood loop succeeded in the first iteration. The plan was created through the Mission Control API, the dry-run export generated three concrete tasks and --apply wrote them to mission-control/TODO.tasks.json with a planning reference back to this YAML plan.
 
-  Friction zjištění: create API neumí doplnit decisions hned při založení, takže rozhodnutí bylo potřeba doplnit následným update krokem. To potvrzuje prioritu tasku na editorové pole pro decisions. Druhé zjištění: workflow je použitelné, ale strategické plánování bude potřebovat dedicated view pro initiatives/projects/issues, aby člověk nemusel vše hledat jen v listu planů.
+  Friction found: the create API cannot add decisions when a plan is created, so the decisions had to be added in a follow-up update step. This confirms the priority of the task for a decisions editor field. Second finding: the workflow is usable, but strategic planning will need a dedicated view for initiatives/projects/issues, so that people do not have to look for everything in the plan list alone.
 
-  Bug z dogfoodu: opakovaný export už materializovaného plánu původně navrhoval nové task IDs. Opraveno v export vrstvě: export teď rozpozná existující tasky podle mission-control planning reference a title, zachová jejich původní ID a --apply je znovu nepřidá.
+  Bug from the dogfood: a repeated export of an already materialized plan originally proposed new task IDs. Fixed in the export layer: the export now recognizes existing tasks by the mission-control planning reference and title, keeps their original IDs, and --apply does not add them again.
 risk_notes:
-- Dogfood nesmí obejít vlastní pravidla; tasky musí vzniknout přes Mission Control export, ne jen ručním
-  zápisem.
-- Pokud se workflow ukáže nepohodlný, je to validní výsledek testu a má se zapsat jako friction, ne zamaskovat.
-- Neplánovat business strategii AgentMintu, dokud planning core není dost stabilní pro zachycení rozhodnutí.
+- The dogfood must not bypass its own rules; tasks must come from the Mission Control export, not just
+  from manual entries.
+- If the workflow turns out to be uncomfortable, that is a valid test result and should be recorded as
+  friction, not hidden.
+- Do not plan the company's business strategy until the planning core is stable enough to capture decisions.
 decisions:
 - date: '2026-05-23'
-  decision: Mission Control vývoj bude plánovaný v Mission Controlu samotném.
-  rationale: Dogfood loop ověřuje, že nástroj umí držet strategický kontext, materializovat TODO a vracet
-    evidence zpět do plánu.
+  decision: Mission Control development will be planned in Mission Control itself.
+  rationale: The dogfood loop checks that the tool can hold the strategic context, materialize TODOs and
+    return evidence to the plan.
 - date: '2026-05-23'
-  decision: Před monetizační prací má prioritu planning core.
-  rationale: AgentMint potřebuje nejdřív stabilní místo pro strategii, rozhodnutí a rozpad práce, jinak
-    se business kontext rozpadne mezi chat, research a task ledgery.
+  decision: The planning core takes priority over monetization work.
+  rationale: The company first needs a stable place for strategy, decisions and the work breakdown; otherwise
+    the business context falls apart between chat, research and task ledgers.
 todo_outputs:
 - task-2026-05-23-003
 - task-2026-05-23-004
@@ -64,42 +65,42 @@ planning_target:
   scope: lazurio-example-organization
   todo_tasks_path: data/mission-control/TODO.tasks.json
 proposed_tasks:
-- title: Vyhodnotit dogfood plánovací smyčku Mission Controlu
-  summary: Projít plán -> export -> TODO -> zpětná evidence a zapsat, které části jsou plynulé a které
-    agenty zpomalují.
+- title: Evaluate the Mission Control dogfood planning loop
+  summary: Walk through plan -> export -> TODO -> evidence back and record which parts run smoothly and
+    which slow agents down.
   priority: high
   tags:
   - dogfood
   - planning
   - friction
   acceptance_criteria:
-  - Je popsáno, co fungovalo v plan -> TODO flow.
-  - Je popsáno, co vyžadovalo ruční zásah mimo UI nebo API.
-  - Vznikne doporučení pro nejbližší zlepšení Mission Controlu.
-- title: Navrhnout minimální strategický planning view pro AgentMint
-  summary: Z dogfood zkušenosti navrhnout první view, ve kterém půjde plánovat AgentMint strategii před
-    monetizační prací.
+  - What worked in the plan -> TODO flow is described.
+  - What needed manual intervention outside the UI or API is described.
+  - There is a recommendation for the next Mission Control improvement.
+- title: Design a minimal strategic planning view for Lazurio Example Organization
+  summary: From the dogfood experience, design the first view in which the company's strategy can be planned
+    before monetization work.
   priority: high
   tags:
   - strategy
   - view
   - mission-control
   acceptance_criteria:
-  - View má jasně oddělit initiatives, projects, issues a decisions.
-  - View ukáže ready/in_progress strategické plány a jejich TODO outputs.
-  - Návrh nevyžaduje externí databázi ani cloud službu.
-- title: Doplnit chybějící editorové pole pro decisions
-  summary: UI detail už decisions zobrazuje, ale edit modal je neumí pohodlně upravit; doplnit minimální
-    textové pole nebo YAML-friendly editor pattern.
+  - The view clearly separates initiatives, projects, issues and decisions.
+  - The view shows ready/in_progress strategic plans and their TODO outputs.
+  - The design needs no external database or cloud service.
+- title: Add the missing editor field for decisions
+  summary: The UI detail already shows decisions, but the edit modal cannot edit them comfortably; add
+    a minimal text field or a YAML-friendly editor pattern.
   priority: medium
   tags:
   - ui
   - decisions
   - editor
   acceptance_criteria:
-  - Agent nebo člověk může přes UI doplnit decision s datem a rationale.
-  - Uložení zachová validní YAML schema.
-  - Existing plans UI zůstane funkční.
+  - An agent or a person can add a decision with a date and a rationale through the UI.
+  - Saving keeps the YAML schema valid.
+  - The existing plans UI stays functional.
 links:
 - label: Linear-like core plan
   path: mission-control/plans/2026/05/mission-control-linear-filesystem-core.yaml

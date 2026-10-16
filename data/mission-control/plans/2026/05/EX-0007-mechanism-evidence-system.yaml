@@ -9,72 +9,73 @@ priority_rank: 6
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
 context: |
-  AgentMint má existující research sprint s kandidáty jako Remote Leaf,
-  ScrapingBee, Bannerbear, Carrd, BuiltWith, GummySearch, Easlo, ShipFast,
-  Text Blaze, TLDR Newsletter a HeadshotPro. Aby se z toho nestala hromada
-  zajímavých příběhů, potřebujeme opakovatelný evidence systém pro mechanismy:
-  co vydělává, komu, jakým kanálem, s jakým důkazem, jaké jsou guardrails a
-  jaký je nejmenší první test.
+  Lazurio Example Organization has an existing research sprint with candidates
+  such as Remote Leaf, ScrapingBee, Bannerbear, Carrd, BuiltWith, GummySearch,
+  Easlo, ShipFast, Text Blaze, TLDR Newsletter and HeadshotPro. So that this
+  does not become a pile of interesting stories, we need a repeatable evidence
+  system for mechanisms: what makes money, for whom, through which channel, with
+  what proof, what the guardrails are and what the smallest first test is.
 
-  Mission Control má držet strategické rozhodnutí a cíle; detailní scans
-  pravděpodobně patří do research modulu nebo knowledgebase, až bude jasná
-  finální struktura.
+  Mission Control should hold the strategic decisions and goals; the detailed
+  scans probably belong in the research module or the knowledgebase once the
+  final structure is clear.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
 target_state: |
-  - Definovat jednotný mechanism scan pro online projekty s monetizačním signálem.
-  - Oddělit revenue evidence, adaptovatelný mechanismus a zakázané kopírování identity.
-  - Připravit shortlist tak, aby šel přímo převést na experiment cards.
+  - Define a uniform mechanism scan for online projects with a monetization signal.
+  - Separate the revenue evidence, the adaptable mechanism and the forbidden copying of identity.
+  - Prepare the shortlist so that it converts directly into experiment cards.
 scope:
   in:
-  - Schema nebo Markdown šablona pro jeden mechanism scan.
-  - Pole pro revenue signal, source URL, datum ověření, confidence a ToS/legal risk.
-  - Scoring kritéria pro time-to-first-dollar, agent leverage a reputační fit.
+  - A schema or Markdown template for one mechanism scan.
+  - Fields for the revenue signal, source URL, verification date, confidence and ToS/legal risk.
+  - Scoring criteria for time-to-first-dollar, agent leverage and reputational fit.
   out:
-  - Kopírování cizích databází, copy, brand assets nebo zákaznických listů.
-  - Automatické označování revenue claimů jako pravdy bez zdroje a data.
-  - Sběr dat způsobem, který obchází ToS nebo privacy hranice.
+  - Copying other companies' databases, copy, brand assets or customer lists.
+  - Automatically marking revenue claims as true without a source and a date.
+  - Collecting data in a way that bypasses the ToS or privacy boundaries.
 acceptance_criteria:
-- Existuje šablona mechanism scan použitelná pro 25-40 kandidátů.
-- Každý scan má explicitní část "co adaptovat" a "co nekopírovat".
-- Scoring umí vybrat top kandidáty pro experiment bez ručního dohadování.
-- Výstup odkazuje na původní research sprinty a jejich data ověření.
+- There is a mechanism scan template usable for 25-40 candidates.
+- Every scan has an explicit "what to adapt" and "what not to copy" part.
+- Scoring can pick the top candidates for an experiment without manual debate.
+- The output links to the original research sprints and their verification dates.
 validation:
 - Check every acceptance criterion against recorded evidence.
 risk_notes:
-- Online revenue data rychle zastarává a může být marketingově přikrášlené.
-- Silný revenue signál neznamená, že AgentMint umí mechanismus bezpečně zopakovat.
-- Agent nesmí vygenerovat plán založený na spam, scraping abuse nebo klamavých claims.
+- Online revenue data goes stale quickly and may be embellished by marketing.
+- A strong revenue signal does not mean that the company can safely repeat the mechanism.
+- An agent must not generate a plan based on spam, scraping abuse or misleading claims.
 decisions:
 - date: '2026-05-23'
-  decision: Mechanism scans mají být evidence-first a legální adaptace má být samostatné pole.
-  rationale: Cílem AgentMintu je kopírovat mechanismus, ne identitu ani neověřené příběhy.
+  decision: Mechanism scans should be evidence-first, and the legal adaptation should be a separate field.
+  rationale: The company's goal is to copy the mechanism, not the identity or unverified stories.
 planning_target:
   scope: lazurio-example-organization
   todo_tasks_path: data/mission-control/TODO.tasks.json
 proposed_tasks:
-- title: Navrhnout mechanism scan šablonu
-  summary: Definovat YAML nebo Markdown šablonu pro kandidáty s revenue evidence, mechanismem, legální
-    adaptací, guardrails a prvním testem.
+- title: Design the mechanism scan template
+  summary: Define a YAML or Markdown template for candidates with revenue evidence, the mechanism, the
+    legal adaptation, guardrails and a first test.
   priority: high
   tags:
   - research
   - schema
   - mechanisms
   acceptance_criteria:
-  - Šablona obsahuje revenue signal, source URL, verified_at a confidence.
-  - Šablona odděluje mechanism, customer, channel, pricing, delivery a risk.
-  - Šablona obsahuje povolenou adaptaci i zakázané kopírování.
-- title: Převést shortlist top kandidátů do mechanism scans
-  summary: Vzít nejdůležitější kandidáty z research sprintu a přepsat je do jednotného evidence formátu.
+  - The template contains the revenue signal, source URL, verified_at and confidence.
+  - The template separates mechanism, customer, channel, pricing, delivery and risk.
+  - The template contains both the allowed adaptation and the forbidden copying.
+- title: Convert the shortlist of top candidates into mechanism scans
+  summary: Take the most important candidates from the research sprint and rewrite them in the uniform
+    evidence format.
   priority: medium
   tags:
   - research
   - shortlist
   - evidence
   acceptance_criteria:
-  - Minimálně 10 kandidátů má jednotný scan.
-  - U každého kandidáta je první AgentMint test nebo důvod odložení.
-  - Výstup je uložený v module scope, který se stane source of truth pro research.
+  - At least 10 candidates have a uniform scan.
+  - Every candidate has a first test for the company or a reason for postponing it.
+  - The output is stored in the module scope that becomes the source of truth for research.
 links:
 - label: Copyable projects scan
   path: company/agents/reference/research-sprint-2026-05-22-copyable-online-projects.md
@@ -83,7 +84,7 @@ links:
 - label: Agentic monetization scan
   path: company/archive/derived/research-sprints/2026-05-22-agentic-monetization-scan.md
 - label: B2B lead-gen and service scan
-  path: company/archive/derived/2026-05-22-agentmint-research-sprint-online-projects.md
+  path: company/archive/derived/2026-05-22-example-research-sprint-online-projects.md
 - label: Experiments shortlist
   path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md
 import_review:

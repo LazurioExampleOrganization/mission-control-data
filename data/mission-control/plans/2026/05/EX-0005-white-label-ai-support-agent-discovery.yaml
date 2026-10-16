@@ -9,59 +9,60 @@ priority_rank: 4
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
 context: |
-  Druhý kandidát monetizačního experimentu: done-with-you nastavení
-  specializovaného AI support agentu pro agentury a jejich klienty.
-  Mechanismus vychází z poptávky po support chatbotech a knowledge-base
-  agentech, ale AgentMint adaptace musí být postavená na datech dodaných se
-  souhlasem, jasném scope a bezpečném handoffu.
+  The second monetization experiment candidate: a done-with-you setup of a
+  specialized AI support agent for agencies and their clients. The mechanism
+  builds on the demand for support chatbots and knowledge-base agents, but the
+  company's adaptation must rest on data supplied with consent, a clear scope
+  and a safe handoff.
 
-  Tento plán zatím nemá startovat delivery. Má zformovat discovery test, který
-  ověří, jestli agentury chtějí white-label nabídku a jsou ochotné nést část
-  support odpovědnosti vůči svým klientům.
+  This plan does not start delivery yet. It shapes a discovery test that checks
+  whether agencies want a white-label offer and are willing to carry part of the
+  support responsibility towards their clients.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
 target_state: |
-  - Ověřit zájem agentur o white-label AI support setup.
-  - Zjistit, jaký minimální setup by šel prodat bez velkého technického závazku.
-  - Oddělit poptávku po jednorázovém setupu od dlouhodobého support retaineru.
+  - Check the agencies' interest in a white-label AI support setup.
+  - Find out what minimal setup could be sold without a large technical commitment.
+  - Separate the demand for a one-off setup from a long-term support retainer.
 scope:
   in:
-  - Discovery nabídka pro web/design/marketing agentury.
-  - Done-with-you setup nad veřejným webem nebo daty dodanými se souhlasem.
-  - Návrh bezpečného pilot scope, ceny a odpovědností.
+  - A discovery offer for web/design/marketing agencies.
+  - A done-with-you setup over a public website or data supplied with consent.
+  - A proposal for a safe pilot scope, price and responsibilities.
   out:
-  - Připojení na klientské účty bez explicitního approvalu.
-  - Práce s neveřejnými zákaznickými daty bez governance.
-  - Garance přesnosti odpovědí bez human review workflow.
+  - Connecting to client accounts without explicit approval.
+  - Work with non-public customer data without governance.
+  - Guaranteeing answer accuracy without a human review workflow.
 acceptance_criteria:
-- Existuje discovery script pro agentury a jejich obavy.
-- Existuje návrh minimálního pilot package.
-- Existuje rizikový checklist pro data, odpovědnost a hallucinations.
-- Plán má rozhodnutí, zda testovat po Agent Automation Desk nebo odložit.
+- There is a discovery script for agencies and their concerns.
+- There is a proposal for a minimal pilot package.
+- There is a risk checklist for data, liability and hallucinations.
+- The plan has a decision whether to test after Agent Automation Desk or to postpone.
 validation:
 - Check every acceptance criterion against recorded evidence.
 risk_notes:
-- Support bot může poškodit důvěru klienta, pokud odpovídá špatně.
-- White-label model rozmazává odpovědnost mezi AgentMintem, agenturou a koncovým klientem.
-- Technická delivery může rychle přerůst do custom integration projektu.
+- A support bot can damage the client's trust if it answers wrongly.
+- The white-label model blurs responsibility between the company, the agency and the end client.
+- Technical delivery can quickly grow into a custom integration project.
 decisions:
 - date: '2026-05-23'
-  decision: Netestovat jako první; připravit až jako druhý kandidát.
-  rationale: B2B signál je silný, ale integrační závazek je vyšší než u Agent Automation Desk.
+  decision: Do not test it first; prepare it only as the second candidate.
+  rationale: The B2B signal is strong, but the integration commitment is higher than for Agent Automation
+    Desk.
 planning_target:
   scope: lazurio-example-organization
   todo_tasks_path: data/mission-control/TODO.tasks.json
 proposed_tasks:
-- title: Připravit discovery brief pro white-label support agent
-  summary: Sepsat otázky, pilot package a risk checklist pro rozhovory s agenturami.
+- title: Prepare a discovery brief for the white-label support agent
+  summary: Write the questions, the pilot package and the risk checklist for interviews with agencies.
   priority: medium
   tags:
   - discovery
   - support-agent
   - agency-channel
   acceptance_criteria:
-  - Brief obsahuje buyer, pain, data requirements, liability a pricing otázky.
-  - Brief má guardrails pro zákaznická data a human review.
-  - Brief končí rozhodovacím kritériem testovat/odložit.
+  - The brief contains buyer, pain, data requirements, liability and pricing questions.
+  - The brief has guardrails for customer data and human review.
+  - The brief ends with a test/postpone decision criterion.
 links:
 - label: Experiment shortlist
   path: workspace/experiments/shortlists/2026-05-23-first-monetization-experiments.md

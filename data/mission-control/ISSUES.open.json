@@ -1,7 +1,7 @@
 [
   {
     "id": "issue-2026-05-22-001",
-    "title": "Vybrat první oblast online monetizace pro research sprint",
+    "title": "Choose the first area of online monetization for the research sprint",
     "status": "open",
     "severity": "high",
     "owner": "alexmorgan",
@@ -12,23 +12,23 @@
       "research",
       "first-loop"
     ],
-    "question": "Kterou oblast má AgentMint rozebrat jako první, aby z ní vznikl malý bezpečný experiment s potenciálem příjmu?",
-    "impact": "Rozhodnutí nastaví první research schema, experiment checklist a budoucí modulovou strukturu.",
+    "question": "Which area should Lazurio Example Organization break down first, so that it yields a small, safe experiment with income potential?",
+    "impact": "The decision sets the first research schema, the experiment checklist and the future module structure.",
     "options": [
       {
         "label": "B2B lead generation",
-        "summary": "Agent hledá firmy s konkrétním signálem potřeby a připravuje ručně schválený outbound.",
-        "tradeoff": "Dobře měřitelné a blízko peněz, ale vyžaduje přísné anti-spam a reputační guardrails."
+        "summary": "An agent looks for companies with a concrete signal of need and prepares manually approved outbound.",
+        "tradeoff": "Easy to measure and close to money, but it requires strict anti-spam and reputational guardrails."
       },
       {
         "label": "Micro-SaaS ops automation",
-        "summary": "Agent hledá opakovaný provozní problém a prodává jednoduchou automatizaci nebo službu.",
-        "tradeoff": "Vyšší šance na skutečnou hodnotu, ale delší discovery a delivery cyklus."
+        "summary": "An agent looks for a recurring operational problem and sells a simple automation or service.",
+        "tradeoff": "A higher chance of real value, but a longer discovery and delivery cycle."
       },
       {
         "label": "Content-to-service funnel",
-        "summary": "Agent vytváří specializovaný obsah, měří poptávku a konvertuje ji na službu.",
-        "tradeoff": "Nižší riziko a levný test, ale pomalejší signál příjmů."
+        "summary": "An agent creates specialized content, measures demand and converts it into a service.",
+        "tradeoff": "Lower risk and a cheap test, but a slower income signal."
       }
     ],
     "decision_needed_for": [
@@ -74,7 +74,7 @@
         "path": "workspace/experiments/templates/run-log-template.md"
       }
     ],
-    "current_decision": "Jan schválil doporučení začít mechanismem DesignJoy-for-automation jako Agent Automation Desk. Issue zůstává open pro launch approvals: pilot cena, ICP, prospect list a outreach copy.",
+    "current_decision": "Alex approved the recommendation to start with the DesignJoy-for-automation mechanism as Agent Automation Desk. The issue stays open for the launch approvals: pilot price, ICP, prospect list and outreach copy.",
     "selected_option": "Micro-SaaS ops automation / productized agent automation service",
     "imported_from": "ISSUES.open.json"
   }

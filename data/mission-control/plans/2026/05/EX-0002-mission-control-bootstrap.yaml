@@ -1,7 +1,7 @@
 schema_version: companiesascode.mission_control.plan.v2
 id: mcplan-ex-0002
 dev_code: EX-0002
-title: Mission Control jako strategické centrum AgentMintu
+title: Mission Control as the strategic centre of Lazurio Example Organization
 status: shaping
 owner: alexmorgan
 priority: medium
@@ -9,32 +9,33 @@ priority_rank: 1
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
 context: |
-  AgentMint potřebuje jedno lokální místo, kde vzniká strategická agenda,
-  feature plány a orchestrace práce. Data mají být obyčejné YAML soubory ve
-  workspace, aby je agenti mohli číst, diffovat, upravovat a generovat z nich
-  implementační TODO bez závislosti na externí službě.
+  Lazurio Example Organization needs one local place where the strategic agenda,
+  feature plans and work orchestration take shape. The data should be plain YAML
+  files in the workspace, so that agents can read, diff and edit them and
+  generate implementation TODOs from them without depending on an external
+  service.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
 target_state: |
-  - Spustit Mission Control jako Launchpad aplikaci.
-  - Držet strategické kroky firmy v YAML souborech.
-  - Napojit plánovací vrstvu na `TODO.tasks.json`.
-  - Zachovat plnou čitelnost a editovatelnost pro agenty.
+  - Run Mission Control as a Launchpad application.
+  - Keep the company's strategic steps in YAML files.
+  - Connect the planning layer to `TODO.tasks.json`.
+  - Keep everything fully readable and editable for agents.
 scope:
   in:
   - YAML feature/strategy plans
-  - lokální Launchpad UI
-  - seznam a detail strategických plánů
-  - vytvoření nového planu přes UI
+  - local Launchpad UI
+  - list and detail of strategic plans
+  - creating a new plan through the UI
   out:
-  - externí task manager
-  - serverová databáze
-  - automatické přepisování TODO bez schválení
+  - an external task manager
+  - a server database
+  - rewriting TODOs automatically without approval
 acceptance_criteria:
-- Launchpad umí Mission Control najít v seznamu aplikací.
-- Mission Control se spustí na lokálním portu.
-- UI zobrazí tento YAML plan.
-- UI umí vytvořit nový YAML plan ve workspace.
-- TODO tasky umí nést `planning` referenci na YAML plan.
+- Launchpad finds Mission Control in its list of applications.
+- Mission Control starts on a local port.
+- The UI shows this YAML plan.
+- The UI can create a new YAML plan in the workspace.
+- TODO tasks can carry a `planning` reference to a YAML plan.
 validation:
 - Check every acceptance criterion against recorded evidence.
 todo_outputs:

@@ -1,32 +1,32 @@
 schema_version: companiesascode.mission_control.plan.v2
 id: mcplan-ex-0003
 dev_code: EX-0003
-title: Smoke test Mission Control v Launchpadu
+title: Smoke test of Mission Control in Launchpad
 status: archived
 owner: alexmorgan
 priority: medium
 priority_rank: 2
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
-context: Ověřujeme, že Mission Control běží jako lokální plánovací centrum přes Launchpad a ukládá strategickou
-  agendu do YAML souborů ve workspace.
+context: We are checking that Mission Control runs as a local planning centre through Launchpad and stores
+  the strategic agenda in YAML files in the workspace.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
-target_state: '- Potvrdit čtení i zápis strategického plánu přes lokální UI.'
+target_state: '- Confirm reading and writing a strategic plan through the local UI.'
 scope:
   in:
-  - Ověřit, že Launchpad spustí Mission Control.
-  - Ověřit, že UI vytvoří YAML plan.
+  - Check that Launchpad starts Mission Control.
+  - Check that the UI creates a YAML plan.
   out:
-  - Nepoužívat tento plan jako živou strategickou prioritu.
+  - Do not use this plan as a live strategic priority.
 acceptance_criteria:
-- V Mission Control je po odeslání vidět nový YAML plán.
+- After submitting, the new YAML plan is visible in Mission Control.
 validation:
 - Check every acceptance criterion against recorded evidence.
 implementation_validation:
 - |
-  Outcome recorded in v1: Smoke test proběhl úspěšně. Mission Control se spustil přes Launchpad,
-  zobrazil bootstrap plan a vytvořil tento YAML plan. Plan je archivovaný,
-  aby nepřekážel mezi živými strategickými prioritami.
+  Outcome recorded in v1: The smoke test passed. Mission Control started through Launchpad,
+  showed the bootstrap plan and created this YAML plan. The plan is archived so
+  that it does not get in the way of the live strategic priorities.
 import_review:
   path: data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md
   schema_fit: Imported from v1 plan plan-2026-05-23-002 (mission-control/plans/2026/05/smoke-test-mission-control-v-launchpadu.yaml).

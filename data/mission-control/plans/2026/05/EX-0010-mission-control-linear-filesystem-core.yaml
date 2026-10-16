@@ -9,105 +9,106 @@ priority_rank: 9
 created_at: '2026-05-23'
 updated_at: '2026-05-23'
 context: |
-  Mission Control má být postavený po vzoru Linearu: rychlé operační jádro
-  pro issues, projects, initiatives, cycles, triage, labels, views a stavové
-  workflow. Rozdíl je backend. AgentMint nechce cloud task tracker jako source
-  of truth; chce filesystem DB v Git workspace, kde jsou všechna data YAML
-  soubory a agenti s nimi umí pracovat nativně.
+  Mission Control should be built on the Linear model: a fast operational core
+  for issues, projects, initiatives, cycles, triage, labels, views and a status
+  workflow. The difference is the backend. Lazurio Example Organization does
+  not want a cloud task tracker as the source of truth; it wants a filesystem DB
+  in the Git workspace, where all data are YAML files and agents can work with
+  them natively.
 
-  Cílem není kopie Linearu. Cílem je přenést jeho core mentální model do
-  AgentMint prostředí: lokálně, auditovatelně, diffovatelně, validovaně a bez
-  externí databáze.
+  The goal is not a copy of Linear. The goal is to bring its core mental model
+  into the company's environment: local, auditable, diffable, validated and
+  without an external database.
 current_problem: The v1 plan recorded no separate problem statement; the context describes it.
 target_state: |
-  - Navrhnout filesystem DB core pro Linear-like práci v AgentMintu.
-  - Oddělit strategické plány od vykonatelných issues a časově ohraničených projects.
-  - Připravit model, který UI i agenti umí používat přes stejné YAML soubory.
-  - Zachovat compatibility bridge na `TODO.tasks.json`, dokud nebude issue model plnohodnotný.
+  - Design a filesystem DB core for Linear-like work in Lazurio Example Organization.
+  - Separate strategic plans from actionable issues and time-boxed projects.
+  - Prepare a model that both the UI and agents can use through the same YAML files.
+  - Keep a compatibility bridge to `TODO.tasks.json` until the issue model is complete.
 scope:
   in:
-  - YAML entity pro workspace, teams/workstreams, workflows, labels a views.
-  - YAML entity pro initiatives, projects, issues, triage, cycles a updates.
-  - Schema validace pro každou core entitu.
-  - Index/query vrstva, která čte filesystem a generuje views bez duplicitních dat.
-  - 'UI patterny inspirované Linearem: list/detail, command-like actions, filters, board a timeline.'
+  - YAML entities for workspace, teams/workstreams, workflows, labels and views.
+  - YAML entities for initiatives, projects, issues, triage, cycles and updates.
+  - Schema validation for every core entity.
+  - An index/query layer that reads the filesystem and generates views without duplicated data.
+  - 'UI patterns inspired by Linear: list/detail, command-like actions, filters, board and timeline.'
   out:
-  - Kopírování Linear brandu, UI textů, designu nebo cloud architektury.
-  - Externí databáze jako source of truth.
-  - Multi-tenant SaaS, billing, permissions a týmové účty v první iteraci.
-  - Automatické přepisování root task ledgerů bez explicitního apply režimu.
+  - Copying Linear's brand, UI texts, design or cloud architecture.
+  - An external database as the source of truth.
+  - Multi-tenant SaaS, billing, permissions and team accounts in the first iteration.
+  - Automatic rewriting of the root task ledgers without an explicit apply mode.
 acceptance_criteria:
-- Existuje dokumentovaný filesystem DB model pro Linear-like core entity.
-- Existují první JSON Schemas pro `issue`, `project`, `initiative`, `view` a `workflow`.
-- App umí načíst filesystem DB a zobrazit issues/projects bez ručního JSON seedování.
-- Views jsou definované jako filtry, ne jako kopie issue dat.
-- Agent může založit issue/projekt úpravou YAML souboru a UI to po reloadu uvidí.
-- '`TODO.tasks.json` bridge zůstane funkční pro zpětnou kompatibilitu.'
+- There is a documented filesystem DB model for the Linear-like core entities.
+- The first JSON Schemas exist for `issue`, `project`, `initiative`, `view` and `workflow`.
+- The app can load the filesystem DB and show issues/projects without manual JSON seeding.
+- Views are defined as filters, not as copies of issue data.
+- An agent can create an issue/project by editing a YAML file, and the UI sees it after a reload.
+- The `TODO.tasks.json` bridge stays functional for backward compatibility.
 validation:
 - Check every acceptance criterion against recorded evidence.
 risk_notes:
-- Příliš rychlé přidání všech Linear funkcí by z Mission Control udělalo těžký klon místo jednoduchého
-  agentního operačního nástroje.
-- Filesystem DB musí řešit stabilní ID, validaci a konflikty v Git diffech, jinak bude horší než jednoduchý
-  task ledger.
-- Views nesmí materializovat kopie dat, protože by agenti museli synchronizovat duplicity.
-- Issue model musí respektovat workspace hranice a nesmí do Gitu ukládat secrets ani citlivá zákaznická
-  data.
+- Adding all Linear features too fast would turn Mission Control into a heavy clone instead of a simple
+  agent operations tool.
+- The filesystem DB must handle stable IDs, validation and conflicts in Git diffs; otherwise it will be
+  worse than a simple task ledger.
+- Views must not materialize copies of data, because agents would have to keep the duplicates in sync.
+- The issue model must respect workspace boundaries and must not store secrets or sensitive customer data
+  in Git.
 decisions:
 - date: '2026-05-23'
-  decision: Mission Control core bude Linear-like, ale filesystem-first.
-  rationale: Linear má dobrý pracovní model pro rychlou koordinaci práce; AgentMint potřebuje stejnou
-    ergonomii s YAML daty, aby agenti mohli pracovat přímo v Git workspace.
+  decision: The Mission Control core will be Linear-like, but filesystem-first.
+  rationale: Linear has a good working model for coordinating work fast; the company needs the same ergonomics
+    with YAML data, so that agents can work directly in the Git workspace.
 - date: '2026-05-23'
-  decision: '`plans/` zůstává strategická vrstva, nové `issues/` budou execution vrstva.'
-  rationale: Strategický plán a vykonatelná issue mají jinou granularitu; jejich smíchání by zhoršilo
-    plánování i agentní execution.
+  decision: '`plans/` stays the strategic layer; the new `issues/` will be the execution layer.'
+  rationale: A strategic plan and an actionable issue have a different granularity; mixing them would
+    make both planning and agent execution worse.
 todo_outputs:
 - task-2026-05-23-006
 planning_target:
   scope: lazurio-example-organization
   todo_tasks_path: data/mission-control/TODO.tasks.json
 proposed_tasks:
-- title: Navrhnout Mission Control filesystem DB schema v0
-  summary: Připravit první core YAML schema pro issue, project, initiative, workflow, view a label podle
-    Linear-like modelu AgentMintu.
+- title: Design the Mission Control filesystem DB schema v0
+  summary: Prepare the first core YAML schema for issue, project, initiative, workflow, view and label
+    following the company's Linear-like model.
   priority: high
   tags:
   - schema
   - filesystem-db
   - mission-control
   acceptance_criteria:
-  - Každá core entita má `schema_version`, stabilní `id`, `status`, `owner`, timestamps a `links`.
-  - Issue schema podporuje team/workstream, workflow status, priority, labels, relations, project, cycle
-    a planning reference.
-  - View schema ukládá filtr a sort/group nastavení bez kopírování výsledků.
-  - Schemas jsou validovatelná lokálně bez externí služby.
-- title: Připravit filesystem index/query vrstvu pro Mission Control
-  summary: Implementovat reader, který projde YAML entity v DB složkách, validuje je a vrátí normalizované
-    kolekce pro UI views.
+  - Every core entity has `schema_version`, a stable `id`, `status`, `owner`, timestamps and `links`.
+  - The issue schema supports team/workstream, workflow status, priority, labels, relations, project,
+    cycle and a planning reference.
+  - The view schema stores the filter and the sort/group settings without copying results.
+  - The schemas can be validated locally without an external service.
+- title: Prepare the filesystem index/query layer for Mission Control
+  summary: Implement a reader that walks the YAML entities in the DB folders, validates them and returns
+    normalized collections for the UI views.
   priority: high
   tags:
   - app
   - query
   - filesystem-db
   acceptance_criteria:
-  - Reader načítá entity z `data/v1/` nebo cílové core struktury.
-  - Nevalidní soubory se zobrazí s konkrétní chybou a neshodí celou appku.
-  - Views se dopočítávají z filtrů nad normalizovanými daty.
-  - Není potřeba externí DB ani server state.
-- title: Udělat první Linear-like issue/project UI nad YAML DB
-  summary: Přidat do Mission Control první list/detail view pro issues a projects s rychlou změnou statusu,
-    filtrací a vazbou na plán.
+  - The reader loads entities from `data/v1/` or the target core structure.
+  - Invalid files are shown with a specific error and do not crash the whole app.
+  - Views are computed from filters over the normalized data.
+  - No external DB or server state is needed.
+- title: Build the first Linear-like issue/project UI over the YAML DB
+  summary: Add the first list/detail view for issues and projects to Mission Control, with quick status
+    changes, filtering and a link to the plan.
   priority: medium
   tags:
   - ui
   - issues
   - projects
   acceptance_criteria:
-  - UI zobrazí issues z YAML souborů.
-  - Detail issue ukazuje status, priority, labels, owner, project, relations a links.
-  - Změna statusu uloží YAML a je vidět v Git diffu.
-  - Existing plans UI zůstane funkční.
+  - The UI shows issues from YAML files.
+  - The issue detail shows status, priority, labels, owner, project, relations and links.
+  - A status change saves the YAML and is visible in the Git diff.
+  - The existing plans UI stays functional.
 links:
 - label: Mission Control architecture
   path: mission-control/ARCHITECTURE.md

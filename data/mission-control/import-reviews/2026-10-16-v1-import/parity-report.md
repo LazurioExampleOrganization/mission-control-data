@@ -10,16 +10,16 @@ Plan EX-0001, step O2. Source: the Organization root at commit `ca592511e1486cea
 |---|---|---|---|---|
 | `plan-2026-05-23-001` | `mission-control/plans/2026/05/mission-control-bootstrap.yaml` | EX-0002 | `data/mission-control/plans/2026/05/EX-0002-mission-control-bootstrap.yaml` | The v1 plan type `strategy` has no v3 field. |
 | `plan-2026-05-23-002` | `mission-control/plans/2026/05/smoke-test-mission-control-v-launchpadu.yaml` | EX-0003 | `data/mission-control/plans/2026/05/EX-0003-smoke-test-mission-control-v-launchpadu.yaml` | The v1 plan type `strategy` has no v3 field. |
-| `plan-2026-05-23-003` | `mission-control/plans/2026/05/agent-automation-desk-paid-pilot.yaml` | EX-0004 | `data/mission-control/plans/2026/05/EX-0004-agent-automation-desk-paid-pilot.yaml` | `links` of the proposed task "Schválit parametry Agent Automation Desk pilotu" (1 links); `links` of the proposed task "Schválit a případně publikovat Fiverr workflow triage gig" (2 links); `tags` (monetization, experiment, productized-service, first-dollar, agent-automation-desk); The v1 plan type `experiment` has no v3 field. |
+| `plan-2026-05-23-003` | `mission-control/plans/2026/05/agent-automation-desk-paid-pilot.yaml` | EX-0004 | `data/mission-control/plans/2026/05/EX-0004-agent-automation-desk-paid-pilot.yaml` | `links` of the proposed task "Approve the Agent Automation Desk pilot parameters" (1 links); `links` of the proposed task "Approve and possibly publish the Fiverr workflow triage gig" (2 links); `tags` (monetization, experiment, productized-service, first-dollar, agent-automation-desk); The v1 plan type `experiment` has no v3 field. |
 | `plan-2026-05-23-004` | `mission-control/plans/2026/05/white-label-ai-support-agent-discovery.yaml` | EX-0005 | `data/mission-control/plans/2026/05/EX-0005-white-label-ai-support-agent-discovery.yaml` | `tags` (monetization, experiment, support-agent, agency-channel); The v1 plan type `experiment` has no v3 field. |
 | `plan-2026-05-23-005` | `mission-control/plans/2026/05/ai-visibility-audit-guardrailed-offer.yaml` | EX-0006 | `data/mission-control/plans/2026/05/EX-0006-ai-visibility-audit-guardrailed-offer.yaml` | `tags` (monetization, experiment, visibility-audit, guardrails); The v1 plan type `experiment` has no v3 field. |
 | `plan-2026-05-23-006` | `mission-control/plans/2026/05/mechanism-evidence-system.yaml` | EX-0007 | `data/mission-control/plans/2026/05/EX-0007-mechanism-evidence-system.yaml` | `tags` (research, mechanisms, evidence, scoring); The v1 plan type `feature` has no v3 field. |
 | `plan-2026-05-23-007` | `mission-control/plans/2026/05/mission-control-v1-implementation.yaml` | EX-0008 | `data/mission-control/plans/2026/05/EX-0008-mission-control-v1-implementation.yaml` | `tags` (mission-control, feature, yaml-first, launchpad); The v1 plan type `feature` has no v3 field. |
-| `plan-2026-05-23-008` | `mission-control/plans/2026/05/launchpad-agentmint-design-pass.yaml` | EX-0009 | `data/mission-control/plans/2026/05/EX-0009-launchpad-agentmint-design-pass.yaml` | `tags` (launchpad, design, agentmint-brand, control-plane); The v1 plan type `feature` has no v3 field. |
+| `plan-2026-05-23-008` | `mission-control/plans/2026/05/launchpad-example-design-pass.yaml` | EX-0009 | `data/mission-control/plans/2026/05/EX-0009-launchpad-example-design-pass.yaml` | `tags` (launchpad, design, example-brand, control-plane); The v1 plan type `feature` has no v3 field. |
 | `plan-2026-05-23-009` | `mission-control/plans/2026/05/mission-control-linear-filesystem-core.yaml` | EX-0010 | `data/mission-control/plans/2026/05/EX-0010-mission-control-linear-filesystem-core.yaml` | `tags` (mission-control, linear-like, filesystem-db, yaml-first, product-architecture); The v1 plan type `feature` has no v3 field. |
 | `plan-2026-05-23-010` | `mission-control/plans/2026/05/dogfood-mission-control-planning-loop.yaml` | EX-0011 | `data/mission-control/plans/2026/05/EX-0011-dogfood-mission-control-planning-loop.yaml` | `tags` (mission-control, dogfood, planning-loop, filesystem-db); The v1 plan type `experiment` has no v3 field. |
 | `plan-2026-05-23-011` | `mission-control/plans/2026/05/mission-control-root-repo-work-board.yaml` | EX-0012 | `data/mission-control/plans/2026/05/EX-0012-mission-control-root-repo-work-board.yaml` | `tags` (mission-control, launchpad, work-board, filesystem-db); The v1 plan type `feature` has no v3 field. |
-| `plan-2026-05-23-012` | `mission-control/plans/2026/05/claude-code-workspace-entrypoints.yaml` | EX-0013 | `data/mission-control/plans/2026/05/EX-0013-claude-code-workspace-entrypoints.yaml` | `links` of the proposed task "Optimalizovat root entrypointy pro Claude Code" (4 links); `tags` (claude-code, workspace-governance, agent-entrypoints, doctor); The v1 plan type `ops` has no v3 field. |
+| `plan-2026-05-23-012` | `mission-control/plans/2026/05/claude-code-workspace-entrypoints.yaml` | EX-0013 | `data/mission-control/plans/2026/05/EX-0013-claude-code-workspace-entrypoints.yaml` | `links` of the proposed task "Optimize the root entrypoints for Claude Code" (4 links); `tags` (claude-code, workspace-governance, agent-entrypoints, doctor); The v1 plan type `ops` has no v3 field. |
 
 12 v1 plans, 12 v3 plans. EX-0001 is the GEN3 migration plan itself and is not imported.
 
@@ -66,7 +66,7 @@ EX-0010).
 - `mission-control/data/v1/labels/mission-control.yaml`
 - `mission-control/data/v1/labels/research.yaml`
 - `mission-control/data/v1/projects/mission-control-v2-phase-1.yaml`
-- `mission-control/data/v1/teams/agentmint.yaml`
+- `mission-control/data/v1/teams/example.yaml`
 - `mission-control/data/v1/triage/2026/05/tri-2026-05-23-001.yaml`
 - `mission-control/data/v1/updates/2026/05/upd-2026-05-23-001.yaml`
 - `mission-control/data/v1/views/active-issues.yaml`
@@ -80,3 +80,5 @@ EX-0010).
 - `jannovak` becomes `alexmorgan` (decision D3) in owners, assignees and deciders.
 - Paths `modules/<module>/...` become `workspace/<module>/...`; `modules/mission-control/...` becomes `mission-control/...`.
 - Text stays in its original language; step T3 translates it.
+
+The one-off import script was removed after the import merged; its last version is in the history of this file's directory.
