@@ -391,7 +391,7 @@ risk_notes:
   - "`try-01` keeps its own preset permanently (D34), so it never tests exactly what other Organizations get; Ring 0 acceptance therefore relies on the members' Environments (`lazurio-bob`, `lazurio-alena` and `team-01`, D36)."
   - A rebuild of the server or of `try-01` does not wipe its vault, which lives on the Conglomerate Host; without the scheduled nightly wipe the items visitors left would stay for every later visitor (task 016).
   - A visitor may put a real password into `try-01`'s vault despite the entry notice; everyone who enters that day sees it until the nightly wipe (D35).
-  - Until the GPT-6 Luna gateway runs, a shared AI account of the maintainers is temporarily signed in on `try-01`, a risk the Owner accepted: anyone who enters can use it and see its history. It is signed out in the same rollout that starts the gateway.
+  - "Until the GPT-6 Luna gateway runs, a shared AI account of the maintainers is temporarily signed in on `try-01`, a risk the Owner accepted: anyone who enters can use it and see its history. It is signed out in the same rollout that starts the gateway."
   - The provider's hard monthly limit is not enforced instantly, so recorded spend can slightly exceed 20 USD; the gateway's per-session token cap limits the overrun (D34).
   - Deleting Alena's Lazurio account is destructive; until the sign-in service can delete or reset an account so the same GitHub identity onboards as new, scenario 3 cannot run (D29).
   - Generated data with real-looking amounts could be mistaken for real people or companies; the generator uses reserved example domains and obviously fictional names (D27).
