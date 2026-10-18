@@ -314,6 +314,7 @@ acceptance_criteria:
   - GitHub Teams and grants match the public access matrix; the default branch of every public repository requires a pull request, an approval and CI and forbids force pushes and deletion; every repository has CODEOWNERS.
   - Bob opens `admin-01` and his Personal Environment; Alena opens her own Work Environment and has no Personal Environment; a member of `workspace` opens `team-01` with the Organization's content. None of them is reachable by a visitor or by anyone outside the GitHub Organization. Everyone enters with a Lazurio login and no tailnet, verified in a browser (0178).
   - A visitor whose request an Admin approved sees `try-01` in the Dashboard and enters it through native Lazurio membership and an exact grant on `try-01`, without GitHub membership; `try-01` uses its own vault account; verified in a browser (0178).
+  - "In `try-01` a visitor opens the vault from Apps and the in-place guide explains the page in words that fit `try-01`: a shared Environment whose vault entries every visitor sees, a vault reached through a Lazurio login, and no invitation to store the visitor's own passwords there (D32); verified in a browser (0178)."
   - A penetration test shows that no Environment, no vault route and not `try-01` answers without a Lazurio login.
   - Every archetype is present once, every module but playbooks has an App on generation v3 (or the documented current generation of its archetype), `lazurio module setup` reports 13/13, modules that hold data keep it on repository-db, every new module came through the normal creation path, and the generated data has the recorded volumes.
   - Alena reads the restricted modules but cannot write them; Bob writes every module; verified in a browser.
@@ -398,10 +399,12 @@ decisions:
   - date: 2026-10-18
     decision: "D31 (answers Q12; proposed default, the Owner may override): Deployment Repo pull requests keep the reference Organization's rollout rule of root decision 0205 (addendum of 2026-10-17, point e): no persona review and no click."
     rationale: Proposed default of 2026-10-18; the Owner may override it.
+  - date: 2026-10-18
+    decision: "D32 (answers Q15): `try-01` keeps its own vault account and shows the vault like any Environment of an Organization. A visitor opens the vault from Apps, sees the lab's fictional entries, and the in-place guide explains how the vault works: the question mark next to the page title and the guide bubble at the bottom right, which without a Buddy shows the neutral Lazurio guide. `try-01` is where visitors learn how Lazurio works, so the guide matters most there. It reaches `try-01` with the ordinary Platform release, as in every Organization (parity, no code path only for the lab). If the standard guest Environment keeps a guest onboarding without a vault, `try-01` still keeps its vault account."
+    rationale: "The Owner, 2026-10-18 about 14:00 UTC: the guide bubble is how people learn how Lazurio works, so visitors must be able to open the vault in `try-01` and have the bubble explain it."
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D28 (cap amount and place of the pool), D30 and D31 stand? They apply unless the Owner overrides them."
   - "Q14 When the sign-in service's native membership and exact grants (0192) are qualified for `try-01`, how Machines admits them in place of `public-account`, and the shape of the account deletion or reset that D29 needs; both are designed in the maintainers' plan."
-  - "Q15 The standard guest Environment that is being drafted may reuse a guest onboarding without vault and Integrations, while D20 gives `try-01` its own vault account. Which applies to `try-01`?"
 dependencies:
   - "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization's content, so `team-01` is empty; it blocks `team-01` in L2 and the Team Environment onboarding scenario."
   - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); visitors and scenario 3 can hit it."
@@ -410,6 +413,7 @@ dependencies:
   - "The Lazurio Dashboard: self-service creation and deletion of a Work Environment; today a new Environment is a Deployment Repo pull request through the rollout pipeline (root decision 0205)."
   - "Machines: no supported way to remove an Environment; a removed guest leaves leftovers on the host. Scenarios 1 to 3 need it."
   - "Machines: a public, SSO-only vault route behind the fail-closed Lazurio-login gateway, including `try-01`'s own vault account (D21)."
+  - "Lazurio/LazurioPlatform: the in-place guide and the vault page in the Apps column reach `try-01` with the ordinary Platform release; the guide's vault explanation has to fit a shared Environment and a vault reached through a Lazurio login (D32, Lazurio/LazurioPlatform#499)."
   - "A root decision addendum (HumanAndMachines/Lazurio#575, tracked in the maintainers' plan): the Organization is tailnet-free for people including the vault (a deviation from 0203 and a note to 0204), and point (b) of the 0204 addendum of 2026-10-17 is corrected from a GitHub invitation and a closed Team to native Lazurio membership and a grant on the shared Environment (0192), with the shared Environment open to any signed-in account until that is ready; `try-01`'s own vault account departs from 0204 point 4."
   - "The Organization's AI pool (root decision 0181) with a fixed monthly cap, for members only (D28)."
   - "Buddy Product 1 (root decision 0207): the one-click Personal Environment for Bob's Buddy (D22)."
