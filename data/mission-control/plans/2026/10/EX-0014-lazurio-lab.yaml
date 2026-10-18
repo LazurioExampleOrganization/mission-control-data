@@ -45,15 +45,16 @@ current_problem: |
   - People and rights. The Teams are `workspace` (closed; Write on the workspace
     modules except finance, and on the root application repositories) and the
     per-person `lazurio-bob` (no grants; Bob is an Owner). Alena is in
-    `workspace` and has no per-person Team. One invited real person is also in
-    `workspace`, because the shared Environment admits that Team, and so holds
-    Write on nine repositories. Rulesets forbid deletion and force pushes and
+    `workspace` and has no per-person Team. The members are the maintainer who
+    owns the Organization and the two test accounts; visitors are not members
+    (D20). Rulesets forbid deletion and force pushes and
     require CI where it exists; nothing requires a pull request, an approval or
     a code owner. The remaining governance questions are open in infra#2.
   - Environments. The dedicated server runs the public entry `edge-01`, Bob's
     Work Environment `admin-01`, the Team Environment `team-01` (Team
-    `workspace`) and the shared Environment `try-01` for invited people.
-    `try-01` has the Organization's content since 2026-10-18; `team-01` has
+    `workspace`) and the public visitor Environment `try-01`, reached by a
+    direct link and open to any signed-in Lazurio account (the `public-account`
+    admission). `try-01` has the Organization's content since 2026-10-18; `team-01` has
     none, because a Team Environment never offers installing the Organization's
     content (Lazurio/LazurioPlatform#483). Alena has no Environment of her own,
     and nobody has a Personal Environment.
@@ -72,7 +73,8 @@ target_state: |
   - Bob lives in his Work Environment `admin-01` and also has a Personal
     Environment with Buddy on the normal Buddy hosting. Alena lives in her own
     Work Environment and has no Personal Environment. Team `workspace` works in
-    `team-01`; invited people use the shared `try-01` through Team `guests`.
+    `team-01`. Visitors reach the public visitor Environment `try-01` by a
+    direct link with any Lazurio account, without becoming members (D20).
   - Every archetype found in real Organizations is present once, with a
     fictional domain and an App: knowledgebase, public website, design system,
     business data Apps on repository-db, React Apps without data, one
@@ -111,8 +113,10 @@ target_state: |
   - People reach the Organization, including every service on its Conglomerate
     Host, only through a Lazurio login, never through the tailnet. The tailnet
     only manages the servers (runner, rollout gateway, admin SSH).
-  - Invited people never get the AI pool, the vault or any credential of the
-    Organization (0204 points 4 and 6).
+  - Visitors never become members of the Organization and never get the AI
+    pool, the vault or any credential of the Organization (D20, 0204 points 4
+    and 6). The members are only the maintainer who owns it and its test
+    accounts.
 
   Open details are listed under open questions; every milestone names what its
   implementer may decide.
@@ -125,9 +129,7 @@ scope:
       `workspace` (the company's working Team, admitted by `team-01`);
       `lazurio-bob` (exists, id 20162541) and a new closed per-person Team
       `lazurio-alena`, each admitted only by its person's Work Environment;
-      `guests` for invited people, read only, admitted by `try-01`, replacing
-      today's entry for invited people, who then leave `workspace`; `finance`,
-      restricted, Bob only; optionally one sales Team that shares the sales
+      `finance`, restricted, Bob only; optionally one sales Team that shares the sales
       modules with `workspace` to show N:M membership (`module_slots[].teams`,
       Q11). Rulesets on the default branch of every public repository: pull
       request required, one approval, required CI, no force push, no deletion,
@@ -135,8 +137,8 @@ scope:
       repository (finance and pricing to Bob, the rest to `workspace`). The
       private Deployment Repo is the one documented exception: GitHub Free has
       no rulesets for private repositories, so its process holds the rule.
-      Fixed: GitHub grants are the only access authority; no second roster. The
-      approval requirement is switched on only when the review automations of
+      Fixed: GitHub grants are the only access authority; no second roster;
+      visitors are never members and get no Team (D20). The approval requirement is switched on only when the review automations of
       L4 run, so work does not stall. Freedom: Team names beyond the per-person
       pattern, the exact matrix, CODEOWNERS granularity, required check names
       and the merge method, which must keep the noreply author. Owner: Example
@@ -149,13 +151,18 @@ scope:
       Alena: a new Work Environment (working name `alena-01`) that admits only
       Team `lazurio-alena`, and no Personal Environment. `team-01`: the Team
       Environment of `workspace` with the Organization's content (needs
-      Lazurio/LazurioPlatform#483). `try-01`: the shared Environment for Team
-      `guests`. A public access matrix per Environment kind (Personal, Work,
-      Team) states who enters, which GitHub identity acts (the person's own
+      Lazurio/LazurioPlatform#483). `try-01`: the public visitor Environment,
+      a separate visitor path reached by a direct link, which admits any
+      signed-in Lazurio account (the `public-account` admission) as today;
+      visitors are not members, and `try-01` does not show in the Dashboard rail
+      for now, which is accepted (D20, Q10). A public access matrix per
+      Environment kind (Personal, Work, Team) and for the visitor path states
+      who enters, which GitHub identity acts (the person's own
       account in a Work Environment, the Team's brokered identity in a Team
       Environment), which modules are installed, and how AI, the vault and
-      Integrations work there. Fixed: entry only through a Lazurio login with
-      membership and a grant (0192 without its network condition, 0204); no
+      Integrations work there. Fixed: entry only through a Lazurio login, to
+      the Organization's own Environments with membership and a grant (0192
+      without its network condition, 0204), to `try-01` without membership; no
       Personal Environment ever runs on the Organization's server (0204 point
       9, 0153); one Personal Environment per person (0153); the vault answers
       people only through a Lazurio login (Q1). Freedom: Environment names,
@@ -212,7 +219,7 @@ scope:
       decision 0181, members only). Fixed: an approval is a review, not a merge
       mandate, unless a pull request is handed over by assignment under the
       Lazurio pull request handoff contract; an account never approves its own
-      pull request; invited people never get the AI pool (0204 point 6);
+      pull request; visitors never get the AI pool (0204 point 6);
       Deployment Repo changes keep the reference Organization's rollout rule
       (0205 addendum of 2026-10-17, point e; Q12). Freedom: prompts, triggers,
       which repositories each automation watches, the business rules and their
@@ -224,8 +231,9 @@ scope:
       which the Environments come back with the Organization's content and
       people re-enter with their Lazurio login; (2) delete Alena's Work
       Environment and add it again through the Dashboard; (3) a brand-new user's
-      onboarding from a fresh Lazurio account: access request, Admin approval,
-      invitation, Team, first sign-in, Environment; (4) restricted versus full
+      onboarding from a fresh Lazurio account, both as a visitor (the direct link
+      to `try-01`, no membership) and as a new member (invitation, Team, first
+      sign-in, own Work Environment); (4) restricted versus full
       profile: Alena versus Bob, the Apps, a module that is not granted, the
       dashboard without finance; (5) with versus without a personal space: Bob
       versus Alena, the rail, Buddy, the Personal Workspace; (6) Ring 0: every
@@ -236,8 +244,8 @@ scope:
       third test account (working name `lazurio-carol`, Q9) and lists what the
       sign-in service and the Dashboard lack to delete and recreate accounts
       and Environments (dependencies). Fixed: runs use only the test accounts;
-      their credentials never enter Git; a rebuild also wipes what invited
-      people left in `try-01`, and its entry says so beforehand. Freedom:
+      their credentials never enter Git; a rebuild also wipes what visitors
+      left in `try-01`, and its entry says so beforehand. Freedom:
       runbook location and format, run cadence, which scenarios are automated.
       Owners: Example thread; Dashboard thread for the self-service pieces.
     - >-
@@ -255,13 +263,13 @@ scope:
     - Code paths that exist only for this Organization (parity, 0204 addendum of 2026-10-17).
     - A backup of the dedicated server; recovery is a rebuild from zero.
     - Access for people through the tailnet.
-    - Personal Environments or Organizations for invited people beyond the shared `try-01`.
+    - Membership of visitors in the Organization, and Personal Environments or Organizations for visitors beyond the public `try-01`.
     - The Lazurio product work the lab depends on (Dashboard self-service, Environment removal in Machines, the vault route, Buddy Product 1, Team Environment content); the lab consumes it and records the gaps it finds.
     - An English locale of the Mission Control UI (Lazurio/mission-control#1).
     - The close-out of EX-0001 (A1), which stays in EX-0001.
 acceptance_criteria:
   - GitHub Teams and grants match the public access matrix; the default branch of every public repository requires a pull request, an approval and CI and forbids force pushes and deletion; every repository has CODEOWNERS.
-  - Bob opens `admin-01` and his Personal Environment; Alena opens her own Work Environment and has no Personal Environment; a member of `workspace` opens `team-01` with the Organization's content; a member of `guests` opens `try-01`. Everyone enters with a Lazurio login and no tailnet, verified in a browser (0178).
+  - Bob opens `admin-01` and his Personal Environment; Alena opens her own Work Environment and has no Personal Environment; a member of `workspace` opens `team-01` with the Organization's content; a visitor with any Lazurio account and no membership opens `try-01` through its direct link. Everyone enters with a Lazurio login and no tailnet, verified in a browser (0178).
   - Every archetype is present once with an App on generation v3 (or the documented current generation of its archetype), `lazurio module setup` reports 13/13, modules that hold data keep it on repository-db, every new module came through the normal creation path, and the generated data has the recorded volumes.
   - Alena does not get the finance module and cannot write to the modules that are read only for her; Bob reaches every module; verified in a browser.
   - A pull request by Alena is approved by Bob's automation, one by Bob is approved by Alena's automation, and Bob merges both without a bypass.
@@ -269,13 +277,14 @@ acceptance_criteria:
   - The benchmark ledger has a baseline row for every App and one row for every later release.
   - A search across every repository of the Organization finds no client name and no private reference.
 validation:
-  - 2026-10-18 via gh, read only - Teams `workspace` (id 20129625) and `lazurio-bob` (id 20162541); four members (the maintainer's Owner account, the two test accounts and one invited person); 12 public repositories and the private Deployment Repo; rulesets on `main` with deletion, non-fast-forward and required status checks but no pull request rule; Lazurio for GitHub and Lazurio Administration Access installed on all repositories; Lazurio/LazurioPlatform#483 open.
+  - 2026-10-18 via gh, read only - Teams `workspace` (id 20129625) and `lazurio-bob` (id 20162541); three members after 13:32 UTC (the maintainer's Owner account and the two test accounts; the one invited person and a Team `guests` created for him earlier that day were removed again, D20); 12 public repositories and the private Deployment Repo; rulesets on `main` with deletion, non-fast-forward and required status checks but no pull request rule; Lazurio for GitHub and Lazurio Administration Access installed on all repositories; Lazurio/LazurioPlatform#483 open.
   - Writing this plan was checked only by the data validator (npm run validate); nothing in it is implemented.
 risk_notes:
   - Every repository is public, so GitHub cannot deny Alena read access; "no finance module" can only mean no Team grant and no install in her Environments (Q3).
   - Requiring a pull request ends the EX-0001 practice of fast-forwarding `main` to a green head, and a squash merge writes the merging account's email as the author (MIGRATION.md); the merge method must keep the noreply author.
   - With an approval required and two reviewing accounts, a broken automation or an exhausted AI pool stalls every merge. The Owner's break-glass is editing the ruleset, and every use is recorded.
-  - A rebuild wipes what invited people left in `try-01`, including sign-ins they forgot to remove.
+  - A rebuild wipes what visitors left in `try-01`, including sign-ins they forgot to remove.
+  - "`try-01` admits any signed-in Lazurio account that has its link; it holds no credential of the Organization and is rebuilt from zero at will (0204 point 4)."
   - Bob's Personal Environment is a paid Buddy (root decision 0207) operated by agents with test credentials; it must hold only fictional data (Q2).
   - Generated data that looks too real could be mistaken for real people or companies; the generator uses reserved example domains and obviously fictional names.
   - The lab finds gaps only while it runs routinely; a lab that is not exercised drifts away from what customers get.
@@ -284,7 +293,7 @@ decisions:
     decision: "D11: The Organization becomes the Lazurio lab: a real, fully working Organization with correctly built modules, correct GitHub rights and Teams and real approval processes; it shows transparently how a Lazurio Organization works and is the pilot where migrations and rollouts are tested first (Ring 0, 0204 point 7). Nothing in it may be worth keeping: everything is public, invented and fictional, the whole server can be wiped and rebuilt, and the complete onboarding is run from scratch as a routine."
     rationale: The Owner, 2026-10-18.
   - date: 2026-10-18
-    decision: "D12: Alena and Bob each have their own Work Environment where they live. Bob (`lazurio-bob`, Owner and Admin, Team `lazurio-bob`) keeps `admin-01`. Alena (`lazurio-alena`, member) gets a new Work Environment with her own closed per-person Team `lazurio-alena`, following the per-person pattern of the maintainers' own Organization. The Team Environment `team-01` (Team `workspace`) and the shared Environment `try-01` for invited people stay."
+    decision: "D12: Alena and Bob each have their own Work Environment where they live. Bob (`lazurio-bob`, Owner and Admin, Team `lazurio-bob`) keeps `admin-01`. Alena (`lazurio-alena`, member) gets a new Work Environment with her own closed per-person Team `lazurio-alena`, following the per-person pattern of the maintainers' own Organization. The Team Environment `team-01` (Team `workspace`) and the shared Environment `try-01` for invited people stay (D20 makes `try-01` the public visitor Environment, without membership)."
     rationale: The Owner, 2026-10-18.
   - date: 2026-10-18
     decision: "D13: Bob has a Personal Environment with Buddy and Alena has none, so the interface can be studied with and without a personal space. Bob's Buddy runs on the normal Buddy (Product 1) hosting like any customer's, never on the Organization's own server (0204 point 9)."
@@ -305,8 +314,11 @@ decisions:
     decision: "D18: Modules move to current best practice: the Lazurio Module Standard (root decision 0171), App generation v3, data on repository-db, and creation through the normal creation path (`lazurio module create` or the Dashboard's new-module dialog), which tests that path too."
     rationale: The Owner, 2026-10-18.
   - date: 2026-10-18
-    decision: "D19 (state recorded on 2026-10-18): one real external person, the Owner's demo guest, was invited and is an active member of Team `workspace`; who is invited is listed only in the Dashboard (0204 addendum of 2026-10-17). `try-01` has the Organization's content, downloaded on 2026-10-18; `team-01` has none (Lazurio/LazurioPlatform#483), which blocks the Team Environment onboarding scenario."
+    decision: "D19 (state recorded on 2026-10-18): one real external person, the Owner's demo guest, was invited and was an active member of Team `workspace`; he was removed again at 13:32 UTC the same day (D20). Who has access is listed only in the Dashboard (0204 addendum of 2026-10-17). `try-01` has the Organization's content, downloaded on 2026-10-18; `team-01` has none (Lazurio/LazurioPlatform#483), which blocks the Team Environment onboarding scenario."
     rationale: The Owner, 2026-10-18.
+  - date: 2026-10-18
+    decision: "D20: Visitors are not members of the lab Organization. Its members are only the maintainer who owns it and its test accounts (Bob, Alena and later a third). `try-01` stays the public visitor Environment, a separate visitor path: reached by a direct link, it admits any signed-in Lazurio account through the `public-account` admission as today, and it does not show in the Dashboard rail for now, which is accepted. Team `guests` is dropped from L1; the invited guest was removed from the Organization and the Team deleted on 2026-10-18 at 13:32 UTC. This departs from the 0204 addendum of 2026-10-17 afternoon (an approved request gives normal membership; `public-account` returns to the normal path), see Q10."
+    rationale: "The Owner, 2026-10-18 about 13:30 UTC: \"I don't want him to be part of the organization where we test things, only to have access to the public Environment.\""
 open_questions:
   - "Q1 Vault: root decision 0203 lets an Organization's vault answer only inside its tailnet, and this Organization's vault does so today, while D15 keeps people off the tailnet. Which way: (a) Machines gains a public, SSO-only vault route behind a fail-closed Lazurio-login gateway, or (b) people reach the vault only from inside their Environments? Either needs a root decision note, because it deviates from 0203 for this Organization, and (a) needs a Machines capability that the current release does not have."
   - "Q2 Bob's Buddy: when is one-click Buddy (Product 1) available to Bob, and who pays its Base plan (root decision 0207 point 5)? Bob's Personal Environment is a test fixture operated by agents with test credentials and holds only fictional data; is that acceptable under the Personalspace rule (0091)?"
@@ -317,19 +329,19 @@ open_questions:
   - "Q7 Prices: EX-0001 D7 keeps prices as placeholders. May the generated data in pricebook, deals and finance carry fictional amounts? Proposal: yes, generated amounts with obviously fictional names; the migrated documents keep their placeholders."
   - "Q8 AI pool: which subscription or key feeds it, who pays, what is the monthly cap, and which Environment of the Organization runs it (0181 point 6)? Its grant is a network grant inside the Organization's tailnet, which people never use."
   - "Q9 Third test account for scenario 3: its name (working name `lazurio-carol`), who keeps its credentials outside Git, and what a reset means while a username is never reassigned (0203 point 4): a reset of the existing account to its first sign-in rather than delete and recreate?"
-  - "Q10 Invited people move from `workspace` to `guests` (read only) once `try-01` admits `guests`; until then the one invited person keeps Write on nine repositories. Confirm."
+  - "Q10 Visitor entry without membership (D20): the 0204 addendum of 2026-10-17 afternoon says that an approved access request gives normal membership and a 0192 grant (point b) and lists the `public-account` admission among the mechanisms that return to the normal path (point a). D20 keeps visitors out of the Organization and `try-01` on `public-account`. How does an approved request grant entry to `try-01` without membership, when the sign-in service, the gateway and 0192 require membership for Team entries; is `public-account` a setting any Organization could use (parity); and which root addendum records the change?"
   - "Q11 Is the optional sales Team, which shares the sales modules with `workspace` to show N:M module membership, wanted?"
   - "Q12 Deployment Repo pull requests: keep the reference Organization's rule of no persona and no click (0205 addendum of 2026-10-17, point e) as proposed, or let Bob's automation review them too?"
 dependencies:
   - "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization's content, so `team-01` is empty; it blocks `team-01` in L2 and the Team Environment onboarding scenario."
-  - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); invited people and scenario 3 can hit it."
+  - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); visitors and scenario 3 can hit it."
   - "The sign-in service and the Lazurio Dashboard: no way to reset an account to its first sign-in, or to delete and recreate it; usernames are never reassigned (0203 point 4), so a resettable test account needs a reset rather than delete and recreate (Q9)."
   - "The Lazurio Dashboard: self-service creation and deletion of a Work Environment; today a new Environment is a Deployment Repo pull request through the rollout pipeline (root decision 0205)."
   - "Machines: no supported way to remove an Environment; a removed guest leaves leftovers on the host. Scenarios 1 and 2 need it."
   - "Machines: a public, SSO-only vault route behind a fail-closed Lazurio-login gateway, or vault access only from inside people's Environments (Q1), together with a root decision note for the deviation from 0203."
   - "The Organization's AI pool (root decision 0181) with a fixed monthly cap, for members only (Q8)."
   - "Buddy Product 1 (root decision 0207): the one-click Personal Environment for Bob's Buddy (Q2)."
-  - "The Dashboard's access request and the move of `try-01` to Team `guests`, tracked in the maintainers' invite-only work (0204 addendum of 2026-10-17)."
+  - "The Dashboard's access request in the maintainers' invite-only work (0204 addendum of 2026-10-17), which after D20 must give entry to `try-01` without membership (Q10)."
   - "`lazurio module create` in its Organization shape with `--data` (LazurioPlatform) for every new module."
   - "The rollout pipeline of root decision 0205 for every Machines apply of this Organization."
 links:
@@ -369,7 +381,7 @@ todo_outputs:
 proposed_tasks:
   - id: task-2026-10-18-001
     title: "L1: Teams, grants and the public access matrix"
-    summary: "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Create the closed Teams `lazurio-alena` (Alena only), `guests` (read only) and `finance` (Bob only; Write on finance), and optionally the sales Team (Q11). Give each Team its grants from one matrix of module, Team and right, and publish that matrix. Invited people move from `workspace` to `guests` once `try-01` admits `guests` (Q10). Nothing starts before the Owner approves EX-0014."
+    summary: "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Create the closed Teams `lazurio-alena` (Alena only) and `finance` (Bob only; Write on finance), and optionally the sales Team (Q11). Give each Team its grants from one matrix of module, Team and right, and publish that matrix. Visitors get no Team and no membership (D20). Nothing starts before the Owner approves EX-0014."
     priority: high
     priority_rank: 61
     assignee: Example thread
@@ -381,7 +393,7 @@ proposed_tasks:
       - The matrix lists every module and root application repository with the right of each Team and person.
       - infra#2 is answered and closed with a link to the matrix.
     risk_notes:
-      - Team membership is visible to members of the Organization; invited people's personal data stays in the Dashboard only.
+      - Members are only the maintainer and the test accounts, so no real person's data enters the Organization; who visits `try-01` stays in the Dashboard only.
     blocked_by: []
   - id: task-2026-10-18-002
     title: "L1: rulesets and CODEOWNERS on every public repository"
@@ -444,7 +456,7 @@ proposed_tasks:
     blocked_by: []
   - id: task-2026-10-18-006
     title: "L2: public access matrix per Environment kind"
-    summary: "Repository: the public access documentation (`infra`). For each Environment kind (Personal, Work, Team) and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what invited people never get."
+    summary: "Repository: the public access documentation (`infra`). For each Environment kind (Personal, Work, Team), the visitor path and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what visitors never get."
     priority: medium
     priority_rank: 66
     assignee: Example thread
@@ -557,7 +569,7 @@ proposed_tasks:
       - Every scenario has a runbook and at least one dated run; the server rebuild is timed.
       - Each missing capability is an issue in its owning repository, referenced from the runbook.
     risk_notes:
-      - A rebuild wipes what invited people left in `try-01`; the entry says so beforehand.
+      - A rebuild wipes what visitors left in `try-01`; the entry says so beforehand.
     blocked_by: []
   - id: task-2026-10-18-014
     title: "L5: delete and re-add a Work Environment through the Dashboard"

@@ -819,10 +819,10 @@
       "infra#2 is answered and closed with a link to the matrix."
     ],
     "risk_notes": [
-      "Team membership is visible to members of the Organization; invited people's personal data stays in the Dashboard only."
+      "Members are only the maintainer and the test accounts, so no real person's data enters the Organization; who visits `try-01` stays in the Dashboard only."
     ],
     "blocked_by": [],
-    "summary": "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Create the closed Teams `lazurio-alena` (Alena only), `guests` (read only) and `finance` (Bob only; Write on finance), and optionally the sales Team (Q11). Give each Team its grants from one matrix of module, Team and right, and publish that matrix. Invited people move from `workspace` to `guests` once `try-01` admits `guests` (Q10). Nothing starts before the Owner approves EX-0014.",
+    "summary": "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Create the closed Teams `lazurio-alena` (Alena only) and `finance` (Bob only; Write on finance), and optionally the sales Team (Q11). Give each Team its grants from one matrix of module, Team and right, and publish that matrix. Visitors get no Team and no membership (D20). Nothing starts before the Owner approves EX-0014.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts after the Owner approves EX-0014.",
@@ -1039,7 +1039,7 @@
     "blocked_by": [
       "task-2026-10-18-001"
     ],
-    "summary": "Repository: the public access documentation (`infra`). For each Environment kind (Personal, Work, Team) and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what invited people never get.",
+    "summary": "Repository: the public access documentation (`infra`). For each Environment kind (Personal, Work, Team), the visitor path and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what visitors never get.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts when task-2026-10-18-001 is done.",
@@ -1335,7 +1335,7 @@
       "Each missing capability is an issue in its owning repository, referenced from the runbook."
     ],
     "risk_notes": [
-      "A rebuild wipes what invited people left in `try-01`; the entry says so beforehand."
+      "A rebuild wipes what visitors left in `try-01`; the entry says so beforehand."
     ],
     "blocked_by": [],
     "summary": "Write public runbooks for the six lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, a brand-new user's onboarding, restricted versus full profile, with versus without a personal space, Ring 0 acceptance), run each as Bob or Alena with the maintainers' smoke-test procedure, and record dated results. Propose the resettable third test account (Q9) and list what the sign-in service, the Dashboard and Machines lack to delete and recreate accounts and Environments, each gap as an issue in its owning repository.",
