@@ -1034,7 +1034,7 @@
       "The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
     ],
     "risk_notes": [
-      "The vault column follows D21 and D33 (a public, SSO-only vault route; `try-01`'s own vault account under the safe contract, task 016) and is filled when that route exists."
+      "The vault column follows D21 and D33 (a public, SSO-only vault route; `try-01`'s own vault, on for everyone who enters and wiped every night, task 016) and is filled when that route exists."
     ],
     "blocked_by": [
       "task-2026-10-18-001"
@@ -1335,10 +1335,10 @@
       "Each missing capability is an issue in its owning repository, referenced from the runbook."
     ],
     "risk_notes": [
-      "A rebuild wipes what visitors left in `try-01` but not its vault on the Conglomerate Host; the visitor runbook includes the vault reset (task 016)."
+      "A rebuild wipes what visitors left in `try-01` but not its vault on the Conglomerate Host; the visitor runbook includes the nightly vault wipe (task 016)."
     ],
     "blocked_by": [],
-    "summary": "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance). Each runbook names its prerequisites, the tasks and external capabilities it waits on, and the maintainers' smoke-test procedure it uses. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, Environment removal, the vault route and the vault reset), each gap as an issue in its owning repository. The dated runs of all eight scenarios are task 017. No third test account (D29).",
+    "summary": "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance). Each runbook names its prerequisites, the tasks and external capabilities it waits on, and the maintainers' smoke-test procedure it uses. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, Environment removal, the vault route and the nightly vault wipe), each gap as an issue in its owning repository. The dated runs of all eight scenarios are task 017. No third test account (D29).",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts after the Owner approves EX-0014.",
@@ -1444,13 +1444,13 @@
   },
   {
     "id": "task-2026-10-18-016",
-    "title": "L2: `try-01`'s vault account under the safe contract",
+    "title": "L2: switch `try-01`'s vault on and wipe it every night",
     "status": "blocked",
     "priority": "high",
     "priority_rank": 76,
     "assignee": "Example thread",
     "priority_decider": "organization-admin",
-    "priority_reason": "Everyone who enters `try-01` sees and may change its vault entries; without these controls a visitor's real password would stay for the next visitor.",
+    "priority_reason": "Visitors learn how the vault works only when it is on, and a vault every visitor sees must not keep what earlier visitors left there.",
     "tags": [
       "EX-0014",
       "lab",
@@ -1458,18 +1458,19 @@
       "try-01"
     ],
     "acceptance_criteria": [
-      "The vault account holds exactly the reviewed lab set of fictional, disposable entries and no real credential.",
-      "Negative test: in `try-01` the Environment's browser offers no password saving into the vault, and a visitor cannot save a browser password there; verified in a browser (0178).",
-      "Negative test: after a visitor adds or changes an entry and `try-01` is reset, the vault holds exactly the lab set again; verified by reading the vault back."
+      "A visitor in `try-01` opens the vault from Apps and can add an item; verified in a browser (0178).",
+      "After the nightly wipe the vault is empty; verified by reading the vault back.",
+      "The entry notice says that everyone who enters `try-01` sees and may change the vault's items."
     ],
     "risk_notes": [
-      "A rebuild of the server or of `try-01` does not reset the vault, which lives on the Organization's Conglomerate Host; the reset is its own step."
+      "A rebuild of the server or of `try-01` does not wipe the vault, which lives on the Organization's Conglomerate Host; without the scheduled wipe the items visitors left would stay for every later visitor.",
+      "Everyone who enters sees what earlier visitors put in the vault that day; the entry notice says so, and the vault holds no secret of the Organization."
     ],
     "blocked_by": [],
-    "summary": "Repositories: the private Deployment Repo and the Organization's vault on its Conglomerate Host; the vault account, the vault route and the reset step come from the maintainers' plan, and `try-01`'s preset from LazurioPlatform (dependencies). Once `try-01` has its own vault account (D32), put in only a reviewed lab set of disposable, non-sensitive fictional entries (D33), recorded so it can be restored; check that `try-01`'s preset offers no password saving from the Environment's browser into the vault (D34); and make every reset of `try-01` restore the vault to exactly the lab set. A rebuild of the server or of `try-01` does not by itself reset the vault, which lives on the Organization's Conglomerate Host, so the reset is its own step. The account and the guide decision of D32 stay.",
+    "summary": "Repositories: the private Deployment Repo and the Organization's vault on its Conglomerate Host; the vault account, the vault route and the scheduled wipe come from the maintainers' plan, and `try-01`'s preset from LazurioPlatform (dependencies). Switch on `try-01`'s own Environment vault (D32, D35) so visitors can try how the vault works, and wipe it every night. The Organization puts no secret of its own into it. A rebuild of the server or of `try-01` does not by itself wipe the vault, which lives on the Organization's Conglomerate Host, so the wipe is its own scheduled step. The entry notice says that everyone who enters sees the vault.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
-    "next_action": "Waits for `try-01`'s own vault account, the vault route and the vault reset step in the maintainers' plan, and for `try-01`'s preset in LazurioPlatform.",
+    "next_action": "Waits for `try-01`'s own vault account, the vault route and the scheduled nightly wipe in the maintainers' plan, and for `try-01`'s preset in LazurioPlatform.",
     "links": [
       {
         "label": "Plan EX-0014",
@@ -1503,10 +1504,10 @@
     "acceptance_criteria": [
       "Every scenario has at least one dated run linked from its runbook; the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding are timed.",
       "The penetration test records that nothing answers without a Lazurio login.",
-      "The visitor's path records that no browser password reached `try-01`'s vault and that the vault held exactly the lab set after the reset."
+      "The visitor's path records that a visitor added an item to `try-01`'s vault and that the vault was empty after the nightly wipe."
     ],
     "risk_notes": [
-      "Several scenarios wait on capabilities outside the lab (account deletion or reset, Environment removal, the vault route and reset, `try-01`'s preset and AI gateway, Buddy Product 1); each records its hold instead of a result until then."
+      "Several scenarios wait on capabilities outside the lab (account deletion or reset, Environment removal, the vault route and nightly wipe, `try-01`'s preset and AI gateway, Buddy Product 1); each records its hold instead of a result until then."
     ],
     "blocked_by": [
       "task-2026-10-18-013",
