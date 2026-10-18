@@ -819,7 +819,7 @@
       "infra#2 is answered and closed with a link to the matrix."
     ],
     "risk_notes": [
-      "Members are only the Lazurio maintainers and the test accounts, so no visitor's data enters the Organization; who visits `try-01` stays in the Dashboard only."
+      "Members are only the Lazurio maintainers and the test accounts, so no visitor's data enters the Organization; visitors enter `try-01` with their Lazurio login and never appear in the Organization's GitHub or repositories (D33)."
     ],
     "blocked_by": [],
     "summary": "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Create the closed Teams `lazurio-alena` (Alena only), `finance` (Bob only; Write on finance) and `sales` (shares the sales modules with `workspace`, D30). Give each Team its grants from one matrix of module, Team and right, where restricted means read without Write (D23), and publish that matrix. Visitors get no Team and no GitHub membership (D20). Nothing starts before the Owner approves EX-0014.",
@@ -1339,7 +1339,7 @@
       "A rebuild wipes what visitors left in `try-01`; the entry says so beforehand."
     ],
     "blocked_by": [],
-    "summary": "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance), run each as Bob or Alena with the maintainers' smoke-test procedure, and record dated results. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, native membership and the exact grant on `try-01`, Environment removal, the vault route), each gap as an issue in its owning repository. No third test account (D29).",
+    "summary": "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance), run each as Bob or Alena with the maintainers' smoke-test procedure, and record dated results. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, offering `try-01` in the Dashboard, Environment removal, the vault route), each gap as an issue in its owning repository. No third test account (D29).",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts after the Owner approves EX-0014.",
