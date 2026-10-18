@@ -800,7 +800,7 @@
   {
     "id": "task-2026-10-18-001",
     "title": "L1: Teams, grants and the public access matrix",
-    "status": "open",
+    "status": "done",
     "priority": "high",
     "priority_rank": 61,
     "assignee": "Example thread",
@@ -825,7 +825,6 @@
     "summary": "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Team `lazurio-alena` (closed, Alena only, no grants) exists; an Admin created it on 2026-10-18. Create the closed Teams `finance` (Bob only; Write on finance) and `sales` (shares the sales modules with `workspace`, D30). Give each Team its grants from one matrix of module, Team and right, where restricted means read without Write (D23), and publish that matrix. Visitors get no Team and no GitHub membership (D20). Nothing starts before the Owner approves EX-0014.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
-    "next_action": "Starts after the Owner approves EX-0014.",
     "links": [
       {
         "label": "Plan EX-0014",
@@ -839,7 +838,16 @@
       "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
     },
     "source": "mission-control",
-    "dev_code": "EX-0014"
+    "dev_code": "EX-0014",
+    "completed_at": "2026-10-18",
+    "completed_by": "immakermatty",
+    "outcome": "The closed Teams `finance` (id 20175541: Bob, Write on `finance`) and `sales` (id 20175543: Alena and Bob, no grant until the sales modules exist, D30) were created on 2026-10-18 without the creating account. The public access matrix in `access/matrix.md` of `infra` lists every repository with the right of each Team and person and how GitHub enforces it (LazurioExampleOrganization/infra#10, merge 442877d2); it was read back against GitHub with no mismatch. infra#2 is answered and closed. Rulesets, CODEOWNERS and the required approval stay with task-2026-10-18-002; the root manifests' Team declarations are LazurioExampleOrganization/LazurioExampleOrganization_GEN3#13.",
+    "evidence": [
+      "https://github.com/LazurioExampleOrganization/infra/blob/main/access/matrix.md",
+      "https://github.com/LazurioExampleOrganization/infra/pull/10",
+      "https://github.com/LazurioExampleOrganization/infra/issues/2",
+      "https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/issues/13"
+    ]
   },
   {
     "id": "task-2026-10-18-002",
