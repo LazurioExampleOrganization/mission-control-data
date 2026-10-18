@@ -852,7 +852,7 @@
   {
     "id": "task-2026-10-18-002",
     "title": "L1: rulesets and CODEOWNERS on every public repository",
-    "status": "blocked",
+    "status": "done",
     "priority": "high",
     "priority_rank": 62,
     "assignee": "Example thread",
@@ -879,7 +879,6 @@
     "summary": "Repositories: every public repository of the Organization. Extend each default-branch ruleset with a required pull request and required CI, keep no deletion and no force push, give Lazurio for GitHub no bypass, and add CODEOWNERS (finance and pricing to Bob, the rest to `workspace`). Switch on one required approval when the review automations of task 011 run. Document the private Deployment Repo as the one exception (GitHub Free has no rulesets for private repositories) and the merge method that keeps the noreply author.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
-    "next_action": "Starts when task-2026-10-18-001 is done.",
     "links": [
       {
         "label": "Plan EX-0014",
@@ -893,7 +892,26 @@
       "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
     },
     "source": "mission-control",
-    "dev_code": "EX-0014"
+    "dev_code": "EX-0014",
+    "completed_at": "2026-10-18",
+    "completed_by": "immakermatty",
+    "outcome": "Eleven of the twelve public repositories have a default-branch ruleset that blocks deletion and force push, requires a pull request with zero approvals and a merge commit, requires the repository's CI where it exists (\"Organization check\" in the root, \"check\" in design-system and knowledgebase, the two \"bun run test\" checks in mission-control) and has no bypass actor, so Lazurio for GitHub has none; read back via gh on 2026-10-18. Seven of them have no CI yet (automations, content, experiments, finance, infra, playbooks, research) and require a pull request without a check. mission-control-data is held: the Mission Control App publishes by a direct fast-forward push to v3, so its ruleset is unchanged (no deletion, no force push, required validate) and the Owner decides in LazurioExampleOrganization/mission-control-data#5. CODEOWNERS, one pull request per repository, merged with merge commits: Team workspace; Bob for finance and, when it exists, pricebook; Bob for the root and infra, where Team workspace has no Write and GitHub rejects it as code owner. The access record names the private Deployment Repo exception, the merge commit as the merge method that keeps the noreply author, and the break-glass (LazurioExampleOrganization/infra#12, merge 9060bcc0). The one required approval is deferred to task-2026-10-18-011; the access record holds the command that switches it on.",
+    "evidence": [
+      "https://github.com/LazurioExampleOrganization/infra/blob/main/access/github-organization.md",
+      "https://github.com/LazurioExampleOrganization/infra/pull/12",
+      "https://github.com/LazurioExampleOrganization/mission-control-data/issues/5",
+      "https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/pull/14",
+      "https://github.com/LazurioExampleOrganization/infra/pull/11",
+      "https://github.com/LazurioExampleOrganization/finance/pull/2",
+      "https://github.com/LazurioExampleOrganization/automations/pull/2",
+      "https://github.com/LazurioExampleOrganization/content/pull/2",
+      "https://github.com/LazurioExampleOrganization/design-system/pull/3",
+      "https://github.com/LazurioExampleOrganization/experiments/pull/4",
+      "https://github.com/LazurioExampleOrganization/knowledgebase/pull/4",
+      "https://github.com/LazurioExampleOrganization/mission-control/pull/2",
+      "https://github.com/LazurioExampleOrganization/playbooks/pull/2",
+      "https://github.com/LazurioExampleOrganization/research/pull/2"
+    ]
   },
   {
     "id": "task-2026-10-18-003",
@@ -1269,7 +1287,7 @@
     "summary": "Set up automations in the Automate tab (Lazurio MausBot) of both Work Environments that review pull requests in the Organization's repositories as `lazurio-alena` and `lazurio-bob`: each reviews the other's pull requests; Bob merges. An approval is a review, not a merge mandate. Their definitions live in the `automations` module (D25).",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
-    "next_action": "Starts when task-2026-10-18-004, task-2026-10-18-010 is done.",
+    "next_action": "Starts when task-2026-10-18-004, task-2026-10-18-010 is done. When its automations run, switch on one required approval in every ruleset that requires a pull request, deferred from task-2026-10-18-002 (access/github-organization.md in infra, \"One required approval\").",
     "links": [
       {
         "label": "Plan EX-0014",
