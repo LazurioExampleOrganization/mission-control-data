@@ -796,5 +796,650 @@
     "source": "mission-control",
     "dev_code": "EX-0012",
     "imported_from": "mission-control/TODO.tasks.json"
+  },
+  {
+    "id": "task-2026-10-18-001",
+    "title": "L1: Teams, grants and the public access matrix",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 61,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Every later milestone depends on who may do what; the matrix is the lab's first visible artifact.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "github",
+      "teams",
+      "access"
+    ],
+    "acceptance_criteria": [
+      "The Teams exist as closed Teams with the grants of the published matrix, read back via gh.",
+      "The matrix lists every module and root application repository with the right of each Team and person.",
+      "infra#2 is answered and closed with a link to the matrix."
+    ],
+    "risk_notes": [
+      "Team membership is visible to members of the Organization; invited people's personal data stays in the Dashboard only."
+    ],
+    "blocked_by": [],
+    "summary": "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Create the closed Teams `lazurio-alena` (Alena only), `guests` (read only) and `finance` (Bob only; Write on finance), and optionally the sales Team (Q11). Give each Team its grants from one matrix of module, Team and right, and publish that matrix. Invited people move from `workspace` to `guests` once `try-01` admits `guests` (Q10). Nothing starts before the Owner approves EX-0014.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts after the Owner approves EX-0014.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-002",
+    "title": "L1: rulesets and CODEOWNERS on every public repository",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 62,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Real approval processes need the rules GitHub enforces, not only a written agreement.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "github",
+      "rulesets",
+      "codeowners"
+    ],
+    "acceptance_criteria": [
+      "Every public repository's default branch rejects a direct push, a force push and deletion, and requires CI; read back via gh.",
+      "After task 011, a pull request cannot merge without one approval from an account other than its author.",
+      "The access documentation names the private Deployment Repo exception and the merge method."
+    ],
+    "risk_notes": [
+      "A required approval without running automations stalls all work; it is switched on only with task 011."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-001"
+    ],
+    "summary": "Repositories: every public repository of the Organization. Extend each default-branch ruleset with a required pull request and required CI, keep no deletion and no force push, give Lazurio for GitHub no bypass, and add CODEOWNERS (finance and pricing to Bob, the rest to `workspace`). Switch on one required approval when the review automations of task 011 run. Document the private Deployment Repo as the one exception (GitHub Free has no rulesets for private repositories) and the merge method that keeps the noreply author.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-001 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-003",
+    "title": "L2: declare Alena's Work Environment in the Deployment Repo",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 63,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Alena needs a place to live before her automations, her restricted profile and scenario 2 can exist.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "environments",
+      "deployment-repo"
+    ],
+    "acceptance_criteria": [
+      "The declaration passes the Deployment Repo's CI with a computed Plan that changes no other Environment."
+    ],
+    "risk_notes": [
+      "The server's capacity must hold one more Work Environment next to `admin-01`, `team-01`, `try-01` and the AI pool."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-001"
+    ],
+    "summary": "Repository: the private Deployment Repo. Declare a Work Environment for Alena (working name `alena-01`) that admits only Team `lazurio-alena`, with the same size class as `admin-01` and the Organization's normal entry through a Lazurio login without a tailnet. The apply runs through the rollout pipeline (task 004).",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-001 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-004",
+    "title": "L2: apply Alena's Work Environment through the rollout pipeline",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 64,
+    "assignee": "rollout pipeline (DEV-6671)",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The first Environment added to the lab after the decision; it also exercises the pipeline on a new Environment.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "environments",
+      "rollout"
+    ],
+    "acceptance_criteria": [
+      "Alena opens her Work Environment with her Lazurio login and sees only what her Teams grant; verified in a browser (0178).",
+      "The apply's evidence is in the Deployment Repo and the run's duration is recorded for L5."
+    ],
+    "risk_notes": [
+      "Until the pipeline's gateway runs, applies for this Organization still start from the operator's computer (0205 addendum, point d)."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-003"
+    ],
+    "summary": "Repository: the private Deployment Repo. After task 003 merges, the rollout pipeline applies it with the pinned Machines release, records the evidence and leaves the Environment healthy. Alena signs in with her Lazurio account, without a tailnet, and lands in her own Work Environment.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-003 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-005",
+    "title": "L2: Bob's Personal Environment with Buddy on the Buddy hosting",
+    "status": "blocked",
+    "priority": "medium",
+    "priority_rank": 65,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The with and without personal space comparison (scenario 5) needs it.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "environments",
+      "buddy"
+    ],
+    "acceptance_criteria": [
+      "Bob sees Buddy and his Personal Workspace next to the Organization in the rail; Alena sees no personal space; verified in a browser (0178)."
+    ],
+    "risk_notes": [
+      "A Buddy is a paid plan; who pays is Q2."
+    ],
+    "blocked_by": [],
+    "summary": "Create Bob's Personal Environment with Buddy through the normal one-click Buddy (Product 1) path, like any customer's, never on the Organization's server. It holds only fictional data. Waits for Buddy Product 1 and the answer to Q2.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Waits for Buddy Product 1 and the answer to Q2.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-006",
+    "title": "L2: public access matrix per Environment kind",
+    "status": "blocked",
+    "priority": "medium",
+    "priority_rank": 66,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Showing transparently how a Lazurio Organization works is half of the lab's purpose.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "environments",
+      "documentation"
+    ],
+    "acceptance_criteria": [
+      "The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
+    ],
+    "risk_notes": [
+      "The vault column stays open until Q1 is decided."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-001"
+    ],
+    "summary": "Repository: the public access documentation (`infra`). For each Environment kind (Personal, Work, Team) and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what invited people never get.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-001 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-007",
+    "title": "L3: module charter, the target module set by archetype",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 67,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Every module task builds on one agreed set.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "modules"
+    ],
+    "acceptance_criteria": [
+      "The charter names one module for every archetype and the reason for every kept, folded, retired or new module.",
+      "It names no client Organization or module and reuses code only from the maintainers' own modules."
+    ],
+    "risk_notes": [
+      "Copying a client module instead of its shape would break the Organization's isolation; only the archetype, stack, structure and volume are taken."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: the Organization root. Record the target module set: one module per archetype, its fictional domain, App, stack and generation, whether it keeps data on repository-db, its Teams and restrictions, and the mapping from today's modules, with the answers to Q3 to Q7. Update `modules.manifest.json` only through the normal path when a module is created.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts after the Owner approves EX-0014.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-008",
+    "title": "L3: deterministic fictional data generator",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 68,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Benchmarks and restricted views mean something only with realistic, reproducible data.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "modules",
+      "data",
+      "benchmark"
+    ],
+    "acceptance_criteria": [
+      "Running the generator twice with the same seed gives byte-identical output.",
+      "The volumes per module are recorded and are in the order of magnitude seen in real Organizations."
+    ],
+    "risk_notes": [
+      "Data that looks too real could be mistaken for real people or companies."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-007"
+    ],
+    "summary": "One public generator with a fixed seed that writes realistic volumes of fictional data for each data module (deals, pricebook, inventory, content calendar, finance, experiments), with per-archetype volumes in a reviewed config. It never reads a real data source and uses reserved example domains and obviously fictional names. Its output is published through each module's normal repository-db path.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-007 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-009",
+    "title": "L3: first new module through the creation path, deals on repository-db",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 69,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The first module proves the creation path before the remaining modules follow it.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "modules",
+      "repository-db"
+    ],
+    "acceptance_criteria": [
+      "`lazurio module setup` reports 13/13 and the App opens in Bob's and Alena's Work Environments; verified in a browser (0178).",
+      "The module was created by the normal creation path, not by hand, and the ledger records the time it took."
+    ],
+    "risk_notes": [
+      "The Organization shape of the creation path may still have gaps; they are fixed in Lazurio, not worked around here."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-007",
+      "task-2026-10-18-008"
+    ],
+    "summary": "Create `deals` with `lazurio module create` in its Organization shape with `--data` (or the Dashboard's new-module dialog), React and Vite on App generation v3, data on repository-db, Teams per the matrix, generated data from task 008. It is the pilot for the creation path; every gap found becomes an issue in the owning Lazurio repository and a ledger row.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-007, task-2026-10-18-008 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-010",
+    "title": "L4: the Organization's AI pool for members with a fixed monthly cap",
+    "status": "blocked",
+    "priority": "medium",
+    "priority_rank": 70,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The review automations of L4 need AI.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "ai-pool"
+    ],
+    "acceptance_criteria": [
+      "An agent in Alena's and in Bob's Work Environment gets answers through the pool; an agent in `try-01` cannot reach it.",
+      "Reaching the cap stops the pool's use without exposing a key in any Environment."
+    ],
+    "risk_notes": [
+      "Without a cap the cost of automations can grow quickly."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: the private Deployment Repo. Declare the Organization's AI pool as a normal Environment with the AI pool preset (root decision 0181), reachable only from the members' Work Environments and `team-01` through a network grant in the Organization's tailnet, with a fixed monthly cap. Never reachable from `try-01`. Waits for Q8.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Waits for the answer to Q8.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-011",
+    "title": "L4: review automations in Alena's and Bob's Work Environments",
+    "status": "blocked",
+    "priority": "medium",
+    "priority_rank": 71,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Real approval processes are the core of L4.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "automations",
+      "review"
+    ],
+    "acceptance_criteria": [
+      "A pull request by Alena gets a review from Bob's automation and one by Bob gets a review from Alena's automation; Bob merges both without a bypass."
+    ],
+    "risk_notes": [
+      "An account cannot approve its own pull request; pull requests opened by the maintainer's account need one of the two automations."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-004",
+      "task-2026-10-18-010"
+    ],
+    "summary": "Set up automations in the Automate tab (Lazurio MausBot) of both Work Environments that review pull requests in the Organization's repositories as `lazurio-alena` and `lazurio-bob`: each reviews the other's pull requests; Bob merges. An approval is a review, not a merge mandate. Their definitions are kept reviewed in the Organization (Q5).",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts when task-2026-10-18-004, task-2026-10-18-010 is done.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-012",
+    "title": "L4: fictional business approval rules in the playbooks",
+    "status": "open",
+    "priority": "medium",
+    "priority_rank": 72,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Shows how a Lazurio Organization combines GitHub rules with process where no mechanism exists.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "playbooks",
+      "approvals"
+    ],
+    "acceptance_criteria": [
+      "Every rule names its owner and its enforcement, and the CODEOWNERS of the affected repositories match it."
+    ],
+    "risk_notes": [
+      "Thresholds and amounts are fictional (Q7)."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: playbooks. Write the company's fictional approval rules (for example a deal above a threshold, a discount above a limit, any price change and every invoice need Bob) and map each rule to where it is enforced: CODEOWNERS, a Team grant, or the process only.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts after the Owner approves EX-0014.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-013",
+    "title": "L5: lab scenario runbooks and the list of product gaps",
+    "status": "open",
+    "priority": "medium",
+    "priority_rank": 73,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The lab is only useful when its scenarios are repeatable and their results are visible.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "runbooks",
+      "onboarding"
+    ],
+    "acceptance_criteria": [
+      "Every scenario has a runbook and at least one dated run; the server rebuild is timed.",
+      "Each missing capability is an issue in its owning repository, referenced from the runbook."
+    ],
+    "risk_notes": [
+      "A rebuild wipes what invited people left in `try-01`; the entry says so beforehand."
+    ],
+    "blocked_by": [],
+    "summary": "Write public runbooks for the six lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, a brand-new user's onboarding, restricted versus full profile, with versus without a personal space, Ring 0 acceptance), run each as Bob or Alena with the maintainers' smoke-test procedure, and record dated results. Propose the resettable third test account (Q9) and list what the sign-in service, the Dashboard and Machines lack to delete and recreate accounts and Environments, each gap as an issue in its owning repository.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts after the Owner approves EX-0014.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-014",
+    "title": "L5: delete and re-add a Work Environment through the Dashboard",
+    "status": "blocked",
+    "priority": "medium",
+    "priority_rank": 74,
+    "assignee": "Dashboard thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Repeating the complete onboarding is the lab's main routine.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "dashboard",
+      "environments"
+    ],
+    "acceptance_criteria": [
+      "Bob deletes Alena's Work Environment in the Dashboard and adds it again; Alena signs in and works there; verified in a browser (0178).",
+      "The code knows no Organization by name or id."
+    ],
+    "risk_notes": [
+      "Machines has no supported Environment removal yet; until it does, the Dashboard path cannot be built."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-004"
+    ],
+    "summary": "Repository: the Lazurio Dashboard. Scenario 2 needs a self-service path for an Admin to delete a member's Work Environment and add it again, built on the normal Deployment Repo path of root decision 0205 and on a supported Environment removal in Machines. It is a generic capability for every Organization; the lab runs it first with Alena's Work Environment.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Waits for a supported Environment removal in Machines and for task-2026-10-18-004.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-015",
+    "title": "L6: benchmark harness and baseline rows",
+    "status": "open",
+    "priority": "medium",
+    "priority_rank": 75,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Load times must be measured before optimizations, or their effect cannot be shown.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "benchmark"
+    ],
+    "acceptance_criteria": [
+      "The ledger has one baseline row per existing App with the versions of LazurioPlatform, Machines and the App.",
+      "Running the harness twice on the same release gives results within a documented tolerance."
+    ],
+    "risk_notes": [
+      "Measurements in a shared Environment are noisy; the method records the conditions of each run."
+    ],
+    "blocked_by": [],
+    "summary": "Build one harness that measures, for every App of the Organization, cold start, first open and time to interactive with the same method, data seed and Environment size, and write the baseline rows for the existing Apps (knowledgebase, design system, Mission Control) in a public benchmark ledger before the first platform optimization lands. New Apps get their row when they ship.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Starts after the Owner approves EX-0014.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
   }
 ]
