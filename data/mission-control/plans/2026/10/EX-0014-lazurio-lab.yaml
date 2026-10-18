@@ -92,7 +92,8 @@ target_state: |
     click into. The approval gives native Lazurio membership in the sign-in
     service and an exact grant on `try-01` only (the native model of root
     decision 0192), never GitHub membership or a Team. `try-01` has its own
-    account in the vault.
+    account in the vault and is the first standard guest Environment once
+    Lazurio defines one for every Organization.
   - Every archetype found in real Organizations is present once, with a
     fictional domain: knowledgebase, public website, design system, business
     data Apps on repository-db, React Apps without data, one deliberately
@@ -184,10 +185,13 @@ scope:
       which the sign-in service is qualifying), never GitHub membership; it is
       not a Dashboard list read by the gateway. Becoming a real member (an own
       Environment, a GitHub invitation) stays ordinary colleague onboarding,
-      outside this path. Until the grant is wired, `try-01` stays on the
-      `public-account` admission exactly as today and is reached by a direct
-      link; the Dashboard's request form and its approve, decline and revoke
-      lists ship first and enforce nothing yet.
+      outside this path. `try-01` becomes the first standard guest Environment
+      (a Team Environment with a guest setting, which a root decision drafted
+      on top of HumanAndMachines/Lazurio#575 defines for every Organization)
+      once that standard exists. Until then, and until the grant is wired,
+      `try-01` stays on the `public-account` admission exactly as today and is
+      reached by a direct link; the Dashboard's request form and its approve,
+      decline and revoke lists ship first and enforce nothing yet.
       A public access matrix per Environment kind (Personal, Work, Team) and
       for the visitor path states who enters, which GitHub identity acts (the
       person's own account in a Work Environment, the Team's brokered identity
@@ -397,6 +401,7 @@ decisions:
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D28 (cap amount and place of the pool), D30 and D31 stand? They apply unless the Owner overrides them."
   - "Q14 When the sign-in service's native membership and exact grants (0192) are qualified for `try-01`, how Machines admits them in place of `public-account`, and the shape of the account deletion or reset that D29 needs; both are designed in the maintainers' plan."
+  - "Q15 The standard guest Environment that is being drafted may reuse a guest onboarding without vault and Integrations, while D20 gives `try-01` its own vault account. Which applies to `try-01`?"
 dependencies:
   - "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization's content, so `team-01` is empty; it blocks `team-01` in L2 and the Team Environment onboarding scenario."
   - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); visitors and scenario 3 can hit it."
@@ -405,9 +410,10 @@ dependencies:
   - "The Lazurio Dashboard: self-service creation and deletion of a Work Environment; today a new Environment is a Deployment Repo pull request through the rollout pipeline (root decision 0205)."
   - "Machines: no supported way to remove an Environment; a removed guest leaves leftovers on the host. Scenarios 1 to 3 need it."
   - "Machines: a public, SSO-only vault route behind the fail-closed Lazurio-login gateway, including `try-01`'s own vault account (D21)."
-  - "A root decision addendum, tracked in the maintainers' plan: the Organization is tailnet-free for people including the vault (a deviation from 0203 and a note to 0204), and point (b) of the 0204 addendum of 2026-10-17 is corrected from a GitHub invitation and a closed Team to native Lazurio membership and a grant on the shared Environment (0192), with the shared Environment open to any signed-in account until that is ready; `try-01`'s own vault account departs from 0204 point 4."
+  - "A root decision addendum (HumanAndMachines/Lazurio#575, tracked in the maintainers' plan): the Organization is tailnet-free for people including the vault (a deviation from 0203 and a note to 0204), and point (b) of the 0204 addendum of 2026-10-17 is corrected from a GitHub invitation and a closed Team to native Lazurio membership and a grant on the shared Environment (0192), with the shared Environment open to any signed-in account until that is ready; `try-01`'s own vault account departs from 0204 point 4."
   - "The Organization's AI pool (root decision 0181) with a fixed monthly cap, for members only (D28)."
   - "Buddy Product 1 (root decision 0207): the one-click Personal Environment for Bob's Buddy (D22)."
+  - "A standard guest Environment for every Organization (a Team Environment with a guest setting), the root decision drafted on top of HumanAndMachines/Lazurio#575; `try-01` becomes its first instance."
   - "`lazurio module create` in its Organization shape with `--data` (LazurioPlatform) for every new module."
   - "The rollout pipeline of root decision 0205 for every Machines apply of this Organization."
 links:
@@ -419,6 +425,8 @@ links:
     url: https://github.com/Lazurio/LazurioPlatform/issues/483
   - label: Root decision register (0171, 0173, 0178, 0181, 0192, 0203, 0204, 0205, 0207)
     url: https://github.com/HumanAndMachines/Lazurio/blob/main/manual/decision-register.md
+  - label: "HumanAndMachines/Lazurio#575: 0204 keeps visitors out of the lab Organization and the vault off the tailnet for people"
+    url: https://github.com/HumanAndMachines/Lazurio/pull/575
   - label: Lazurio Module Standard
     url: https://github.com/HumanAndMachines/Lazurio/blob/main/manual/module-standard.md
   - label: Lazurio pull request handoff contract
