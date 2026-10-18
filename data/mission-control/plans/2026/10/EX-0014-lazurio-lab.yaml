@@ -33,13 +33,13 @@ context: |
   Alena (`lazurio-alena`, member), work in Environments that are never public.
   Visitors from outside, such as a prospect, reach only `try-01`, the
   Organization's one public Environment, which any signed-in Lazurio account
-  opens (D33), and never become members of the GitHub Organization. Agents sign in as Bob and Alena to verify
+  opens through its link (D33, D34), and never become members of the GitHub Organization. Agents sign in as Bob and Alena to verify
   in a browser every change a person meets (root decision 0178). The fictional
   characters of the business data stay those of EX-0001 D3: Alex Morgan, Sam
   Taylor, Robin Lee and Kim Park.
 
   The Owner answered the plan's open questions on 2026-10-18 (D20 to D32) and
-  simplified the visitor path the same afternoon (D33).
+  simplified the visitor path the same afternoon (D33, D34).
   Decisions marked "proposed default" stand unless the Owner overrides them.
 current_problem: |
   State of 2026-10-18. The Organization is migrated but does not yet work like a
@@ -68,9 +68,9 @@ current_problem: |
     content (Lazurio/LazurioPlatform#483). Alena has no Environment of her own,
     and nobody has a Personal Environment.
   - Visitors. Any signed-in Lazurio account that has the link opens `try-01`,
-    and that stays (D33). The Lazurio Dashboard does not offer `try-01` yet,
-    because its terms of use and privacy pages do not exist, and `try-01` has
-    no vault account yet (D32).
+    and that stays (D33, D34). `try-01` does not yet have its own preset, AI
+    or vault account, and its entry notice does not yet link its terms of use
+    and privacy pages.
   - Processes. No automation reviews pull requests and members get no AI.
   - Vault. The Organization's vault on its Conglomerate Host answers only
     inside the Organization's tailnet (root decision 0203), while people must
@@ -93,13 +93,14 @@ target_state: |
     grants), as in every Organization, and a new member is added by a GitHub
     invitation.
   - Visitors. `try-01` is the Organization's one public Environment (D33).
-    Any signed-in Lazurio account opens it through its link, and the Lazurio
-    Dashboard offers it to every signed-in account once its terms of use and
-    privacy pages exist; there is no invitation, request, approval,
-    membership or grant, and a visitor never becomes a member of the GitHub
-    Organization, a Team or the sign-in service. Its public-entry settings
-    stay as built, and it shows the vault once it has its own vault account,
-    which holds only disposable lab entries (D32, D33).
+    Any signed-in Lazurio account opens it, only through its link; the Lazurio
+    Dashboard does not offer it, and there is no invitation, request,
+    approval, membership or grant. A visitor never becomes a member of the
+    GitHub Organization, a Team or the sign-in service. The entry notice links
+    `try-01`'s terms of use and privacy pages, its settings form its own
+    Environment preset, its chat agent runs on GPT-6 Luna through the
+    Organization's capped gateway, and its own vault account holds only the
+    lab's disposable entries and returns to them on every reset (D32 to D34).
   - Every archetype found in real Organizations is present once, with a
     fictional domain: knowledgebase, public website, design system, business
     data Apps on repository-db, React Apps without data, one deliberately
@@ -135,17 +136,19 @@ target_state: |
     or client module.
   - Parity: the same code paths as every Organization (0204 addendum of
     2026-10-17). The lab differs only in settings: no tailnet for people (D21)
-    and `try-01`'s public-entry settings under root decision 0204 (D33). A gap
-    it finds is fixed in Lazurio for everyone.
+    and `try-01`'s own Environment preset under root decision 0204 (D34). A
+    gap it finds is fixed in Lazurio for everyone.
   - No tailnet for people anywhere in the Organization (D21): every
     Environment, the vault and `try-01` are reached only through a Lazurio
     login, and a penetration test proves that nothing gets in without it. The
     tailnet only manages the servers (runner, rollout gateway, admin SSH).
   - Visitors never become members of the GitHub Organization, a Team or the
     sign-in service, never reach the members' Environments and never get the
-    AI pool, Integrations or any credential of the Organization; `try-01` has
-    its own vault account, which holds only disposable lab entries an Admin
-    puts in (D32, D33, 0204 points 4 and 6).
+    AI pool, Integrations or any credential of the Organization; the only AI
+    the Organization gives in `try-01` is GPT-6 Luna through the capped
+    gateway, whose provider key never enters `try-01`, and `try-01`'s own
+    vault account holds only disposable lab entries an Admin puts in (D32 to
+    D34, 0204 points 4 and 6).
 
   Remaining open details are listed under open questions; every milestone
   names what its implementer may decide.
@@ -189,26 +192,36 @@ scope:
       Teams and grants), as in every Organization. Visitors: `try-01` is the
       Organization's one public Environment (D33), a special Environment of
       this Organization under root decision 0204, not a standard for other
-      Organizations. Any signed-in Lazurio account opens it through its link
-      (the `public-account` admission), and the Lazurio Dashboard offers it to
-      every signed-in account through its public-Organization view once
-      `try-01`'s terms of use and privacy pages exist; there is no invitation,
-      request, approval, membership or grant. Its public-entry settings stay
-      as built: the `public-account` admission, the Dashboard's
-      public-Organization view, the demo onboarding with its quiet notice that
-      the Environment is shared and nothing to sign in to, and reading the
-      Organization's public content without a GitHub identity
-      (`entry.audience: public`). Integrations stay off (0204 point 4). The
-      one change is that `try-01` shows the vault once it has its own vault
-      account (D32), which follows a safe contract: only disposable,
-      non-sensitive lab entries an Admin puts in, no offer to save passwords
-      from the Environment's browser, and a reset back to the lab set;
-      everyone who enters sees and may change its entries. Becoming a real
+      Organizations. Any signed-in Lazurio account opens it, only through its
+      link (the `public-account` admission); the Lazurio Dashboard does not
+      offer it, and there is no invitation, request, approval, membership or
+      grant (D34). Its entry notice links `try-01`'s terms of use and privacy
+      pages on lazurio.ai and says that continuing means accepting them. Its
+      settings form its own Environment preset (working name Try), separate
+      from the Work and Team presets: the demo onboarding, the entry notice,
+      reading the Organization's public content without a GitHub identity
+      (`entry.audience: public`), the vault once `try-01` has its own vault
+      account, Integrations off (0204 point 4), AI from the Organization's
+      capped gateway, and agent instructions so the chat agent can explain
+      what this Environment and Lazurio can do. The only AI the Organization
+      gives there is GPT-6 Luna, through its gateway on `edge-01`, with a
+      provider project that allows only that model and has a hard monthly
+      limit of 20 USD, plus a per-session token cap at the gateway (D34). A
+      visitor may sign in to their own GitHub account and AI subscription at
+      the risk of the shared session and signs out after use. `try-01`'s own
+      vault account follows a safe contract (D33, task 016): only disposable,
+      non-sensitive lab entries an Admin puts in, no password saving from the
+      Environment's browser, and on every reset of `try-01` the vault returns
+      to exactly the reviewed lab set; a rebuild of the server or of `try-01`
+      does not by itself reset the vault, which lives on the Organization's
+      Conglomerate Host. Everyone who enters sees and may change its entries.
+      Becoming a real
       member (an own Environment, a GitHub invitation) stays ordinary
       colleague onboarding. A public access matrix per Environment kind
       (Personal, Work, Team) and for `try-01` states who enters, which GitHub
       identity acts (the person's own account in a Work Environment, the
-      Team's brokered identity in a Team Environment, none in `try-01`), which
+      Team's brokered identity in a Team Environment, none in `try-01`, which
+      reads the public content anonymously), which
       modules are installed, and how AI, the vault and Integrations work
       there. Fixed: no tailnet for people (D21): entry and the vault only
       through a Lazurio login, to the members' Environments only for members,
@@ -216,10 +229,11 @@ scope:
       to `try-01` with any signed-in Lazurio account (D33); no Personal
       Environment ever runs on the Organization's server (0204 point 9, 0153);
       one Personal Environment per person (0153). Freedom: Environment names,
-      sizes and order. Owners: Example thread (Deployment Repo declarations,
-      Teams and `try-01`'s vault account), rollout pipeline (DEV-6671) (every
-      Machines apply), Dashboard thread (Dashboard pieces, including offering
-      `try-01` once its terms exist); Bob's Buddy waits for Buddy Product 1.
+      sizes and order, and the name of `try-01`'s preset. Owners: Example
+      thread (Deployment Repo declarations, Teams, `try-01`'s preset and vault
+      account), rollout pipeline (DEV-6671) (every Machines apply), Dashboard
+      thread (Dashboard pieces and `try-01`'s terms pages); Bob's Buddy waits
+      for Buddy Product 1.
     - >-
       L3 Modules. Outcome: one module per archetype with a fictional domain,
       and every module but one with an App, so load times can be measured. Set,
@@ -289,9 +303,9 @@ scope:
       scratch: delete Alena completely, her Environment and her Lazurio account,
       and let her sign in again and onboard under her own account (D29; no
       third test account); (4) a visitor's path: a fresh Lazurio account opens
-      `try-01` through its link and, once its terms exist, from the Dashboard,
-      sees the shared-Environment notice, tries Lazurio and the vault, and
-      signs out of its own accounts; (5) restricted versus full profile: Alena versus Bob, the
+      `try-01` through its link, sees the entry notice with the terms, asks
+      the chat agent what the Environment can do, tries the vault, cannot
+      save a browser password into it, and signs out of its own accounts; (5) restricted versus full profile: Alena versus Bob, the
       Apps, modules she reads but cannot write; (6) with versus without a
       personal space: Bob versus Alena, the rail, Buddy, the Personal
       Workspace; (7) penetration test of the login-only entry: no Environment,
@@ -302,8 +316,9 @@ scope:
       wave (0204 point 7, 0205 addendum point h, 0178). The plan lists what the
       sign-in service, the Dashboard and Machines lack for these scenarios
       (dependencies). Fixed: runs use only the test accounts; their credentials
-      never enter Git; a rebuild also wipes what visitors left in `try-01`, and
-      its entry says so beforehand. Freedom: runbook location and format, run
+      never enter Git; a rebuild also wipes what visitors left in `try-01`, the
+      vault returns to the lab set on every reset (task 016), and the entry
+      notice promises no reset that does not run. Freedom: runbook location and format, run
       cadence, which scenarios are automated. Owners: Example thread; Dashboard
       thread for the self-service pieces.
     - >-
@@ -321,15 +336,18 @@ scope:
     - Code paths that exist only for this Organization (parity, 0204 addendum of 2026-10-17).
     - A backup of the dedicated server; recovery is a rebuild from zero.
     - Access for people through the tailnet, to any Environment or to the vault.
-    - GitHub membership, a Team or a sign-in service membership for visitors; an invitation, access request or approval for `try-01`; any other Environment for visitors, a standard guest Environment for other Organizations (shelved, D33), and Personal Environments or Organizations for visitors; becoming a real member is ordinary colleague onboarding.
+    - GitHub membership, a Team or a sign-in service membership for visitors; an invitation, access request, approval or Dashboard offer for `try-01`; any other Environment for visitors, a standard guest Environment for other Organizations (shelved, D33), and Personal Environments or Organizations for visitors; becoming a real member is ordinary colleague onboarding.
     - A third test account; scenario 3 deletes and re-onboards Alena instead (D29).
-    - The Lazurio product work the lab depends on (Dashboard self-service, offering `try-01` in the Dashboard, account deletion or reset, Environment removal in Machines, the vault route, `try-01`'s vault page and guide, Buddy Product 1, Team Environment content); the lab consumes it and records the gaps it finds.
+    - AI for visitors other than GPT-6 Luna through the capped gateway, and the members' AI pool for visitors (D34).
+    - The Lazurio product work the lab depends on (Dashboard self-service, account deletion or reset, Environment removal in Machines, the vault route and the vault reset, `try-01`'s preset with its vault page and guide, the capped AI gateway, Buddy Product 1, Team Environment content); the lab consumes it and records the gaps it finds.
     - An English locale of the Mission Control UI (Lazurio/mission-control#1).
     - The close-out of EX-0001 (A1), which stays in EX-0001.
 acceptance_criteria:
   - GitHub Teams and grants match the public access matrix; the default branch of every public repository requires a pull request, an approval and CI and forbids force pushes and deletion; every repository has CODEOWNERS.
   - Bob opens `admin-01` and his Personal Environment; Alena opens her own Work Environment and has no Personal Environment; a member of `workspace` opens `team-01` with the Organization's content. None of them is reachable by a visitor or by anyone outside the GitHub Organization. Everyone enters with a Lazurio login and no tailnet, verified in a browser (0178).
-  - Anyone with a Lazurio account opens `try-01` through its link, and the Lazurio Dashboard offers it to every signed-in account once its terms of use and privacy pages exist; there is no request, approval or membership; `try-01` uses its own vault account under the safe contract of D33; verified in a browser (0178).
+  - Anyone with a Lazurio account opens `try-01` through its link, and the Lazurio Dashboard does not offer it; there is no request, approval or membership; the entry notice links `try-01`'s terms of use and privacy pages; `try-01` uses its own vault account under the safe contract of D33; verified in a browser (0178).
+  - "`try-01`'s vault account holds exactly the reviewed lab set of disposable entries; a visitor cannot save a browser password into it; after a visitor changes an entry and `try-01` is reset, the vault holds exactly the lab set again; verified in a browser and by reading the vault back (0178)."
+  - "In `try-01` the chat agent answers through GPT-6 Luna on the Organization's capped gateway and explains what the Environment and Lazurio can do; no other model answers, and the provider key is not in `try-01`; verified in a browser (0178)."
   - "In `try-01` a visitor opens the vault from Apps and the in-place guide explains the page in words that fit `try-01`: a shared Environment whose vault entries every visitor sees, a vault reached through a Lazurio login, and no invitation to store the visitor's own passwords there (D32); verified in a browser (0178)."
   - A penetration test shows that no Environment, no vault route and not `try-01` answers without a Lazurio login.
   - Every archetype is present once, every module but playbooks has an App on generation v3 (or the documented current generation of its archetype), `lazurio module setup` reports 13/13, modules that hold data keep it on repository-db, every new module came through the normal creation path, and the generated data has the recorded volumes.
@@ -347,8 +365,10 @@ risk_notes:
   - With an approval required and two reviewing accounts, a broken automation or an exhausted AI pool stalls every merge. The Owner's break-glass is editing the ruleset, and every use is recorded.
   - A public vault route is a new attack surface; its gateway must fail closed, the penetration test covers it, and the vault holds only fictional secrets (D21).
   - A rebuild wipes what visitors left in `try-01`, including sign-ins they forgot to remove.
-  - "`try-01` admits any signed-in Lazurio account permanently (D33), so anyone may use it, including for abuse, and everyone who enters sees and may change its vault entries (root decision 0198 point 2); it holds no credential of the Organization, its vault account holds only disposable lab entries and the Environment's browser offers no password saving into it, and it is rebuilt from zero at will (0204 point 4)."
-  - "`try-01` keeps its public-entry settings permanently (D33), so it never tests exactly what other Organizations get; Ring 0 acceptance therefore relies on the members' Environments (`admin-01`, Alena's Work Environment and `team-01`)."
+  - "`try-01` admits any signed-in Lazurio account with its link permanently (D33, D34), so anyone may use it, including for abuse, and everyone who enters sees and may change its vault entries (root decision 0198 point 2); it holds no credential of the Organization, its vault account holds only disposable lab entries and the Environment's browser offers no password saving into it, and it is rebuilt from zero at will (0204 point 4)."
+  - "`try-01` keeps its own preset permanently (D34), so it never tests exactly what other Organizations get; Ring 0 acceptance therefore relies on the members' Environments (`admin-01`, Alena's Work Environment and `team-01`)."
+  - A rebuild of the server or of `try-01` does not reset its vault, which lives on the Conglomerate Host; without the reset step a visitor's entries would stay for every later visitor (task 016).
+  - The provider's hard monthly limit is not enforced instantly, so a small overrun past 20 USD is possible; the gateway's per-session token cap limits it (D34).
   - Deleting Alena's Lazurio account is destructive; until the sign-in service can delete or reset an account so the same GitHub identity onboards as new, scenario 3 cannot run (D29).
   - Generated data with real-looking amounts could be mistaken for real people or companies; the generator uses reserved example domains and obviously fictional names (D27).
   - The lab finds gaps only while it runs routinely; a lab that is not exercised drifts away from what customers get.
@@ -420,8 +440,11 @@ decisions:
     decision: "D32 (answers Q15): `try-01` keeps its own vault account and shows the vault like any Environment of an Organization. A visitor opens the vault from Apps, sees the lab's fictional entries, and the in-place guide explains how the vault works: the question mark next to the page title and the guide bubble at the bottom right, which without a Buddy shows the neutral Lazurio guide. `try-01` is where visitors learn how Lazurio works, so the guide matters most there. It reaches `try-01` with the ordinary Platform release, as in every Organization (parity, no code path only for the lab). If the standard guest Environment keeps a guest onboarding without a vault, `try-01` still keeps its vault account (D33 shelves the standard guest Environment)."
     rationale: "The Owner, 2026-10-18 about 14:00 UTC: the guide bubble is how people learn how Lazurio works, so visitors must be able to open the vault in `try-01` and have the bubble explain it."
   - date: 2026-10-18
-    decision: "D33 (simplifies D20 (b)): `try-01` is the Organization's only public Environment, a special Environment of this Organization under root decision 0204 and not a standard mechanism for other Organizations. Any signed-in Lazurio account opens it through its link (the `public-account` admission, as today, permanently), and the Lazurio Dashboard offers it to every signed-in account through its public-Organization view once `try-01`'s terms of use and privacy pages exist. There is no invitation, access request, approval, native membership or grant, and a visitor never becomes a member of the GitHub Organization, a Team or the sign-in service; the access-request form is not built. The public-entry settings stay for `try-01` as built: the `public-account` admission, the Dashboard's public-Organization view, the demo onboarding with its quiet public notice and nothing to sign in to, and reading the Organization's public content without a GitHub identity (`entry.audience: public`, Lazurio/LazurioPlatform#472). Integrations stay off (0204 point 4), and the separate `untrusted` network profile is not used, since `try-01` runs with the normal network profile. The one change is that `try-01` shows the vault once it has its own vault account (D32), under a safe contract: the account holds only disposable, non-sensitive lab entries an Admin puts in, the Environment's browser never offers to save passwords into it, and a reset returns it to the lab set; everyone who enters `try-01` sees and may change its entries (root decision 0198 point 2). The standard guest Environment for every Organization is shelved (HumanAndMachines/Lazurio#576), and the lab has no other Environment for visitors. Otherwise the Organization works as a standard Organization: GitHub defines access (membership, Teams and grants), by which the Lazurio maintainers and the test accounts enter Alena's and Bob's Work Environments and `team-01`, where the maintainers test and benchmark Environments; invitations stay for real Organizations adding new members, as ordinary colleague onboarding through GitHub. The lab's one exception stays D21: people enter every Environment and the vault only through a Lazurio login, never the tailnet, and server management stays on the Organization's own tailnet. A root addendum records it (HumanAndMachines/Lazurio#575)."
-    rationale: "The Owner, 2026-10-18 about 14:15 UTC, refined the same afternoon: `try-01` is the one Environment anyone may try with a Lazurio account, with no invitation or approval, and the Dashboard offers it once its terms exist; invitations belong to real Organizations adding members; everything else in the lab follows the standard Organization path."
+    decision: "D33 (simplifies D20 (b)): `try-01` is the Organization's only public Environment, a special Environment of this Organization under root decision 0204 and not a standard mechanism for other Organizations. Any signed-in Lazurio account enters it with its link (the `public-account` admission, as today, permanently), with no invitation, access request, approval, native membership or grant, and a visitor never becomes a member of the GitHub Organization, a Team or the sign-in service. `try-01` keeps its own vault account (D32) under a safe contract: the account holds only disposable, non-sensitive lab entries an Admin puts in, the Environment's browser never offers to save passwords into it, and a reset returns it to the lab set; everyone who enters `try-01` sees and may change its entries (root decision 0198 point 2). The standard guest Environment for every Organization is shelved (HumanAndMachines/Lazurio#576), and the lab has no other Environment for visitors. Otherwise the Organization works as a standard Organization: GitHub defines access (membership, Teams and grants), by which the Lazurio maintainers and the test accounts enter Alena's and Bob's Work Environments and `team-01`, where the maintainers test and benchmark Environments; a new member is added by an ordinary GitHub invitation. The lab's one exception stays D21: people enter every Environment and the vault only through a Lazurio login, never the tailnet, and server management stays on the Organization's own tailnet. How visitors reach `try-01`, its settings and its AI are set by D34. A root addendum records both (HumanAndMachines/Lazurio#575)."
+    rationale: "The Owner, 2026-10-18 about 14:15 UTC: `try-01` is the one Environment anyone may try with a Lazurio account, with no invitation or approval; everything else in the lab follows the standard Organization path."
+  - date: 2026-10-18
+    decision: "D34 (refines D33): (a) Link only (about 14:30 UTC). `try-01` is reached only through its link; the Lazurio Dashboard does not offer it, and the Dashboard's public-Organization mechanism built for it is removed. Its entry notice links `try-01`'s terms of use and privacy pages on lazurio.ai and says that continuing means accepting them. An access request stays a general Dashboard feature for new members of real Organizations, found through a join link the Owner shares and followed by the ordinary GitHub invitation; it is not used for `try-01`. Every visitor may sign in to their own GitHub account and their own AI subscription in `try-01` at the risk of the shared session and signs out after use; the Organization gives `try-01` only read access on GitHub. (b) Own preset (about 14:55 UTC). `try-01`'s settings form its own Environment preset (working name Try, which may change), separate from the Work and Team presets: the demo onboarding without the AI-first step, the entry notice, reading the Organization's public content without a GitHub identity (`entry.audience: public`, Lazurio/LazurioPlatform#472), the vault once `try-01` has its own vault account (D32, Lazurio/LazurioPlatform#499), Integrations off (0204 point 4), AI from the Organization's capped gateway, and agent instructions so the chat agent can explain what this Environment and Lazurio can do. The `public-account` admission stays; the `untrusted` network profile returns to normal, as `try-01` has full ordinary web access. (c) AI (about 15:00 UTC). The only AI the Organization gives in `try-01` is the model GPT-6 Luna (`gpt-6-luna`) through the Organization's gateway on `edge-01`: a dedicated provider project allows only this model and has a hard monthly spend limit of 20 USD, and the gateway also pins the model and caps tokens per session. `try-01` gets one gateway key, renewed on every reset; the provider key lives only on `edge-01` and in custody, never in `try-01` or Git. Creating the provider project, its limits and the key is a billing step the Owner does himself. This is the capped gateway root decision 0204 point 6 foresees; visitors never get the members' AI pool (D14)."
+    rationale: "The Owner, 2026-10-18: about 14:30 UTC (link only, no Dashboard offer, access requests only for real Organizations), about 14:55 UTC (own preset and capped AI) and about 15:00 UTC (GPT-6 Luna only, 20 USD a month)."
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D28 (cap amount and place of the pool), D30 and D31 stand? They apply unless the Owner overrides them."
   - "Q14 The shape of the account deletion or reset that D29 needs; it is designed in the maintainers' plan."
@@ -429,12 +452,15 @@ dependencies:
   - "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization's content, so `team-01` is empty; it blocks `team-01` in L2 and the Team Environment onboarding scenario."
   - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); visitors and scenario 3 can hit it."
   - "The sign-in service and the Lazurio Dashboard: deleting or resetting a Lazurio account so that the same GitHub identity onboards as new, while usernames are never reassigned (0203 point 4); scenario 3 needs it (D29)."
-  - "The Lazurio Dashboard and the Lazurio website: `try-01`'s terms of use and privacy pages, drafted for the Owner's approval; once they exist, the Dashboard's public-Organization view is switched on, first in its stable preview and checked in a browser (0178), then in production with the Owner's go, and offers `try-01` to every signed-in account (D33). Until then `try-01` is reached by its link."
+  - "The Lazurio website: `try-01`'s terms of use and privacy pages on lazurio.ai, drafted for the Owner's approval and linked from `try-01`'s entry notice (D34)."
+  - "The Lazurio Dashboard: removing the public-Organization mechanism built for `try-01`, which the Dashboard does not offer (D34)."
   - "The Lazurio Dashboard: self-service creation and deletion of a Work Environment; today a new Environment is a Deployment Repo pull request through the rollout pipeline (root decision 0205)."
   - "Machines: no supported way to remove an Environment; a removed guest leaves leftovers on the host. Scenarios 1 to 3 need it."
   - "Machines: a public, SSO-only vault route behind the fail-closed Lazurio-login gateway, including `try-01`'s own vault account (D21, D32)."
-  - "Lazurio/LazurioPlatform: `try-01` shows the vault once it has its own vault account, and the in-place guide and the vault page in the Apps column reach it with the ordinary Platform release; the guide's vault explanation has to fit a shared Environment and a vault reached through a Lazurio login (D32, D33, Lazurio/LazurioPlatform#499). The rest of `try-01`'s public setting stays as built."
-  - "A root decision addendum (HumanAndMachines/Lazurio#575, tracked in the maintainers' plan): `try-01` is the Organization's one public Environment, open to any signed-in Lazurio account and offered by the Dashboard to every signed-in account, with no invitation, request or approval; it keeps its public-entry settings except the `untrusted` network profile and has its own vault account with a safe contract (a departure from 0204 point 4 for `try-01` only); the Organization otherwise works as a standard Organization whose access GitHub defines; and people enter every Environment and the vault only through a Lazurio login, never the tailnet (a deviation from 0203 for this Organization once the public SSO-only vault route exists)."
+  - "Machines and the Organization's Conglomerate Host: every reset of `try-01` also restores its vault account to the reviewed lab set; a rebuild alone does not (D33, task 016)."
+  - "Machines and the AI provider: the capped AI gateway on `edge-01` for `try-01` (GPT-6 Luna only, a per-session token cap, one gateway key for `try-01` renewed on reset) and the provider project that allows only that model with a hard monthly limit of 20 USD, which the Owner creates himself (D34)."
+  - "Lazurio/LazurioPlatform: `try-01`'s own Environment preset with the ordinary Platform release (D34): the demo onboarding, the entry notice that links the terms pages, anonymous content, the vault once `try-01` has its vault account with no password saving from the Environment's browser, Integrations off, AI with the model and endpoint read from the Organization's settings, and agent instructions; the in-place guide's vault explanation has to fit a shared Environment and a vault reached through a Lazurio login (D32, Lazurio/LazurioPlatform#499)."
+  - "A root decision addendum (HumanAndMachines/Lazurio#575, tracked in the maintainers' plan): the Organization works as a standard Organization whose access GitHub defines; `try-01` is its one public Environment, entered by any signed-in Lazurio account only through its link, with no request, approval or membership and no Dashboard offer; its entry notice links its terms pages; its settings form its own preset; its only AI is GPT-6 Luna through the gateway with a 20 USD monthly cap; it has its own vault account with a safe contract (a departure from 0204 point 4 for `try-01` only); every visitor may sign in to their own GitHub and AI at their own risk; the `untrusted` network profile and the Dashboard's public-Organization flag return to normal paths; and people enter every Environment and the vault only through a Lazurio login, never the tailnet (a deviation from 0203 for this Organization once the public SSO-only vault route exists)."
   - "The Organization's AI pool (root decision 0181) with a fixed monthly cap, for members only (D28)."
   - "Buddy Product 1 (root decision 0207): the one-click Personal Environment for Bob's Buddy (D22)."
   - "`lazurio module create` in its Organization shape with `--data` (LazurioPlatform) for every new module."
@@ -479,6 +505,8 @@ todo_outputs:
   - task-2026-10-18-013
   - task-2026-10-18-014
   - task-2026-10-18-015
+  - task-2026-10-18-016
+  - task-2026-10-18-017
 proposed_tasks:
   - id: task-2026-10-18-001
     title: "L1: Teams, grants and the public access matrix"
@@ -562,12 +590,12 @@ proposed_tasks:
     priority_rank: 66
     assignee: Example thread
     priority_decider: organization-admin
-    priority_reason: Showing transparently how a Lazurio Organization works is half of the lab's purpose.
+    priority_reason: "Showing transparently how a Lazurio Organization works is half of the lab's purpose."
     tags: [EX-0014, lab, environments, documentation]
     acceptance_criteria:
-      - The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state.
+      - "The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
     risk_notes:
-      - The vault column follows D21 (a public, SSO-only vault route; `try-01` has its own vault account) and is filled when that route exists.
+      - "The vault column follows D21 and D33 (a public, SSO-only vault route; `try-01`'s own vault account under the safe contract, task 016) and is filled when that route exists."
     blocked_by: [task-2026-10-18-001]
   - id: task-2026-10-18-007
     title: "L3: module charter, the target module set by archetype"
@@ -659,19 +687,18 @@ proposed_tasks:
     blocked_by: []
   - id: task-2026-10-18-013
     title: "L5: lab scenario runbooks and the list of product gaps"
-    summary: "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance), run each as Bob or Alena with the maintainers' smoke-test procedure, and record dated results. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, offering `try-01` in the Dashboard, Environment removal, the vault route), each gap as an issue in its owning repository. No third test account (D29)."
+    summary: "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance). Each runbook names its prerequisites, the tasks and external capabilities it waits on, and the maintainers' smoke-test procedure it uses. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, Environment removal, the vault route and the vault reset), each gap as an issue in its owning repository. The dated runs of all eight scenarios are task 017. No third test account (D29)."
     priority: medium
     priority_rank: 73
     assignee: Example thread
     priority_decider: organization-admin
-    priority_reason: The lab is only useful when its scenarios are repeatable and their results are visible.
+    priority_reason: "The lab is only useful when its scenarios are repeatable and their results are visible."
     tags: [EX-0014, lab, runbooks, onboarding]
     acceptance_criteria:
-      - Every scenario has a runbook and at least one dated run; the server rebuild and Alena's complete re-onboarding are timed.
-      - The penetration test records that nothing answers without a Lazurio login.
-      - Each missing capability is an issue in its owning repository, referenced from the runbook.
+      - "Every scenario has a runbook that names its prerequisites and the tasks or external capabilities it waits on."
+      - "Each missing capability is an issue in its owning repository, referenced from the runbook."
     risk_notes:
-      - A rebuild wipes what visitors left in `try-01`; the entry says so beforehand.
+      - "A rebuild wipes what visitors left in `try-01` but not its vault on the Conglomerate Host; the visitor runbook includes the vault reset (task 016)."
     blocked_by: []
   - id: task-2026-10-18-014
     title: "L5: delete and re-add a Work Environment through the Dashboard"
@@ -703,3 +730,35 @@ proposed_tasks:
     risk_notes:
       - Measurements in a shared Environment are noisy; the method records the conditions of each run.
     blocked_by: []
+  - id: task-2026-10-18-016
+    title: "L2: `try-01`'s vault account under the safe contract"
+    summary: "Repositories: the private Deployment Repo and the Organization's vault on its Conglomerate Host; the vault account, the vault route and the reset step come from the maintainers' plan, and `try-01`'s preset from LazurioPlatform (dependencies). Once `try-01` has its own vault account (D32), put in only a reviewed lab set of disposable, non-sensitive fictional entries (D33), recorded so it can be restored; check that `try-01`'s preset offers no password saving from the Environment's browser into the vault (D34); and make every reset of `try-01` restore the vault to exactly the lab set. A rebuild of the server or of `try-01` does not by itself reset the vault, which lives on the Organization's Conglomerate Host, so the reset is its own step. The account and the guide decision of D32 stay."
+    priority: high
+    priority_rank: 76
+    assignee: Example thread
+    priority_decider: organization-admin
+    priority_reason: "Everyone who enters `try-01` sees and may change its vault entries; without these controls a visitor's real password would stay for the next visitor."
+    tags: [EX-0014, lab, vault, try-01]
+    acceptance_criteria:
+      - "The vault account holds exactly the reviewed lab set of fictional, disposable entries and no real credential."
+      - "Negative test: in `try-01` the Environment's browser offers no password saving into the vault, and a visitor cannot save a browser password there; verified in a browser (0178)."
+      - "Negative test: after a visitor adds or changes an entry and `try-01` is reset, the vault holds exactly the lab set again; verified by reading the vault back."
+    risk_notes:
+      - "A rebuild of the server or of `try-01` does not reset the vault, which lives on the Organization's Conglomerate Host; the reset is its own step."
+    blocked_by: []
+  - id: task-2026-10-18-017
+    title: "L5: dated runs of all eight lab scenarios"
+    summary: "Run each scenario from the runbooks of task 013 as Bob or Alena with the maintainers' smoke-test procedure and record a dated result; time the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding. A scenario runs as soon as its prerequisites exist: scenarios 1 to 3 need a supported Environment removal in Machines, scenario 2 also task 014, scenario 3 the sign-in service's account deletion or reset, scenario 4 `try-01`'s preset, terms pages and AI gateway and task 016, scenario 5 task 004, scenario 6 task 005 (Buddy Product 1), scenario 7 the public SSO-only vault route, and scenario 8 the next rollout. No third test account (D29)."
+    priority: medium
+    priority_rank: 77
+    assignee: Example thread
+    priority_decider: organization-admin
+    priority_reason: "The lab is only useful when its scenarios run routinely and their results are visible."
+    tags: [EX-0014, lab, runbooks, onboarding]
+    acceptance_criteria:
+      - "Every scenario has at least one dated run linked from its runbook; the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding are timed."
+      - "The penetration test records that nothing answers without a Lazurio login."
+      - "The visitor's path records that no browser password reached `try-01`'s vault and that the vault held exactly the lab set after the reset."
+    risk_notes:
+      - "Several scenarios wait on capabilities outside the lab (account deletion or reset, Environment removal, the vault route and reset, `try-01`'s preset and AI gateway, Buddy Product 1); each records its hold instead of a result until then."
+    blocked_by: [task-2026-10-18-013, task-2026-10-18-004, task-2026-10-18-005, task-2026-10-18-014, task-2026-10-18-016]

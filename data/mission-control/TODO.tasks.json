@@ -1034,7 +1034,7 @@
       "The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
     ],
     "risk_notes": [
-      "The vault column follows D21 (a public, SSO-only vault route; `try-01` has its own vault account) and is filled when that route exists."
+      "The vault column follows D21 and D33 (a public, SSO-only vault route; `try-01`'s own vault account under the safe contract, task 016) and is filled when that route exists."
     ],
     "blocked_by": [
       "task-2026-10-18-001"
@@ -1331,15 +1331,14 @@
       "onboarding"
     ],
     "acceptance_criteria": [
-      "Every scenario has a runbook and at least one dated run; the server rebuild and Alena's complete re-onboarding are timed.",
-      "The penetration test records that nothing answers without a Lazurio login.",
+      "Every scenario has a runbook that names its prerequisites and the tasks or external capabilities it waits on.",
       "Each missing capability is an issue in its owning repository, referenced from the runbook."
     ],
     "risk_notes": [
-      "A rebuild wipes what visitors left in `try-01`; the entry says so beforehand."
+      "A rebuild wipes what visitors left in `try-01` but not its vault on the Conglomerate Host; the visitor runbook includes the vault reset (task 016)."
     ],
     "blocked_by": [],
-    "summary": "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance), run each as Bob or Alena with the maintainers' smoke-test procedure, and record dated results. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, offering `try-01` in the Dashboard, Environment removal, the vault route), each gap as an issue in its owning repository. No third test account (D29).",
+    "summary": "Write public runbooks for the eight lab scenarios (rebuild from zero, delete and re-add Alena's Work Environment, delete Alena completely and onboard her again under her own account, a visitor's path to `try-01`, restricted versus full profile, with versus without a personal space, a penetration test of the login-only entry, Ring 0 acceptance). Each runbook names its prerequisites, the tasks and external capabilities it waits on, and the maintainers' smoke-test procedure it uses. List what the sign-in service, the Dashboard and Machines lack for these scenarios (deleting or resetting an account, Environment removal, the vault route and the vault reset), each gap as an issue in its owning repository. The dated runs of all eight scenarios are task 017. No third test account (D29).",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts after the Owner approves EX-0014.",
@@ -1428,6 +1427,98 @@
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts after the Owner approves EX-0014.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-016",
+    "title": "L2: `try-01`'s vault account under the safe contract",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 76,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Everyone who enters `try-01` sees and may change its vault entries; without these controls a visitor's real password would stay for the next visitor.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "vault",
+      "try-01"
+    ],
+    "acceptance_criteria": [
+      "The vault account holds exactly the reviewed lab set of fictional, disposable entries and no real credential.",
+      "Negative test: in `try-01` the Environment's browser offers no password saving into the vault, and a visitor cannot save a browser password there; verified in a browser (0178).",
+      "Negative test: after a visitor adds or changes an entry and `try-01` is reset, the vault holds exactly the lab set again; verified by reading the vault back."
+    ],
+    "risk_notes": [
+      "A rebuild of the server or of `try-01` does not reset the vault, which lives on the Organization's Conglomerate Host; the reset is its own step."
+    ],
+    "blocked_by": [],
+    "summary": "Repositories: the private Deployment Repo and the Organization's vault on its Conglomerate Host; the vault account, the vault route and the reset step come from the maintainers' plan, and `try-01`'s preset from LazurioPlatform (dependencies). Once `try-01` has its own vault account (D32), put in only a reviewed lab set of disposable, non-sensitive fictional entries (D33), recorded so it can be restored; check that `try-01`'s preset offers no password saving from the Environment's browser into the vault (D34); and make every reset of `try-01` restore the vault to exactly the lab set. A rebuild of the server or of `try-01` does not by itself reset the vault, which lives on the Organization's Conglomerate Host, so the reset is its own step. The account and the guide decision of D32 stay.",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Waits for `try-01`'s own vault account, the vault route and the vault reset step in the maintainers' plan, and for `try-01`'s preset in LazurioPlatform.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-18-017",
+    "title": "L5: dated runs of all eight lab scenarios",
+    "status": "blocked",
+    "priority": "medium",
+    "priority_rank": 77,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The lab is only useful when its scenarios run routinely and their results are visible.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "runbooks",
+      "onboarding"
+    ],
+    "acceptance_criteria": [
+      "Every scenario has at least one dated run linked from its runbook; the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding are timed.",
+      "The penetration test records that nothing answers without a Lazurio login.",
+      "The visitor's path records that no browser password reached `try-01`'s vault and that the vault held exactly the lab set after the reset."
+    ],
+    "risk_notes": [
+      "Several scenarios wait on capabilities outside the lab (account deletion or reset, Environment removal, the vault route and reset, `try-01`'s preset and AI gateway, Buddy Product 1); each records its hold instead of a result until then."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-013",
+      "task-2026-10-18-004",
+      "task-2026-10-18-005",
+      "task-2026-10-18-014",
+      "task-2026-10-18-016"
+    ],
+    "summary": "Run each scenario from the runbooks of task 013 as Bob or Alena with the maintainers' smoke-test procedure and record a dated result; time the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding. A scenario runs as soon as its prerequisites exist: scenarios 1 to 3 need a supported Environment removal in Machines, scenario 2 also task 014, scenario 3 the sign-in service's account deletion or reset, scenario 4 `try-01`'s preset, terms pages and AI gateway and task 016, scenario 5 task 004, scenario 6 task 005 (Buddy Product 1), scenario 7 the public SSO-only vault route, and scenario 8 the next rollout. No third test account (D29).",
+    "created_at": "2026-10-18",
+    "updated_at": "2026-10-18",
+    "next_action": "Runs scenario by scenario once task-2026-10-18-013 is done and each scenario's prerequisites exist (tasks 004, 005, 014 and 016 and the external holds in the summary).",
     "links": [
       {
         "label": "Plan EX-0014",
