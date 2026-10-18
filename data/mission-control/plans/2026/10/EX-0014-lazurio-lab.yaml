@@ -65,8 +65,9 @@ current_problem: |
     and open to any signed-in Lazurio account (the `public-account` admission).
     `try-01` has the Organization's content since 2026-10-18; `team-01` has
     none, because a Team Environment never offers installing the Organization's
-    content (Lazurio/LazurioPlatform#483). Alena has no Environment of her own,
-    and nobody has a Personal Environment.
+    content (Lazurio/LazurioPlatform#483), and it is signed in to GitHub with
+    Alena's account instead of the Organization's brokered identity. Alena has
+    no Environment of her own, and nobody has a Personal Environment.
   - Visitors. Any signed-in Lazurio account that has the link opens `try-01`,
     and that stays (D33, D34). `try-01` does not yet have its own preset, AI
     or vault account, and its entry notice does not yet link its terms of use
@@ -84,10 +85,12 @@ target_state: |
   Outcome: the Organization works like a small real company on Lazurio, with
   two faces (D20).
 
-  - Members. Bob lives in his Work Environment `admin-01` and also has a
-    Personal Environment with Buddy on the normal Buddy hosting. Alena lives in
-    her own Work Environment and has no Personal Environment. Team `workspace`
-    works in `team-01`. These Environments are reached only by members of the
+  - Members. Bob lives in his Work Environment `lazurio-bob` as Admin and
+    also has a Personal Environment with Buddy on the normal Buddy hosting.
+    Alena lives in her own Work Environment `lazurio-alena` and has no Personal
+    Environment. Team `workspace` works in `team-01`, a real Team Environment
+    whose GitHub identity is the Organization's brokered identity Lazurio for
+    GitHub. The maintainers' Ring 0 release tests run on these three (D36). These Environments are reached only by members of the
     GitHub Organization (the Lazurio maintainers and the test accounts) and are
     never public. GitHub defines who enters them (membership, Teams and
     grants), as in every Organization, and a new member is added by a GitHub
@@ -181,13 +184,21 @@ scope:
     - >-
       L2 Environments. Outcome: each person has a place to live, the difference
       between the three kinds of Environment is visible, and the two faces of
-      the lab are separate (D20). Members: Bob has the Work Environment
-      `admin-01` (Team `lazurio-bob`) and a Personal Environment with Buddy on
-      the normal Buddy (Product 1) hosting, like any customer's, paid by the
-      maintainers' own Organization (D22); Alena has a new Work Environment
-      (working name `alena-01`) that admits only Team `lazurio-alena`, and no
-      Personal Environment; `team-01` is the Team Environment of `workspace`
-      with the Organization's content (needs Lazurio/LazurioPlatform#483).
+      the lab are separate (D20). Members (D36): Bob has the Work Environment
+      `lazurio-bob` as Admin (root decision 0202), signed in to GitHub with his
+      own account and admitting Team `lazurio-bob`; it replaces `admin-01`,
+      which is migrated and then retired, and starts fresh. Bob also has a
+      Personal Environment with Buddy on the normal Buddy (Product 1) hosting,
+      like any customer's, paid by the maintainers' own Organization (D22).
+      Alena has the Work Environment `lazurio-alena` as an ordinary member,
+      signed in to GitHub with her own account and admitting only Team
+      `lazurio-alena`, and no Personal Environment. `team-01` is a real Team
+      Environment of `workspace` whose GitHub identity is the Organization's
+      brokered identity Lazurio for GitHub, disconnected from Alena's account,
+      with the Organization's content (needs Lazurio/LazurioPlatform#483). The
+      host lane declares the changes and the rollout pipeline applies them
+      after its first run; `lazurio-bob` and `lazurio-alena` are its first real
+      rollouts.
       These are never public; GitHub defines who enters them (membership,
       Teams and grants), as in every Organization. Visitors: `try-01` is the
       Organization's one public Environment (D33), a special Environment of
@@ -312,8 +323,9 @@ scope:
       no vault route and no `try-01` answers without a Lazurio login (D21); (8)
       Ring 0: every rollout of Machines, LazurioPlatform, Lazurio T3 Code,
       Lazurio MausBot and of entry changes in the sign-in service and the
-      Dashboard lands here first and is accepted in a browser before the next
-      wave (0204 point 7, 0205 addendum point h, 0178). The plan lists what the
+      Dashboard lands here first and is accepted in a browser on
+      `lazurio-bob` (admin), `lazurio-alena` (user) and `team-01` (team) before
+      the next wave (0204 point 7, 0205 addendum point h, 0178, D36). The plan lists what the
       sign-in service, the Dashboard and Machines lack for these scenarios
       (dependencies). Fixed: runs use only the test accounts; their credentials
       never enter Git; a rebuild also wipes what visitors left in `try-01`, the
@@ -345,7 +357,7 @@ scope:
     - The close-out of EX-0001 (A1), which stays in EX-0001.
 acceptance_criteria:
   - GitHub Teams and grants match the public access matrix; the default branch of every public repository requires a pull request, an approval and CI and forbids force pushes and deletion; every repository has CODEOWNERS.
-  - Bob opens `admin-01` and his Personal Environment; Alena opens her own Work Environment and has no Personal Environment; a member of `workspace` opens `team-01` with the Organization's content. None of them is reachable by a visitor or by anyone outside the GitHub Organization. Everyone enters with a Lazurio login and no tailnet, verified in a browser (0178).
+  - Bob opens `lazurio-bob` and his Personal Environment; Alena opens her own Work Environment `lazurio-alena` and has no Personal Environment; each acts on GitHub with their own account; a member of `workspace` opens `team-01` with the Organization's content, where GitHub acts as Lazurio for GitHub; `admin-01` is retired. None of them is reachable by a visitor or by anyone outside the GitHub Organization. Everyone enters with a Lazurio login and no tailnet, verified in a browser (0178).
   - Anyone with a Lazurio account opens `try-01` through its link, and the Lazurio Dashboard does not offer it; there is no request, approval or membership; the entry notice links `try-01`'s terms of use and privacy pages; `try-01` has its own vault switched on (D35); verified in a browser (0178).
   - "In `try-01` a visitor opens the vault from Apps and can add an item; the entry notice says that everyone who enters sees and may change the vault's items; after the nightly wipe the vault is empty; verified in a browser and by reading the vault back (0178)."
   - "In `try-01` the chat agent answers through GPT-6 Luna on the Organization's capped gateway and explains what the Environment and Lazurio can do; no other model answers, the gateway stops at the per-session token cap and the provider refuses requests once the 20 USD monthly limit is reached (HTTP 429), and the provider key is not in `try-01`; verified in a browser (0178)."
@@ -354,6 +366,7 @@ acceptance_criteria:
   - Every archetype is present once, every module but playbooks has an App on generation v3 (or the documented current generation of its archetype), `lazurio module setup` reports 13/13, modules that hold data keep it on repository-db, every new module came through the normal creation path, and the generated data has the recorded volumes.
   - Alena reads the restricted modules but cannot write them; Bob writes every module; verified in a browser.
   - A pull request by Alena is approved by Bob's automation, one by Bob is approved by Alena's automation, and Bob merges both without a bypass.
+  - Every Ring 0 rollout is accepted in a browser on `lazurio-bob`, `lazurio-alena` and `team-01` before the next wave (D36).
   - Every L5 scenario has a runbook and at least one dated run; the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding are timed.
   - The benchmark ledger has a baseline row for every App and one row for every later release.
   - A search across every repository of the Organization finds no client name and no private reference.
@@ -367,7 +380,7 @@ risk_notes:
   - A public vault route is a new attack surface; its gateway must fail closed, the penetration test covers it, and the vault holds no secret of the Organization, only fictional lab data (D21); `try-01`'s vault holds whatever visitors put in, which may be sensitive and stays visible to everyone in `try-01` until the independent nightly wipe (D35).
   - A rebuild wipes what visitors left in `try-01`, including sign-ins they forgot to remove.
   - "`try-01` admits any signed-in Lazurio account with its link permanently (D33, D34), so anyone may use it, including for abuse, and everyone who enters sees and may change its vault entries (root decision 0198 point 2); it holds no credential of the Organization, its vault holds no secret of the Organization and is wiped every night, and it is rebuilt from zero at will (0204 point 4)."
-  - "`try-01` keeps its own preset permanently (D34), so it never tests exactly what other Organizations get; Ring 0 acceptance therefore relies on the members' Environments (`admin-01`, Alena's Work Environment and `team-01`)."
+  - "`try-01` keeps its own preset permanently (D34), so it never tests exactly what other Organizations get; Ring 0 acceptance therefore relies on the members' Environments (`lazurio-bob`, `lazurio-alena` and `team-01`, D36)."
   - A rebuild of the server or of `try-01` does not wipe its vault, which lives on the Conglomerate Host; without the scheduled nightly wipe the items visitors left would stay for every later visitor (task 016).
   - A visitor may put a real password into `try-01`'s vault despite the entry notice; everyone who enters that day sees it until the nightly wipe (D35).
   - The provider's hard monthly limit is not enforced instantly, so recorded spend can slightly exceed 20 USD; the gateway's per-session token cap limits the overrun (D34).
@@ -379,7 +392,7 @@ decisions:
     decision: "D11: The Organization becomes the Lazurio lab: a real, fully working Organization with correctly built modules, correct GitHub rights and Teams and real approval processes; it shows transparently how a Lazurio Organization works and is the pilot where migrations and rollouts are tested first (Ring 0, 0204 point 7). Nothing in it may be worth keeping: everything is public, invented and fictional, the whole server can be wiped and rebuilt, and the complete onboarding is run from scratch as a routine."
     rationale: The Owner, 2026-10-18.
   - date: 2026-10-18
-    decision: "D12: Alena and Bob each have their own Work Environment where they live. Bob (`lazurio-bob`, Owner and Admin, Team `lazurio-bob`) keeps `admin-01`. Alena (`lazurio-alena`, member) gets a new Work Environment with her own closed per-person Team `lazurio-alena`, following the per-person pattern of the maintainers' own Organization. The Team Environment `team-01` (Team `workspace`) and the shared Environment `try-01` for invited people stay (D20 makes `try-01` the visitor Environment, without membership; D33 opens it to any signed-in Lazurio account)."
+    decision: "D12: Alena and Bob each have their own Work Environment where they live. Bob (`lazurio-bob`, Owner and Admin, Team `lazurio-bob`) keeps `admin-01` (renamed by D36: `lazurio-bob` replaces it). Alena (`lazurio-alena`, member) gets a new Work Environment (named `lazurio-alena` by D36) with her own closed per-person Team `lazurio-alena`, following the per-person pattern of the maintainers' own Organization. The Team Environment `team-01` (Team `workspace`) and the shared Environment `try-01` for invited people stay (D20 makes `try-01` the visitor Environment, without membership; D33 opens it to any signed-in Lazurio account)."
     rationale: The Owner, 2026-10-18.
   - date: 2026-10-18
     decision: "D13: Bob has a Personal Environment with Buddy and Alena has none, so the interface can be studied with and without a personal space. Bob's Buddy runs on the normal Buddy (Product 1) hosting like any customer's, never on the Organization's own server (0204 point 9)."
@@ -450,6 +463,9 @@ decisions:
   - date: 2026-10-18
     decision: "D35 (simplifies the vault part of D32 to D34): `try-01`'s own Environment vault is simply switched on (a technical account in the Organization's Vaultwarden), so visitors can try how the vault works; it is not the Organization's vault for people's passwords (root decision 0203 point 3). Everyone who enters `try-01` sees and may change its items (root decision 0198 point 2), and the entry notice says so. The Organization puts no secret of its own into it, and it is wiped every night. The earlier safe contract (only entries an Admin puts in, no password saving from the Environment's browser, a prepared set restored on reset) is dropped. A rebuild of the server or of `try-01` does not by itself wipe the vault, which lives on the Organization's Conglomerate Host, so the nightly wipe is its own scheduled step (task 016)."
     rationale: "The Owner, 2026-10-18 about 15:20 UTC: “Let’s not complicate the vault in try-01. I would simply switch the vault on and wipe it every night.”"
+  - date: 2026-10-18
+    decision: "D36 (the members' Environments): `try-01` stays the public Environment for trying Lazurio, unchanged. `lazurio-bob` is Bob's Work Environment as Admin (root decision 0202), signed in to GitHub with Bob's own account and admitting Team `lazurio-bob`; it replaces `admin-01`, which is migrated and then retired, and because the lab is disposable it starts fresh. `lazurio-alena` is Alena's Work Environment as an ordinary member, signed in to GitHub with her own account and admitting Team `lazurio-alena`; it replaces the working name `alena-01`. `team-01` becomes a real Team Environment like those of other Organizations: its GitHub identity is the Organization's brokered identity Lazurio for GitHub, and it is disconnected from Alena's account. The maintainers' Ring 0 release tests run on `lazurio-bob` (admin), `lazurio-alena` (user) and `team-01` (team); the public tries `try-01`. The host lane declares the changes and the rollout pipeline applies them after its first run (tasks 003 and 004); an Admin creates Team `lazurio-alena`; the gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization need the Owner's explicit approval; `admin-01`'s VM keeps running unmanaged until Machines supports removing an Environment or the Owner approves destroying it."
+    rationale: "The Owner, 2026-10-18 about 16:20 UTC: “try-01 for the public to try, as we have it today; lazurio-bob as Bob's working admin Environment, signed in with Bob's GitHub; lazurio-alena as Alena's working Environment, signed in with Alena's GitHub; team-01 as the working Team Environment, signed in to GitHub as the Lazurio for GitHub bot, as usual. I would retire admin-01, or rather migrate it as lazurio-bob; I would disconnect team-01 from Alena's account and make it a real Team Environment, and give Alena her own Work Environment. Our release testing then runs on lazurio-bob (admin Environment), lazurio-alena (user Environment) and team-01 (Team Environment). We share try-01 with the public to try.”"
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D28 (cap amount and place of the pool), D30 and D31 stand? They apply unless the Owner overrides them."
   - "Q14 The shape of the account deletion or reset that D29 needs; it is designed in the maintainers' plan."
@@ -459,6 +475,9 @@ dependencies:
   - "The sign-in service and the Lazurio Dashboard: deleting or resetting a Lazurio account so that the same GitHub identity onboards as new, while usernames are never reassigned (0203 point 4); scenario 3 needs it (D29)."
   - "The Lazurio website: `try-01`'s terms of use and privacy pages on lazurio.ai, drafted for the Owner's approval and linked from `try-01`'s entry notice (D34)."
   - "The Lazurio Dashboard: removing the public-Organization mechanism built for `try-01`, which the Dashboard does not offer (D34)."
+  - "The rollout pipeline's first run, after which the host lane's changes for `lazurio-bob`, `lazurio-alena`, `team-01` and `admin-01` are applied (D36)."
+  - "The shared sign-in issuer outside the reference Organization: gateway clients for `lazurio-bob` and `lazurio-alena`, applied only with the Owner's explicit approval (0204 point 7)."
+  - "The Lazurio Dashboard: binding `lazurio-bob`, `lazurio-alena` and `team-01` to their Teams in its registry, and removing `admin-01` (D36)."
   - "The Lazurio Dashboard: self-service creation and deletion of a Work Environment; today a new Environment is a Deployment Repo pull request through the rollout pipeline (root decision 0205)."
   - "Machines: no supported way to remove an Environment; a removed guest leaves leftovers on the host. Scenarios 1 to 3 need it."
   - "Machines: a public, SSO-only vault route behind the fail-closed Lazurio-login gateway, including `try-01`'s own vault account (D21, D32)."
@@ -546,33 +565,35 @@ proposed_tasks:
       - A required approval without running automations stalls all work; it is switched on only with task 011.
     blocked_by: [task-2026-10-18-001]
   - id: task-2026-10-18-003
-    title: "L2: declare Alena's Work Environment in the Deployment Repo"
-    summary: "Repository: the private Deployment Repo. Declare a Work Environment for Alena (working name `alena-01`) that admits only Team `lazurio-alena`, with the same size class as `admin-01` and the Organization's normal entry through a Lazurio login without a tailnet. The apply runs through the rollout pipeline (task 004)."
+    title: "L2: migrate admin-01 to lazurio-bob, create lazurio-alena, turn team-01 into a brokered Team Environment, retire admin-01"
+    summary: "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it (task 004). Following D36: declare `lazurio-bob`, Bob's Work Environment as Admin (root decision 0202) that admits only Team `lazurio-bob` and signs in to GitHub with Bob's own account, with its Admin grants, as the replacement of `admin-01`; declare `lazurio-alena`, Alena's Work Environment as an ordinary member that admits only Team `lazurio-alena` (which an Admin creates, task 001) and signs in to GitHub with her own account, in the same size class as `lazurio-bob`; switch `team-01` to the Organization's brokered identity Lazurio for GitHub, after a read-only check of its current GitHub sign-in, and disconnect Alena's account from it; and retire `admin-01` by dropping it from the roster (the host keeps the VM unmanaged), DNS, its gateway client and the Dashboard's registry. The lab is disposable, so `lazurio-bob` starts fresh. Entry to all of them is the Organization's normal entry through a Lazurio login without a tailnet. Gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization need the Owner's explicit approval; the Dashboard binds the Environments to their Teams; `admin-01`'s VM is destroyed only once Machines supports removing an Environment or the Owner approves destroying it."
     priority: high
     priority_rank: 63
     assignee: Example thread
     priority_decider: organization-admin
-    priority_reason: Alena needs a place to live before her automations, her restricted profile and scenario 2 can exist.
-    tags: [EX-0014, lab, environments, deployment-repo]
+    priority_reason: "Alena needs a place to live, Bob's Environment needs its target name and `team-01` must act as the Organization rather than as Alena before the automations, the restricted profile, scenario 2 and the Ring 0 release tests can run."
+    tags: [EX-0014, lab, environments, deployment-repo, migration]
     acceptance_criteria:
-      - The declaration passes the Deployment Repo's CI with a computed Plan that changes no other Environment.
+      - "The declarations pass the Deployment Repo's CI with a computed Plan that adds `lazurio-bob` and `lazurio-alena`, switches `team-01` to the brokered identity, drops `admin-01` from the roster and changes no other Environment."
+      - "After the apply `admin-01` has no roster entry, DNS name, gateway client or registry entry; its VM is removed once Machines supports removing an Environment or the Owner approves destroying it."
     risk_notes:
-      - The server's capacity must hold one more Work Environment next to `admin-01`, `team-01`, `try-01` and the AI pool.
+      - "The server's capacity must hold `lazurio-bob`, `lazurio-alena`, `team-01`, `try-01` and the AI pool while `admin-01`'s VM still runs unmanaged."
+      - "Disconnecting Alena's account from `team-01` changes a shared Environment; a read-only check of its GitHub sign-in comes first."
     blocked_by: [task-2026-10-18-001]
   - id: task-2026-10-18-004
-    title: "L2: apply Alena's Work Environment through the rollout pipeline"
-    summary: "Repository: the private Deployment Repo. After task 003 merges, the rollout pipeline applies it with the pinned Machines release, records the evidence and leaves the Environment healthy. Alena signs in with her Lazurio account, without a tailnet, and lands in her own Work Environment."
+    title: "L2: apply `lazurio-bob`, `lazurio-alena` and the brokered `team-01` through the rollout pipeline"
+    summary: "Repository: the private Deployment Repo. After task 003 merges and after the rollout pipeline's first run, the pipeline applies the changes with the pinned Machines release, records the evidence and leaves the Environments healthy; `lazurio-bob` and `lazurio-alena` are its first real rollouts. Bob signs in to `lazurio-bob` and Alena to `lazurio-alena` with their Lazurio accounts, without a tailnet, and a member of `workspace` works in `team-01`, where GitHub acts as Lazurio for GitHub."
     priority: high
     priority_rank: 64
     assignee: rollout pipeline (DEV-6671)
     priority_decider: organization-admin
-    priority_reason: The first Environment added to the lab after the decision; it also exercises the pipeline on a new Environment.
+    priority_reason: "The first Environments changed after D36; they also exercise the pipeline on new and changed Environments."
     tags: [EX-0014, lab, environments, rollout]
     acceptance_criteria:
-      - Alena opens her Work Environment with her Lazurio login and sees only what her Teams grant; verified in a browser (0178).
-      - The apply's evidence is in the Deployment Repo and the run's duration is recorded for L5.
+      - "Bob opens `lazurio-bob` and Alena opens `lazurio-alena` with their Lazurio logins, each sees only what their Teams grant and acts on GitHub with their own account; in `team-01` GitHub acts as Lazurio for GitHub; verified in a browser (0178)."
+      - "The apply's evidence is in the Deployment Repo and the run's duration is recorded for L5."
     risk_notes:
-      - Until the pipeline's gateway runs, applies for this Organization still start from the operator's computer (0205 addendum, point d).
+      - "Until the pipeline's gateway runs, applies for this Organization still start from the operator's computer (0205 addendum, point d)."
     blocked_by: [task-2026-10-18-003]
   - id: task-2026-10-18-005
     title: "L2: Bob's Personal Environment with Buddy on the Buddy hosting"
@@ -598,7 +619,7 @@ proposed_tasks:
     priority_reason: "Showing transparently how a Lazurio Organization works is half of the lab's purpose."
     tags: [EX-0014, lab, environments, documentation]
     acceptance_criteria:
-      - "The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
+      - "The matrix covers `lazurio-bob`, `lazurio-alena`, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
     risk_notes:
       - "The vault column follows D21 and D33 (a public, SSO-only vault route; `try-01`'s own vault, on for everyone who enters and wiped every night, task 016) and is filled when that route exists."
     blocked_by: [task-2026-10-18-001]
@@ -649,18 +670,18 @@ proposed_tasks:
     blocked_by: [task-2026-10-18-007, task-2026-10-18-008]
   - id: task-2026-10-18-010
     title: "L4: the Organization's AI pool for members with a fixed monthly cap"
-    summary: "Repository: the private Deployment Repo. Declare the Organization's AI pool with the AI pool preset (root decision 0181), running in Bob's Work Environment, paid by the maintainers' own Organization, with a monthly cap of 50 USD (D28, proposed default), reachable only from the members' Work Environments and `team-01` through a server-side network grant. Never reachable from `try-01`."
+    summary: "Repository: the private Deployment Repo. Declare the Organization's AI pool with the AI pool preset (root decision 0181), running in Bob's Work Environment `lazurio-bob`, paid by the maintainers' own Organization, with a monthly cap of 50 USD (D28, proposed default), reachable only from the members' Work Environments and `team-01` through a server-side network grant. Never reachable from `try-01`."
     priority: medium
     priority_rank: 70
     assignee: Example thread
     priority_decider: organization-admin
-    priority_reason: The review automations of L4 need AI.
+    priority_reason: "The review automations of L4 need AI."
     tags: [EX-0014, lab, ai-pool]
     acceptance_criteria:
-      - An agent in Alena's and in Bob's Work Environment gets answers through the pool; an agent in `try-01` cannot reach it.
-      - Reaching the cap stops the pool's use without exposing a key in any Environment.
+      - "An agent in Alena's and in Bob's Work Environment gets answers through the pool; an agent in `try-01` cannot reach it."
+      - "Reaching the cap stops the pool's use without exposing a key in any Environment."
     risk_notes:
-      - Without a cap the cost of automations can grow quickly.
+      - "Without a cap the cost of automations can grow quickly."
     blocked_by: []
   - id: task-2026-10-18-011
     title: "L4: review automations in Alena's and Bob's Work Environments"

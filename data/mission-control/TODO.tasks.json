@@ -889,29 +889,32 @@
   },
   {
     "id": "task-2026-10-18-003",
-    "title": "L2: declare Alena's Work Environment in the Deployment Repo",
+    "title": "L2: migrate admin-01 to lazurio-bob, create lazurio-alena, turn team-01 into a brokered Team Environment, retire admin-01",
     "status": "blocked",
     "priority": "high",
     "priority_rank": 63,
     "assignee": "Example thread",
     "priority_decider": "organization-admin",
-    "priority_reason": "Alena needs a place to live before her automations, her restricted profile and scenario 2 can exist.",
+    "priority_reason": "Alena needs a place to live, Bob's Environment needs its target name and `team-01` must act as the Organization rather than as Alena before the automations, the restricted profile, scenario 2 and the Ring 0 release tests can run.",
     "tags": [
       "EX-0014",
       "lab",
       "environments",
-      "deployment-repo"
+      "deployment-repo",
+      "migration"
     ],
     "acceptance_criteria": [
-      "The declaration passes the Deployment Repo's CI with a computed Plan that changes no other Environment."
+      "The declarations pass the Deployment Repo's CI with a computed Plan that adds `lazurio-bob` and `lazurio-alena`, switches `team-01` to the brokered identity, drops `admin-01` from the roster and changes no other Environment.",
+      "After the apply `admin-01` has no roster entry, DNS name, gateway client or registry entry; its VM is removed once Machines supports removing an Environment or the Owner approves destroying it."
     ],
     "risk_notes": [
-      "The server's capacity must hold one more Work Environment next to `admin-01`, `team-01`, `try-01` and the AI pool."
+      "The server's capacity must hold `lazurio-bob`, `lazurio-alena`, `team-01`, `try-01` and the AI pool while `admin-01`'s VM still runs unmanaged.",
+      "Disconnecting Alena's account from `team-01` changes a shared Environment; a read-only check of its GitHub sign-in comes first."
     ],
     "blocked_by": [
       "task-2026-10-18-001"
     ],
-    "summary": "Repository: the private Deployment Repo. Declare a Work Environment for Alena (working name `alena-01`) that admits only Team `lazurio-alena`, with the same size class as `admin-01` and the Organization's normal entry through a Lazurio login without a tailnet. The apply runs through the rollout pipeline (task 004).",
+    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it (task 004). Following D36: declare `lazurio-bob`, Bob's Work Environment as Admin (root decision 0202) that admits only Team `lazurio-bob` and signs in to GitHub with Bob's own account, with its Admin grants, as the replacement of `admin-01`; declare `lazurio-alena`, Alena's Work Environment as an ordinary member that admits only Team `lazurio-alena` (which an Admin creates, task 001) and signs in to GitHub with her own account, in the same size class as `lazurio-bob`; switch `team-01` to the Organization's brokered identity Lazurio for GitHub, after a read-only check of its current GitHub sign-in, and disconnect Alena's account from it; and retire `admin-01` by dropping it from the roster (the host keeps the VM unmanaged), DNS, its gateway client and the Dashboard's registry. The lab is disposable, so `lazurio-bob` starts fresh. Entry to all of them is the Organization's normal entry through a Lazurio login without a tailnet. Gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization need the Owner's explicit approval; the Dashboard binds the Environments to their Teams; `admin-01`'s VM is destroyed only once Machines supports removing an Environment or the Owner approves destroying it.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts when task-2026-10-18-001 is done.",
@@ -932,13 +935,13 @@
   },
   {
     "id": "task-2026-10-18-004",
-    "title": "L2: apply Alena's Work Environment through the rollout pipeline",
+    "title": "L2: apply `lazurio-bob`, `lazurio-alena` and the brokered `team-01` through the rollout pipeline",
     "status": "blocked",
     "priority": "high",
     "priority_rank": 64,
     "assignee": "rollout pipeline (DEV-6671)",
     "priority_decider": "organization-admin",
-    "priority_reason": "The first Environment added to the lab after the decision; it also exercises the pipeline on a new Environment.",
+    "priority_reason": "The first Environments changed after D36; they also exercise the pipeline on new and changed Environments.",
     "tags": [
       "EX-0014",
       "lab",
@@ -946,7 +949,7 @@
       "rollout"
     ],
     "acceptance_criteria": [
-      "Alena opens her Work Environment with her Lazurio login and sees only what her Teams grant; verified in a browser (0178).",
+      "Bob opens `lazurio-bob` and Alena opens `lazurio-alena` with their Lazurio logins, each sees only what their Teams grant and acts on GitHub with their own account; in `team-01` GitHub acts as Lazurio for GitHub; verified in a browser (0178).",
       "The apply's evidence is in the Deployment Repo and the run's duration is recorded for L5."
     ],
     "risk_notes": [
@@ -955,7 +958,7 @@
     "blocked_by": [
       "task-2026-10-18-003"
     ],
-    "summary": "Repository: the private Deployment Repo. After task 003 merges, the rollout pipeline applies it with the pinned Machines release, records the evidence and leaves the Environment healthy. Alena signs in with her Lazurio account, without a tailnet, and lands in her own Work Environment.",
+    "summary": "Repository: the private Deployment Repo. After task 003 merges and after the rollout pipeline's first run, the pipeline applies the changes with the pinned Machines release, records the evidence and leaves the Environments healthy; `lazurio-bob` and `lazurio-alena` are its first real rollouts. Bob signs in to `lazurio-bob` and Alena to `lazurio-alena` with their Lazurio accounts, without a tailnet, and a member of `workspace` works in `team-01`, where GitHub acts as Lazurio for GitHub.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts when task-2026-10-18-003 is done.",
@@ -1031,7 +1034,7 @@
       "documentation"
     ],
     "acceptance_criteria": [
-      "The matrix covers `admin-01`, Alena's Work Environment, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
+      "The matrix covers `lazurio-bob`, `lazurio-alena`, `team-01`, `try-01` and Bob's Personal Environment, and matches the deployed state."
     ],
     "risk_notes": [
       "The vault column follows D21 and D33 (a public, SSO-only vault route; `try-01`'s own vault, on for everyone who enters and wiped every night, task 016) and is filled when that route exists."
@@ -1211,7 +1214,7 @@
       "Without a cap the cost of automations can grow quickly."
     ],
     "blocked_by": [],
-    "summary": "Repository: the private Deployment Repo. Declare the Organization's AI pool with the AI pool preset (root decision 0181), running in Bob's Work Environment, paid by the maintainers' own Organization, with a monthly cap of 50 USD (D28, proposed default), reachable only from the members' Work Environments and `team-01` through a server-side network grant. Never reachable from `try-01`.",
+    "summary": "Repository: the private Deployment Repo. Declare the Organization's AI pool with the AI pool preset (root decision 0181), running in Bob's Work Environment `lazurio-bob`, paid by the maintainers' own Organization, with a monthly cap of 50 USD (D28, proposed default), reachable only from the members' Work Environments and `team-01` through a server-side network grant. Never reachable from `try-01`.",
     "created_at": "2026-10-18",
     "updated_at": "2026-10-18",
     "next_action": "Starts after the Owner approves EX-0014.",
