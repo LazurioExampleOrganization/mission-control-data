@@ -1220,7 +1220,7 @@
   },
   {
     "id": "task-2026-10-18-010",
-    "title": "L4: the Organization's AI pool for members with a fixed monthly cap",
+    "title": "L4: the Organization's AI pool for members",
     "status": "open",
     "priority": "medium",
     "priority_rank": 70,
@@ -1233,17 +1233,17 @@
       "ai-pool"
     ],
     "acceptance_criteria": [
-      "An agent in Alena's and in Bob's Work Environment gets answers through the pool; an agent in `try-01` cannot reach it.",
-      "Reaching the cap stops the pool's use without exposing a key in any Environment."
+      "An agent in Bob's Work Environment and in `team-01` (and in Alena's once it exists) gets answers through the pool; an agent in `try-01` cannot reach it; verified in a browser (0178).",
+      "The accounts' sign-ins are only in the pool service and in custody, never in Git or in a member Environment."
     ],
     "risk_notes": [
-      "Without a cap the cost of automations can grow quickly."
+      "A subscription pool is bounded by its accounts' plan limits rather than a dollar cap; heavy automation can exhaust them for a while."
     ],
     "blocked_by": [],
-    "summary": "Repository: the private Deployment Repo. Declare the Organization's AI pool with the AI pool preset (root decision 0181), running in Bob's Work Environment `lazurio-bob`, paid by the maintainers' own Organization, with a monthly cap of 50 USD (D28, proposed default), reachable only from the members' Work Environments and `team-01` through a server-side network grant. Never reachable from `try-01`.",
+    "summary": "Repository: the private Deployment Repo, delivered with the services Machine of D39 by the maintainers' server-services work. Declare the Organization's AI pool (root decision 0181) as a subscription pool service on `services-01` (root decision 0209), with two test subscription accounts the Owner signs in, paid by the maintainers' own Organization (D40). The server-side service grant reaches the members' Environments only: today `admin-01` and `team-01`, and `lazurio-bob` and `lazurio-alena` when they replace `admin-01`. Never reachable from `try-01`.",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
-    "next_action": "Starts after the Owner approves EX-0014.",
+    "updated_at": "2026-10-20",
+    "next_action": "Delivered as a follow-up lane after the services Machine replaces `edge-01`; the Owner signs in the two test accounts.",
     "links": [
       {
         "label": "Plan EX-0014",
