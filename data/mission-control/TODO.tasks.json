@@ -930,7 +930,7 @@
       "migration"
     ],
     "acceptance_criteria": [
-      "The declarations pass the Deployment Repo's CI with a computed Plan that adds `lazurio-bob` and `lazurio-alena`, keeps `team-01` on the brokered identity, leaves `admin-01` unchanged and changes no other Environment."
+      "The declarations pass the Deployment Repo's CI with a computed Plan that adds `lazurio-bob` (with the tailnet server node and the TCP 22 grant from Bob's Personal Environment, D45) and `lazurio-alena`, keeps `team-01` on the brokered identity, leaves `admin-01` unchanged and changes no other Environment."
     ],
     "risk_notes": [
       "The server's capacity must hold `lazurio-bob`, `lazurio-alena`, `team-01`, `try-01`, `admin-01` and the AI pool until `admin-01`'s VM is destroyed (task 018)."
@@ -938,9 +938,9 @@
     "blocked_by": [
       "task-2026-10-18-001"
     ],
-    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it (task 004). Following D36: declare `lazurio-bob`, Bob's Work Environment as Admin (root decision 0202) that admits only Team `lazurio-bob` and signs in to GitHub with Bob's own account, with its Admin grants, as the replacement of `admin-01`; declare `lazurio-alena`, Alena's Work Environment as an ordinary member that admits only Team `lazurio-alena` (which an Admin created on 2026-10-18) and signs in to GitHub with her own account, in the same size class as `lazurio-bob`; and keep `team-01` on the Organization's brokered identity Lazurio for GitHub, which its GitHub tool already uses. `admin-01` stays declared and reachable until `lazurio-bob` is verified; its retirement is task 018. The lab is disposable, so `lazurio-bob` starts fresh. Entry to all of them is the Organization's normal entry through a Lazurio login without a tailnet. The Owner approved adding the gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization (D37).",
+    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it (task 004). Following D36: declare `lazurio-bob`, Bob's Work Environment as Admin (root decision 0202) that admits only Team `lazurio-bob` and signs in to GitHub with Bob's own account, with its Admin grants, as the replacement of `admin-01`; declare `lazurio-alena`, Alena's Work Environment as an ordinary member that admits only Team `lazurio-alena` (which an Admin created on 2026-10-18) and signs in to GitHub with her own account, in the same size class as `lazurio-bob`; and keep `team-01` on the Organization's brokered identity Lazurio for GitHub, which its GitHub tool already uses. `admin-01` stays declared and reachable until `lazurio-bob` is verified; its retirement is task 018. `lazurio-bob` also becomes the tailnet server node that Bob's Personal Environment reaches over SSH on TCP 22, in place of `admin-01`, which holds that node until then (D45). The lab is disposable, so `lazurio-bob` starts fresh. Entry for people to all of them is the Organization's normal entry through a Lazurio login without a tailnet. The Owner approved adding the gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization (D37).",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
+    "updated_at": "2026-10-21",
     "next_action": "Starts when task-2026-10-18-001 is done.",
     "links": [
       {
@@ -975,6 +975,7 @@
     "acceptance_criteria": [
       "Bob opens `lazurio-bob` and Alena opens `lazurio-alena` with their Lazurio logins, each sees only what their Teams grant and acts on GitHub with their own account; in `team-01` GitHub acts as Lazurio for GitHub; verified in a browser (0178).",
       "The apply's evidence is in the Deployment Repo and the run's duration is recorded for L5.",
+      "Bob's Personal Environment reaches `lazurio-bob` over SSH on TCP 22 through the tailnet (D45).",
       "In `team-01` no browser session of Alena's GitHub account remains (only its login name was read before signing it out), and the Dashboard shows `team-01` through Team `workspace`, not as Alena's."
     ],
     "risk_notes": [
@@ -984,9 +985,9 @@
     "blocked_by": [
       "task-2026-10-18-003"
     ],
-    "summary": "Repository: the private Deployment Repo. After task 003 merges and after the rollout pipeline's first run, the pipeline applies the changes with the pinned Machines release, records the evidence and leaves the Environments healthy; `lazurio-bob` and `lazurio-alena` are its first real rollouts, with no manual apply from an operator's computer (D37). Bob signs in to `lazurio-bob` and Alena to `lazurio-alena` with their Lazurio accounts, without a tailnet, and a member of `workspace` works in `team-01`, where GitHub acts as Lazurio for GitHub. After the apply, the Dashboard's registry binds `team-01` to Team `workspace` instead of Alena, and a browser session of Alena's GitHub account in `team-01`, if any, is signed out after reading only its login name.",
+    "summary": "Repository: the private Deployment Repo. After task 003 merges and after the rollout pipeline's first run, the pipeline applies the changes with the pinned Machines release, records the evidence and leaves the Environments healthy; `lazurio-bob` and `lazurio-alena` are its first real rollouts, with no manual apply from an operator's computer (D37). Bob signs in to `lazurio-bob` and Alena to `lazurio-alena` with their Lazurio accounts, without a tailnet, and a member of `workspace` works in `team-01`, where GitHub acts as Lazurio for GitHub. From then on Buddy's Ring 0 tests reach `lazurio-bob` over SSH from Bob's Personal Environment instead of `admin-01` (D45). After the apply, the Dashboard's registry binds `team-01` to Team `workspace` instead of Alena, and a browser session of Alena's GitHub account in `team-01`, if any, is signed out after reading only its login name.",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
+    "updated_at": "2026-10-21",
     "next_action": "Starts when task-2026-10-18-003 is done.",
     "links": [
       {
@@ -1587,7 +1588,7 @@
     ],
     "acceptance_criteria": [
       "The rollout starts only after task 004 recorded Bob working in `lazurio-bob`; its Plan removes only `admin-01` and changes no other Environment.",
-      "After the apply `admin-01` has no roster entry, DNS name, active gateway client or registry entry and does not answer from outside; then its VM and the old `try-01`'s VM are destroyed and the evidence records both."
+      "After the apply `admin-01` has no roster entry, DNS name, active gateway client, tailnet node or registry entry and does not answer from outside; then its VM and the old `try-01`'s VM are destroyed and the evidence records both."
     ],
     "risk_notes": [
       "Destroying the VMs is irreversible; it happens only after `admin-01` is retired and unreachable, and the lab keeps nothing on them (0204 point 4)."
@@ -1595,9 +1596,9 @@
     "blocked_by": [
       "task-2026-10-18-004"
     ],
-    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it. After task 004 has verified that Bob works in `lazurio-bob`, a further pipeline rollout retires `admin-01`: it leaves the roster (the host keeps its VM unmanaged), DNS, its gateway client at the shared sign-in issuer (parked, as the Owner approved) and the Dashboard's registry. Once `admin-01` is unreachable from outside, its VM and the old `try-01`'s VM are destroyed, as the Owner approved (D37), and the evidence records it. `admin-01`'s live route is never removed before its replacement is verified.",
+    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it. After task 004 has verified that Bob works in `lazurio-bob`, a further pipeline rollout retires `admin-01`: it leaves the roster (the host keeps its VM unmanaged), DNS, its gateway client at the shared sign-in issuer (parked, as the Owner approved), the tailnet together with the SSH grant from Bob's Personal Environment, both of which have moved to `lazurio-bob` (D45), and the Dashboard's registry. Once `admin-01` is unreachable from outside, its VM and the old `try-01`'s VM are destroyed, as the Owner approved (D37), and the evidence records it. `admin-01`'s live route is never removed before its replacement is verified.",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
+    "updated_at": "2026-10-21",
     "next_action": "Starts when task-2026-10-18-004 has verified Bob working in `lazurio-bob`.",
     "links": [
       {
@@ -1638,7 +1639,7 @@
       "The SSH edge from Bob's Personal Environment does not pass the Lazurio login; it exists only inside the tailnet and only from that one node (D44)."
     ],
     "blocked_by": [],
-    "summary": "Repository: the private Deployment Repo, the host lane `proxmox-01`; the rollout pipeline applies it in the same Ring 0 window as Bob's Personal Environment, after Thursday's demo (D44). Enroll Bob's Work Environment `admin-01` in the Organization's tailnet as a server node only, so that Buddy in Bob's Personal Environment reaches it over SSH on TCP 22 (D43, D44). People keep entering `admin-01` only through the Organization's public entry with a Lazurio login (D21). Q16 decides whether the node later moves to `lazurio-bob`.",
+    "summary": "Repository: the private Deployment Repo, the host lane `proxmox-01`; the rollout pipeline applies it in the same Ring 0 window as Bob's Personal Environment, after Thursday's demo (D44). Enroll Bob's Work Environment `admin-01` in the Organization's tailnet as a server node only, so that Buddy in Bob's Personal Environment reaches it over SSH on TCP 22 (D43, D44). People keep entering `admin-01` only through the Organization's public entry with a Lazurio login (D21). When `lazurio-bob` replaces `admin-01` under D36, the node and the SSH grant move to it (D45, tasks 003, 004 and 018).",
     "created_at": "2026-10-21",
     "updated_at": "2026-10-21",
     "next_action": "Waits for the Ring 0 window after Thursday's demo, when the rollout pipeline applies the host lane change together with Bob's lanes.",
