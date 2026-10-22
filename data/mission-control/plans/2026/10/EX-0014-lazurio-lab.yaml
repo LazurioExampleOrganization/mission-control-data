@@ -7,7 +7,7 @@ owner: organization-admin
 priority: high
 priority_rank: 2
 created_at: 2026-10-18
-updated_at: 2026-10-21
+updated_at: 2026-10-22
 context: |
   Lazurio Example Organization is Lazurio's public reference Organization (root
   decision 0204): fictional data, public repositories, its own dedicated server,
@@ -546,6 +546,9 @@ decisions:
   - date: 2026-10-21
     decision: "D45 (answers Q16; limits D44 (a) to now, so D36 stands): Bob's Work Environment for Buddy's Ring 0 tests is `admin-01` now. It is the server node of the Organization's tailnet that Buddy reaches over SSH from Bob's Personal Environment (D43). When `lazurio-bob` replaces `admin-01` under D36, the tailnet node and the SSH grant move to it (tasks 003, 004 and 018)."
     rationale: "The Owner, 2026-10-21 about 20:50 UTC, with the question tool, choosing “Now admin-01”, whose stated consequence was: “admin-01 is already running, so testing can start right after [Thursday's] demo. Once lazurio-bob replaces it according to D36, the tailnet node and the SSH grant move to it.”"
+  - date: 2026-10-22
+    decision: "D46 (implements the vault of D32 and D35; extends D43 (a) to `try-01`): `try-01` joins the Organization's tailnet only as a server node, so that its Platform can reach the Organization's vault with `try-01`'s own account. The vault answers only inside the tailnet (root decision 0203), Platform talks to it from the Environment's server, and the public SSO-only vault route of D21 serves people's browsers, which a server-side client cannot pass. The node uses the same mechanism as `admin-01` (D43): the lane's rollout-gateway key and the Organization's workspace tag. The access rules stay the ones the Machines engine renders, which let workspace-tagged nodes reach only the Conglomerate Host's vault and the DNS resolver. People stay off the tailnet and keep entering with a Lazurio login; D21 is unchanged for them. Visitors have full access in `try-01`, so they can reach the vault's interface from the tailnet. It is the vault whose `try-01` account they already share: open signup is off, Environment accounts are pre-allowed, the vault's administration does not answer there, and it holds no secret of the Organization (D35). The Conglomerate Host issues the account on the operator path, because the rollout pipeline does not yet deliver its hand-over; `try-01`'s lane then takes it through the pipeline. The nightly wipe stays task 016, and until it runs the entry notice promises none."
+    rationale: "The Owner, 2026-10-22 evening, with the question tool, choosing variant A, a tailnet server node for the vault only, over a vault relay on the services Environment (B) and postponing until the public vault route (C); root decision 0204, addendum of 2026-10-22."
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D30 and D31 stand? They apply unless the Owner overrides them. (D28's cap and place of the pool are settled by D40.)"
   - "Q14 The shape of the account deletion or reset that D29 needs; it is designed in the maintainers' plan."
