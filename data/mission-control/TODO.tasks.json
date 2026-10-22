@@ -930,7 +930,7 @@
       "migration"
     ],
     "acceptance_criteria": [
-      "The declarations pass the Deployment Repo's CI with a computed Plan that adds `lazurio-bob` and `lazurio-alena`, keeps `team-01` on the brokered identity, leaves `admin-01` unchanged and changes no other Environment."
+      "The declarations pass the Deployment Repo's CI with a computed Plan that adds `lazurio-bob` (with the tailnet server node and the TCP 22 grant from Bob's Personal Environment, D45) and `lazurio-alena`, keeps `team-01` on the brokered identity, leaves `admin-01` unchanged and changes no other Environment."
     ],
     "risk_notes": [
       "The server's capacity must hold `lazurio-bob`, `lazurio-alena`, `team-01`, `try-01`, `admin-01` and the AI pool until `admin-01`'s VM is destroyed (task 018)."
@@ -938,9 +938,9 @@
     "blocked_by": [
       "task-2026-10-18-001"
     ],
-    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it (task 004). Following D36: declare `lazurio-bob`, Bob's Work Environment as Admin (root decision 0202) that admits only Team `lazurio-bob` and signs in to GitHub with Bob's own account, with its Admin grants, as the replacement of `admin-01`; declare `lazurio-alena`, Alena's Work Environment as an ordinary member that admits only Team `lazurio-alena` (which an Admin created on 2026-10-18) and signs in to GitHub with her own account, in the same size class as `lazurio-bob`; and keep `team-01` on the Organization's brokered identity Lazurio for GitHub, which its GitHub tool already uses. `admin-01` stays declared and reachable until `lazurio-bob` is verified; its retirement is task 018. The lab is disposable, so `lazurio-bob` starts fresh. Entry to all of them is the Organization's normal entry through a Lazurio login without a tailnet. The Owner approved adding the gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization (D37).",
+    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it (task 004). Following D36: declare `lazurio-bob`, Bob's Work Environment as Admin (root decision 0202) that admits only Team `lazurio-bob` and signs in to GitHub with Bob's own account, with its Admin grants, as the replacement of `admin-01`; declare `lazurio-alena`, Alena's Work Environment as an ordinary member that admits only Team `lazurio-alena` (which an Admin created on 2026-10-18) and signs in to GitHub with her own account, in the same size class as `lazurio-bob`; and keep `team-01` on the Organization's brokered identity Lazurio for GitHub, which its GitHub tool already uses. `admin-01` stays declared and reachable until `lazurio-bob` is verified; its retirement is task 018. `lazurio-bob` also becomes the tailnet server node that Bob's Personal Environment reaches over SSH on TCP 22, in place of `admin-01`, which holds that node until then (D45). The lab is disposable, so `lazurio-bob` starts fresh. Entry for people to all of them is the Organization's normal entry through a Lazurio login without a tailnet. The Owner approved adding the gateway clients of the new Environments at the shared sign-in issuer outside the reference Organization (D37).",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
+    "updated_at": "2026-10-21",
     "next_action": "Starts when task-2026-10-18-001 is done.",
     "links": [
       {
@@ -975,6 +975,7 @@
     "acceptance_criteria": [
       "Bob opens `lazurio-bob` and Alena opens `lazurio-alena` with their Lazurio logins, each sees only what their Teams grant and acts on GitHub with their own account; in `team-01` GitHub acts as Lazurio for GitHub; verified in a browser (0178).",
       "The apply's evidence is in the Deployment Repo and the run's duration is recorded for L5.",
+      "Bob's Personal Environment reaches `lazurio-bob` over SSH on TCP 22 through the tailnet (D45).",
       "In `team-01` no browser session of Alena's GitHub account remains (only its login name was read before signing it out), and the Dashboard shows `team-01` through Team `workspace`, not as Alena's."
     ],
     "risk_notes": [
@@ -984,9 +985,9 @@
     "blocked_by": [
       "task-2026-10-18-003"
     ],
-    "summary": "Repository: the private Deployment Repo. After task 003 merges and after the rollout pipeline's first run, the pipeline applies the changes with the pinned Machines release, records the evidence and leaves the Environments healthy; `lazurio-bob` and `lazurio-alena` are its first real rollouts, with no manual apply from an operator's computer (D37). Bob signs in to `lazurio-bob` and Alena to `lazurio-alena` with their Lazurio accounts, without a tailnet, and a member of `workspace` works in `team-01`, where GitHub acts as Lazurio for GitHub. After the apply, the Dashboard's registry binds `team-01` to Team `workspace` instead of Alena, and a browser session of Alena's GitHub account in `team-01`, if any, is signed out after reading only its login name.",
+    "summary": "Repository: the private Deployment Repo. After task 003 merges and after the rollout pipeline's first run, the pipeline applies the changes with the pinned Machines release, records the evidence and leaves the Environments healthy; `lazurio-bob` and `lazurio-alena` are its first real rollouts, with no manual apply from an operator's computer (D37). Bob signs in to `lazurio-bob` and Alena to `lazurio-alena` with their Lazurio accounts, without a tailnet, and a member of `workspace` works in `team-01`, where GitHub acts as Lazurio for GitHub. From then on Buddy's Ring 0 tests reach `lazurio-bob` over SSH from Bob's Personal Environment instead of `admin-01` (D45). After the apply, the Dashboard's registry binds `team-01` to Team `workspace` instead of Alena, and a browser session of Alena's GitHub account in `team-01`, if any, is signed out after reading only its login name.",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
+    "updated_at": "2026-10-21",
     "next_action": "Starts when task-2026-10-18-003 is done.",
     "links": [
       {
@@ -1005,13 +1006,13 @@
   },
   {
     "id": "task-2026-10-18-005",
-    "title": "L2: Bob's Personal Environment with Buddy on the Buddy hosting",
+    "title": "L2: Bob's Personal Environment on the shared personal VM pool",
     "status": "blocked",
-    "priority": "medium",
+    "priority": "high",
     "priority_rank": 65,
-    "assignee": "Example thread",
+    "assignee": "rollout pipeline (DEV-6671)",
     "priority_decider": "organization-admin",
-    "priority_reason": "The with and without personal space comparison (scenario 5) needs it.",
+    "priority_reason": "Buddy on the web needs its Ring 0 test bed (D42), and the comparison with and without a personal space (scenario 6) needs it too.",
     "tags": [
       "EX-0014",
       "lab",
@@ -1019,16 +1020,20 @@
       "buddy"
     ],
     "acceptance_criteria": [
+      "Bob's Personal Environment runs on the shared personal VM pool as a node of the Organization's tailnet, never on the Organization's server, and its gateway admits only Bob's Lazurio login; verified in a browser from Bob's test device (0178).",
       "Bob sees Buddy and his Personal Workspace next to the Organization in the rail; Alena sees no personal space; verified in a browser (0178)."
     ],
     "risk_notes": [
-      "Bob's Buddy is a paid Base plan (D22); it is cancelled when the lab no longer needs it."
+      "The first creation runs from the operator's computer, outside the pipeline; the pipeline takes the lanes over afterwards (D44).",
+      "Bob's test device is the agents' headless client, a Ring 0 exception for a fictional test user that is never used for a real person (D44)."
     ],
-    "blocked_by": [],
-    "summary": "Create Bob's Personal Environment with Buddy through the normal one-click Buddy (Product 1) path, like any customer's, never on the Organization's server. It holds only fictional data and is operated by agents with test credentials; its Base plan is paid by the maintainers' own Organization (D22). Waits for Buddy Product 1.",
+    "blocked_by": [
+      "task-2026-10-21-002"
+    ],
+    "summary": "Repository: the private Deployment Repo, LazurioExampleOrganization/machines#82 (Bob's personal lane) and #83 (the Conglomerate Host lane), prepared by the maintainers' Buddy work (DEV-6676) and applied by the rollout pipeline (D44). Create Bob's Personal Environment on the shared personal VM pool next to the other Personal Environments, never on the Organization's server (D42), as a node of the Organization's tailnet under Bob's personal tailnet user, with the grants of D44: Bob's test device to the Personal Environment on TCP 443, and the Personal Environment to `admin-01` on TCP 22 once `admin-01` is a tailnet node (task-2026-10-21-001). Its certificate for the personal label uses DNS-01 through a delegated `_acme-challenge` CNAME (Machines#760), and its gateway admits only Bob's Lazurio login through the issuer client `personal-lazurio-bob` (task-2026-10-21-002). The first creation runs from the operator's computer after Thursday's demo, on Thursday evening 2026-10-22 or Friday 2026-10-23; later changes go through the Organization's pipeline. Buddy itself is installed by the Buddy work, not by these lanes. It holds only fictional data and is operated by agents with test credentials (D22).",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
-    "next_action": "Waits for Buddy Product 1.",
+    "updated_at": "2026-10-21",
+    "next_action": "Waits for Machines#760 in a Machines release after v0.12.188, the issuer client (task-2026-10-21-002) and the Ring 0 window after Thursday's demo; the rollout pipeline then creates it from the operator's computer.",
     "links": [
       {
         "label": "Plan EX-0014",
@@ -1536,19 +1541,20 @@
       "The visitor's path records that a visitor added an item to `try-01`'s vault and that the vault was empty after the nightly wipe."
     ],
     "risk_notes": [
-      "Several scenarios wait on capabilities outside the lab (account deletion or reset, Environment removal, the vault route and nightly wipe, `try-01`'s preset and AI gateway, Buddy Product 1); each records its hold instead of a result until then."
+      "Several scenarios wait on capabilities outside the lab (account deletion or reset, Environment removal, the vault route and nightly wipe, `try-01`'s preset and AI gateway, Buddy on the web); each records its hold instead of a result until then."
     ],
     "blocked_by": [
       "task-2026-10-18-013",
       "task-2026-10-18-004",
       "task-2026-10-18-005",
       "task-2026-10-18-014",
-      "task-2026-10-18-016"
+      "task-2026-10-18-016",
+      "task-2026-10-21-003"
     ],
-    "summary": "Run each scenario from the runbooks of task 013 as Bob or Alena with the maintainers' smoke-test procedure and record a dated result; time the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding. A scenario runs as soon as its prerequisites exist: scenarios 1 to 3 need a supported Environment removal in Machines, scenario 2 also task 014, scenario 3 the sign-in service's account deletion or reset, scenario 4 `try-01`'s preset, terms pages and AI gateway and task 016, scenario 5 task 004, scenario 6 task 005 (Buddy Product 1), scenario 7 the public SSO-only vault route, and scenario 8 the next rollout. No third test account (D29).",
+    "summary": "Run each scenario from the runbooks of task 013 as Bob or Alena with the maintainers' smoke-test procedure and record a dated result; time the server rebuild, the delete-and-re-add of Alena's Work Environment and her complete re-onboarding. A scenario runs as soon as its prerequisites exist: scenarios 1 to 3 need a supported Environment removal in Machines, scenario 2 also task 014, scenario 3 the sign-in service's account deletion or reset, scenario 4 `try-01`'s preset, terms pages and AI gateway and task 016, scenario 5 task 004, scenario 6 task 005 and the Ring 0 acceptance of Buddy on the web (task-2026-10-21-003), scenario 7 the public SSO-only vault route, and scenario 8 the next rollout. No third test account (D29).",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
-    "next_action": "Runs scenario by scenario once task-2026-10-18-013 is done and each scenario's prerequisites exist (tasks 004, 005, 014 and 016 and the external holds in the summary).",
+    "updated_at": "2026-10-21",
+    "next_action": "Runs scenario by scenario once task-2026-10-18-013 is done and each scenario's prerequisites exist (tasks 004, 005, 014 and 016, task-2026-10-21-003 and the external holds in the summary).",
     "links": [
       {
         "label": "Plan EX-0014",
@@ -1582,7 +1588,7 @@
     ],
     "acceptance_criteria": [
       "The rollout starts only after task 004 recorded Bob working in `lazurio-bob`; its Plan removes only `admin-01` and changes no other Environment.",
-      "After the apply `admin-01` has no roster entry, DNS name, active gateway client or registry entry and does not answer from outside; then its VM and the old `try-01`'s VM are destroyed and the evidence records both."
+      "After the apply `admin-01` has no roster entry, DNS name, active gateway client, tailnet node or registry entry and does not answer from outside; then its VM and the old `try-01`'s VM are destroyed and the evidence records both."
     ],
     "risk_notes": [
       "Destroying the VMs is irreversible; it happens only after `admin-01` is retired and unreachable, and the lab keeps nothing on them (0204 point 4)."
@@ -1590,10 +1596,142 @@
     "blocked_by": [
       "task-2026-10-18-004"
     ],
-    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it. After task 004 has verified that Bob works in `lazurio-bob`, a further pipeline rollout retires `admin-01`: it leaves the roster (the host keeps its VM unmanaged), DNS, its gateway client at the shared sign-in issuer (parked, as the Owner approved) and the Dashboard's registry. Once `admin-01` is unreachable from outside, its VM and the old `try-01`'s VM are destroyed, as the Owner approved (D37), and the evidence records it. `admin-01`'s live route is never removed before its replacement is verified.",
+    "summary": "Repositories: the private Deployment Repo, with the host lane; the rollout pipeline applies it. After task 004 has verified that Bob works in `lazurio-bob`, a further pipeline rollout retires `admin-01`: it leaves the roster (the host keeps its VM unmanaged), DNS, its gateway client at the shared sign-in issuer (parked, as the Owner approved), the tailnet together with the SSH grant from Bob's Personal Environment, both of which have moved to `lazurio-bob` (D45), and the Dashboard's registry. Once `admin-01` is unreachable from outside, its VM and the old `try-01`'s VM are destroyed, as the Owner approved (D37), and the evidence records it. `admin-01`'s live route is never removed before its replacement is verified.",
     "created_at": "2026-10-18",
-    "updated_at": "2026-10-18",
+    "updated_at": "2026-10-21",
     "next_action": "Starts when task-2026-10-18-004 has verified Bob working in `lazurio-bob`.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-21-001",
+    "title": "L2: `admin-01` joins the Organization's tailnet as a server node",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 79,
+    "assignee": "rollout pipeline (DEV-6671)",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Buddy's SSH reach can be tested on Ring 0 only once Bob's Work Environment is a tailnet node (D43).",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "environments",
+      "tailnet",
+      "buddy"
+    ],
+    "acceptance_criteria": [
+      "`admin-01` is a node of the Organization's tailnet, and Bob's Personal Environment reaches it over SSH on TCP 22 (D44).",
+      "People still reach `admin-01` only through the public entry with a Lazurio login; verified in a browser (0178)."
+    ],
+    "risk_notes": [
+      "The SSH edge from Bob's Personal Environment does not pass the Lazurio login; it exists only inside the tailnet and only from that one node (D44)."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: the private Deployment Repo, the host lane `proxmox-01`; the rollout pipeline applies it in the same Ring 0 window as Bob's Personal Environment, after Thursday's demo (D44). Enroll Bob's Work Environment `admin-01` in the Organization's tailnet as a server node only, so that Buddy in Bob's Personal Environment reaches it over SSH on TCP 22 (D43, D44). People keep entering `admin-01` only through the Organization's public entry with a Lazurio login (D21). When `lazurio-bob` replaces `admin-01` under D36, the node and the SSH grant move to it (D45, tasks 003, 004 and 018).",
+    "created_at": "2026-10-21",
+    "updated_at": "2026-10-21",
+    "next_action": "Waits for the Ring 0 window after Thursday's demo, when the rollout pipeline applies the host lane change together with Bob's lanes.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-21-002",
+    "title": "L2: the issuer client `personal-lazurio-bob` at the shared sign-in issuer",
+    "status": "open",
+    "priority": "high",
+    "priority_rank": 80,
+    "assignee": "rollout pipeline (DEV-6671)",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Without the client nobody can sign in to Bob's Personal Environment.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "sign-in",
+      "buddy"
+    ],
+    "acceptance_criteria": [
+      "The client `personal-lazurio-bob` exists at the shared issuer; Bob signs in to his Personal Environment with his Lazurio login and Alena is refused; verified in a browser (0178)."
+    ],
+    "risk_notes": [
+      "The shared issuer also serves Environments outside the reference Organization (0204 point 7); the change adds only this one client."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: the shared sign-in issuer outside the reference Organization; the rollout pipeline adds the client with the next change of the issuer. Add the gateway client `personal-lazurio-bob` of Bob's Personal Environment, which admits only Bob's Lazurio account; the Owner approved it on 2026-10-21 as an exception to 0204 point 7, as D37 did for the Work Environments' clients (D43).",
+    "created_at": "2026-10-21",
+    "updated_at": "2026-10-21",
+    "next_action": "The rollout pipeline adds the client with the next change of the shared issuer.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-21-003",
+    "title": "L5: Ring 0 acceptance of Buddy on the web as Bob and Alena",
+    "status": "blocked",
+    "priority": "high",
+    "priority_rank": 81,
+    "assignee": "Buddy work (DEV-6676)",
+    "priority_decider": "organization-admin",
+    "priority_reason": "Buddy on the web is accepted on Ring 0 before the next wave of Organizations gets it (0204 point 7).",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "buddy",
+      "ring-0",
+      "acceptance"
+    ],
+    "acceptance_criteria": [
+      "Bob opens the bubble in Apps, Chat and Automate on `admin-01`, chats with his Buddy, and Buddy reaches `admin-01` over SSH; verified in a browser (0178).",
+      "Alena sees the neutral Lazurio guide in the bubble and no Buddy; verified in a browser (0178).",
+      "The run is recorded with its date and the accepted versions as a Ring 0 result."
+    ],
+    "risk_notes": [
+      "Bob's Personal Environment is reachable only from his test device on the tailnet (D44), so the acceptance runs from the agents' device, not from a device a real person would use."
+    ],
+    "blocked_by": [
+      "task-2026-10-18-005",
+      "task-2026-10-21-001",
+      "task-2026-10-21-002"
+    ],
+    "summary": "When Buddy on the web reaches Ring 0 through the ordinary releases (DEV-6676) and Bob's Personal Environment, the `admin-01` server node and the issuer client exist, accept it in a browser as Bob and Alena with the maintainers' smoke-test procedure (0178). Bob opens the bubble in Apps, Chat and Automate on `admin-01`, chats with his Buddy, and Buddy, given the page context, reaches `admin-01` over SSH from Bob's Personal Environment. Alena, who has no Personal Environment, sees the neutral Lazurio guide in the bubble (root decision 0210). The agents drive Bob's browser from his test device (D44). The dated result counts as a run of scenarios 6 and 8.",
+    "created_at": "2026-10-21",
+    "updated_at": "2026-10-21",
+    "next_action": "Waits for Buddy on the web in the ordinary releases (DEV-6676) and for task-2026-10-18-005, task-2026-10-21-001 and task-2026-10-21-002.",
     "links": [
       {
         "label": "Plan EX-0014",
