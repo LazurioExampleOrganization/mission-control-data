@@ -7,7 +7,7 @@ owner: organization-admin
 priority: high
 priority_rank: 2
 created_at: 2026-10-18
-updated_at: 2026-10-21
+updated_at: 2026-10-22
 context: |
   Lazurio Example Organization is Lazurio's public reference Organization (root
   decision 0204): fictional data, public repositories, its own dedicated server,
@@ -546,6 +546,15 @@ decisions:
   - date: 2026-10-21
     decision: "D45 (answers Q16; limits D44 (a) to now, so D36 stands): Bob's Work Environment for Buddy's Ring 0 tests is `admin-01` now. It is the server node of the Organization's tailnet that Buddy reaches over SSH from Bob's Personal Environment (D43). When `lazurio-bob` replaces `admin-01` under D36, the tailnet node and the SSH grant move to it (tasks 003, 004 and 018)."
     rationale: "The Owner, 2026-10-21 about 20:50 UTC, with the question tool, choosing “Now admin-01”, whose stated consequence was: “admin-01 is already running, so testing can start right after [Thursday's] demo. Once lazurio-bob replaces it according to D36, the tailnet node and the SSH grant move to it.”"
+  - date: 2026-10-22
+    decision: "D46 (implements the vault of D32 and D35; extends D43 (a) to `try-01`): `try-01` joins the Organization's tailnet only as a server node, so that its Platform can reach the Organization's vault with `try-01`'s own account. The vault answers only inside the tailnet (root decision 0203), Platform talks to it from the Environment's server, and the public SSO-only vault route of D21 serves people's browsers, which a server-side client cannot pass. The node uses the same mechanism as `admin-01` (D43): the lane's rollout-gateway key and the Organization's workspace tag. The access rules stay the ones the Machines engine renders: the workspace tag's default grants take the node out to the Conglomerate Host on HTTPS, where the vault is, and to the DNS resolver; `try-01` gets no exact-address grant such as an SSH grant. People stay off the tailnet and keep entering with a Lazurio login; D21 is unchanged for them. Visitors have full access in `try-01`, so they can reach every HTTPS service of the Organization's Conglomerate Host from the tailnet, the whole vault interface included, with sign-in attempts against other accounts. The host serves only this Organization. Open signup is off, Environment accounts are pre-allowed, the vault's administration does not answer there, and every account's content is encrypted with its own password; only `try-01`'s own vault holds no secret of the Organization (D35). The Conglomerate Host issues the account on the operator path, because the rollout pipeline does not yet deliver its hand-over; `try-01`'s lane then takes it through the pipeline. The nightly wipe stays task 016, and until it runs the entry notice promises none."
+    rationale: "The Owner, 2026-10-22 evening, with the question tool, choosing variant A, a tailnet server node for the vault only, over a vault relay on the services Environment (B) and postponing until the public vault route (C); root decision 0204, addendum of 2026-10-22."
+  - date: 2026-10-23
+    decision: "D47 (the one model of the Organization; reads D20 to D46 through it): The reference Organization works exactly as an ordinary Organization of Lazurio. It shows in the Lazurio Dashboard and in the rail like any other Organization for everyone who is its member in the ordinary way; its members are set by GitHub (invitation, Teams, grants); every member who works in it has a standard Work Environment signed in to GitHub with the member's own account (Bob as `lazurio-bob`, Alena as `lazurio-alena`); the Team Environment `team-01` carries the Organization's modules; and each Environment's rail shows the person's other Organizations and Environments as everywhere else. Only two things differ. (a) The whole Organization works without a tailnet for people: its Environments are on public names of its own zone, reached only through a Lazurio login (D21; root decision 0204). (b) `try-01` is the one Environment cut off from everything else: a public link behind a Lazurio login for anyone with a Lazurio account, who does not become a member of the Organization (D33, D34). Anything else that differs today is a gap to close, not a feature of the lab: Bob's provisional `admin-01` and Alena's missing Work Environment (tasks 003, 004, 018), `team-01` without the Organization's modules (Lazurio/LazurioPlatform#483), and the Environments' gateways without the account relay, so the rail shows none of a person's other Organizations (task-2026-10-23-001). A person outside Human and Machine may be a member too: the external guest Václav Vacek gets a service entry to watch how Bob and Alena work, as a member of the Organization in Teams `workspace`, `lazurio-bob` and `lazurio-alena`, without a Work Environment of his own in this Organization (D48); inside those Environments he has everything the Environment has (root decision 0192, trusted full sharing), so watching is an agreement, not a technical limit (task-2026-10-23-002)."
+    rationale: "The Owner, 2026-10-23 morning in the maintainers' thread, after seeing `team-01` without the Organization's modules and without his other Organizations in the rail, and confirming this model with the question tool (“Ano, zapiš a ukliďme”); the same morning, also with the question tool: Alena's standard Work Environment today, and Václav Vacek as an external guest."
+  - date: 2026-10-23
+    decision: "D48 (adds to D47): Václav Vacek (GitHub `vacekv`), a trusted external, is a member of the Organization with full access: Teams `workspace`, `lazurio-bob` and `lazurio-alena`, so he enters `team-01` and Bob's and Alena's Work Environments through the Organization's public entry with his Lazurio login from his own browser, without a tailnet. He also gets his own Personal Environment without a tailnet, reached only through his Lazurio login (Product 1, root decision 0207), as a pilot that gets Buddy with the Buddy rollout (root decision 0210). That profile does not exist yet: it is the maintainers' Product 1 milestone M5 (a public entry for personal Environments on the shared personal pool), shaped and built outside this plan; by the Ring 0 rule a test persona of this Organization (Alena) is its first consumer and Václav the first real person. His Personal Environment belongs to him, not to this Organization: it takes none of its repositories, and his Personalspace is his alone. Later he may join the maintainers' Organization with its tailnet and a Work Environment there; that is not part of this plan."
+    rationale: "The Owner, 2026-10-23, after a call with Václav (“chci ho plně pustit do Lazurio Example Organization, ať vidí jak do environmentu Boba, tak Aleny”; a Personal Environment without a tailnet, purely behind the Lazurio login); the Product 1 owner's answer the same morning that the no-tailnet personal profile is still to be built (its M5)."
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D30 and D31 stand? They apply unless the Owner overrides them. (D28's cap and place of the pool are settled by D40.)"
   - "Q14 The shape of the account deletion or reset that D29 needs; it is designed in the maintainers' plan."
@@ -621,6 +630,8 @@ todo_outputs:
   - task-2026-10-21-001
   - task-2026-10-21-002
   - task-2026-10-21-003
+  - task-2026-10-23-001
+  - task-2026-10-23-002
 proposed_tasks:
   - id: task-2026-10-18-001
     title: "L1: Teams, grants and the public access matrix"
@@ -942,3 +953,27 @@ proposed_tasks:
     risk_notes:
       - "Bob's Personal Environment is reachable only from his test device on the tailnet (D44), so the acceptance runs from the agents' device, not from a device a real person would use."
     blocked_by: [task-2026-10-18-005, task-2026-10-21-001, task-2026-10-21-002]
+  - id: task-2026-10-23-001
+    title: "L2: the account relay on the Organization's Work and Team Environments, so the rail shows a person's other Organizations"
+    summary: "Repository: the private Deployment Repo, lane `lazurioexampleorganization-proxmox-01`, through the rollout pipeline. The Lazurio rail reads the person's account at the Dashboard through the Environment's gateway (`/.lazurio/account/environments`, Machines `account-relay.ts`). The Organization's guests declare no `gateway.account_relay`, so the rail shows only the Environment it is in. `lazurio-alena` gets the relay in its own pull request (task 003); `admin-01` and `team-01` in one pull request after it."
+    priority: high
+    priority_rank: 62
+    assignee: "Example thread"
+    tags: [EX-0014, lab, environments, deployment-repo, rail]
+    acceptance_criteria:
+      - "`admin-01`, `team-01` and every new Work Environment of the Organization declare the gateway's account relay (`dashboard_origin` https://dashboard.lazurio.ai, `scope` lazurio-account) as the Work Environments of other Organizations do; `try-01` keeps none; verified in a browser (0178): a member sees the other Organizations in the rail."
+    risk_notes:
+      - "The gateway of each changed Environment restarts once in its apply."
+    blocked_by: []
+  - id: task-2026-10-23-002
+    title: "L1: the external guest Václav Vacek as a member with a service entry to Bob's and Alena's Environments"
+    summary: "Repository: the GitHub Organization's settings only, with no lane change or apply. Invite his GitHub account as a member and add it to Teams `lazurio-bob` and `lazurio-alena`, not `workspace`. The gateways of `admin-01` (and `lazurio-bob` later) and `lazurio-alena` admit those Teams. Waits for his GitHub login."
+    priority: high
+    priority_rank: 60
+    assignee: "Example thread"
+    tags: [EX-0014, lab, members, github]
+    acceptance_criteria:
+      - "Václav is a member of the GitHub Organization and of Teams `lazurio-bob` and `lazurio-alena` only, has no Environment of his own, and enters Bob's and Alena's Work Environments with his Lazurio login; verified in a browser (0178) or confirmed by him."
+    risk_notes:
+      - "Inside Bob's and Alena's Environments he can do everything they can, including acting with their GitHub accounts (root decision 0192); watching only is an agreement with him."
+    blocked_by: []
