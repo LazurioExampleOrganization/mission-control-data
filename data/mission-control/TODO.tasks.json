@@ -1746,5 +1746,88 @@
     },
     "source": "mission-control",
     "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-23-001",
+    "title": "L2: the account relay on the Organization's Work and Team Environments, so the rail shows a person's other Organizations",
+    "status": "todo",
+    "priority": "high",
+    "priority_rank": 62,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "D47: the rail of `admin-01` and `team-01` shows only that Environment, while every ordinary Organization's Environment shows the person's other Organizations.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "environments",
+      "deployment-repo",
+      "rail"
+    ],
+    "acceptance_criteria": [
+      "`admin-01`, `team-01` and every new Work Environment of the Organization declare the gateway's account relay (`dashboard_origin` https://dashboard.lazurio.ai, `scope` lazurio-account) as the Work Environments of other Organizations do; `try-01` keeps none; verified in a browser (0178): a member sees the other Organizations in the rail."
+    ],
+    "risk_notes": [
+      "The gateway of each changed Environment restarts once in its apply."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: the private Deployment Repo, lane `lazurioexampleorganization-proxmox-01`, through the rollout pipeline. The Lazurio rail reads the person's account at the Dashboard through the Environment's gateway (`/.lazurio/account/environments`, Machines `account-relay.ts`). The Organization's guests declare no `gateway.account_relay`, so the rail shows only the Environment it is in. `lazurio-alena` gets the relay in its own pull request (task 003); `admin-01` and `team-01` in one pull request after it.",
+    "created_at": "2026-10-23",
+    "updated_at": "2026-10-23",
+    "next_action": "After `lazurio-alena`'s apply, one proxmox-01 pull request for `admin-01` and `team-01`.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-10-23-002",
+    "title": "L1: the external guest Václav Vacek as a member with a service entry to Bob's and Alena's Environments",
+    "status": "todo",
+    "priority": "high",
+    "priority_rank": 60,
+    "assignee": "Example thread",
+    "priority_decider": "organization-admin",
+    "priority_reason": "The Owner wants Václav to watch how Bob and Alena work from 2026-10-23.",
+    "tags": [
+      "EX-0014",
+      "lab",
+      "members",
+      "github"
+    ],
+    "acceptance_criteria": [
+      "Václav is a member of the GitHub Organization and of Teams `lazurio-bob` and `lazurio-alena` only, has no Environment of his own, and enters Bob's and Alena's Work Environments with his Lazurio login; verified in a browser (0178) or confirmed by him."
+    ],
+    "risk_notes": [
+      "Inside Bob's and Alena's Environments he can do everything they can, including acting with their GitHub accounts (root decision 0192); watching only is an agreement with him."
+    ],
+    "blocked_by": [],
+    "summary": "Repository: the GitHub Organization's settings only, with no lane change or apply. Invite his GitHub account as a member and add it to Teams `lazurio-bob` and `lazurio-alena`, not `workspace`. The gateways of `admin-01` (and `lazurio-bob` later) and `lazurio-alena` admit those Teams. Waits for his GitHub login.",
+    "created_at": "2026-10-23",
+    "updated_at": "2026-10-23",
+    "next_action": "Invite as soon as the Owner sends his GitHub login.",
+    "links": [
+      {
+        "label": "Plan EX-0014",
+        "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+      }
+    ],
+    "planning": {
+      "source": "mission-control",
+      "plan_id": "mcplan-ex-0014",
+      "dev_code": "EX-0014",
+      "path": "data/mission-control/plans/2026/10/EX-0014-lazurio-lab.yaml"
+    },
+    "source": "mission-control",
+    "dev_code": "EX-0014"
   }
 ]
