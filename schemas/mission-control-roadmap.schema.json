@@ -73,6 +73,9 @@
       "type": "string",
       "minLength": 1
     },
+    "main": {
+      "type": "boolean"
+    },
     "agent_lane": {
       "type": "object",
       "properties": {
@@ -167,6 +170,30 @@
           },
           "executable": {
             "type": "boolean"
+          },
+          "timing": {
+            "type": "object",
+            "required": [
+              "to"
+            ],
+            "properties": {
+              "from": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2]|Q[1-4])$"
+              },
+              "to": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2]|Q[1-4])$"
+              },
+              "confidence": {
+                "enum": [
+                  "committed",
+                  "likely",
+                  "tentative"
+                ]
+              }
+            },
+            "additionalProperties": false
           },
           "priority_refs": {
             "type": "array",
