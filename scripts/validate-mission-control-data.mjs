@@ -2938,6 +2938,37 @@ function validateRoadmapLinks(file, links) {
   }
 }
 
+const roadmapPeriodPattern = /^([0-9]{4})-(?:(0[1-9]|1[0-2])|Q([1-4]))$/;
+
+// A Roadmap Step period is a calendar month (2026-11) or a quarter (2027-Q1),
+// returned as absolute month indexes (year * 12 + month - 1), end inclusive.
+function roadmapPeriodBounds(value) {
+  if (typeof value !== "string") return null;
+  const match = roadmapPeriodPattern.exec(value);
+  if (!match) return null;
+  const year = Number(match[1]);
+  if (match[2]) {
+    const month = year * 12 + Number(match[2]) - 1;
+    return { start: month, end: month };
+  }
+  const start = year * 12 + (Number(match[3]) - 1) * 3;
+  return { start, end: start + 2 };
+}
+
+function validateRoadmapStepTimings(file, steps) {
+  if (!Array.isArray(steps)) return;
+  for (const [index, step] of steps.entries()) {
+    if (!isObject(step) || !isObject(step.timing)) continue;
+    const from = roadmapPeriodBounds(step.timing.from);
+    const to = roadmapPeriodBounds(step.timing.to);
+    if (from && to && (from.start > to.start || from.end > to.end)) {
+      failures.push(
+        `${file}: steps[${index}].timing.from must not start or end after steps[${index}].timing.to`,
+      );
+    }
+  }
+}
+
 function validateRoadmapTrimmedStrings(file, roadmap) {
   const validateValue = (value, label) => {
     if (typeof value === "string" && value.trim() === "") {
@@ -3006,6 +3037,7 @@ function validateRoadmap(
     existingIssueIds,
     seenRoadmapCodes,
     seenRoadmapIds,
+    seenMainRoadmaps,
   },
 ) {
   const parsed = parseRoadmapYaml(file);
@@ -3044,6 +3076,18 @@ function validateRoadmap(
     } else {
       seen.set(value, file);
     }
+  }
+
+  if (roadmap.main === true) {
+    if (roadmap.status === "archived") {
+      failures.push(`${file}: an archived roadmap cannot be the main roadmap (main: true)`);
+    }
+    if (seenMainRoadmaps.length > 0) {
+      failures.push(
+        `${file}: main: true is already set by ${seenMainRoadmaps[0]}; an Organization has at most one main roadmap`,
+      );
+    }
+    seenMainRoadmaps.push(file);
   }
 
   if (typeof roadmap.source_plan === "string" && !existingPlanCodes.has(roadmap.source_plan)) {
@@ -3121,6 +3165,7 @@ function validateRoadmap(
     }
   }
   validateRoadmapEvidencePaths(file, roadmap.steps);
+  validateRoadmapStepTimings(file, roadmap.steps);
 }
 
 function isSafeConfiguredDirectory(directory, label) {
@@ -5365,6 +5410,7 @@ if (
 ) {
   const seenRoadmapCodes = new Map();
   const seenRoadmapIds = new Map();
+  const seenMainRoadmaps = [];
   for (const file of listYamlFiles(config.roadmaps_dir)) {
     validateRoadmap(file, validateRoadmapSchema, {
       existingPlanCodes,
@@ -5372,6 +5418,7 @@ if (
       existingIssueIds,
       seenRoadmapCodes,
       seenRoadmapIds,
+      seenMainRoadmaps,
     });
   }
 }
