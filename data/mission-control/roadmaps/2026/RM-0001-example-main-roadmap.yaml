@@ -1,0 +1,151 @@
+schema_version: companiesascode.mission_control.roadmap.v1
+id: mcroadmap-rm-0001
+roadmap_code: RM-0001
+title: Main roadmap of Lazurio Example Organization
+main: true
+status: in_progress
+owner: organization-admin
+priority: high
+created_at: 2026-11-01
+updated_at: 2026-11-01
+source_plan: EX-0002
+summary: >-
+  Fictional reference roadmap: when the Organization's own plans land,
+  approximately, from its move to Lazurio to its first paid offers. It shows
+  Lazurio's main roadmap on this Organization's fictional data.
+priorities:
+  - id: priority-001
+    title: Run the Organization on Lazurio
+    rank: 1
+    rationale: >-
+      The reference Organization is Lazurio's lab and showcase, so its own
+      work runs on the current Lazurio first.
+  - id: priority-002
+    title: First paid offers
+    rank: 2
+    rationale: >-
+      The fictional business needs offers that customers can buy before it
+      grows its team.
+steps:
+  - id: step-001
+    title: Mission Control as the work board for agents
+    status: done
+    executable: true
+    timing:
+      to: 2026-05
+      confidence: committed
+    priority_refs:
+      - priority-001
+    plan_refs:
+      - EX-0012
+    evidence_refs:
+      - label: Plan EX-0012
+        kind: plan
+        path: data/mission-control/plans/2026/05/EX-0012-mission-control-root-repo-work-board.yaml
+    acceptance_criteria:
+      - Agents pick their work from the Mission Control work board.
+  - id: step-002
+    title: Migrate the Organization to GEN3
+    status: in_progress
+    executable: true
+    timing:
+      from: 2026-09
+      to: 2026-11
+      confidence: likely
+    priority_refs:
+      - priority-001
+    plan_refs:
+      - EX-0001
+    acceptance_criteria:
+      - Every colleague works in the GEN3 layout.
+  - id: step-003
+    title: Mission Control as the planning loop
+    status: in_progress
+    executable: true
+    timing:
+      to: 2026-Q4
+      confidence: likely
+    priority_refs:
+      - priority-001
+    plan_refs:
+      - EX-0011
+      - EX-0008
+    acceptance_criteria:
+      - Plans, tasks and this roadmap are kept in Mission Control and nowhere else.
+  - id: step-004
+    title: The Organization becomes the Lazurio lab
+    status: shaping
+    executable: true
+    timing:
+      to: 2026-12
+      confidence: tentative
+    priority_refs:
+      - priority-001
+    plan_refs:
+      - EX-0014
+    acceptance_criteria:
+      - Every Lazurio release reaches this Organization first.
+  - id: step-005
+    title: Agent Automation Desk paid pilot
+    status: ready
+    executable: true
+    timing:
+      from: 2026-12
+      to: 2027-Q1
+      confidence: tentative
+    priority_refs:
+      - priority-002
+    plan_refs:
+      - EX-0004
+    acceptance_criteria:
+      - One fictional customer runs the paid pilot.
+  - id: step-006
+    title: Launchpad design pass
+    status: ready
+    executable: true
+    timing:
+      to: 2027-01
+      confidence: tentative
+    priority_refs:
+      - priority-001
+    plan_refs:
+      - EX-0009
+    acceptance_criteria:
+      - The Launchpad uses the Organization's design system.
+  - id: step-007
+    title: AI visibility audit offer
+    status: shaping
+    executable: true
+    timing:
+      to: 2027-Q1
+      confidence: tentative
+    priority_refs:
+      - priority-002
+    plan_refs:
+      - EX-0006
+    acceptance_criteria:
+      - The offer has a price, a scope and its guardrails.
+  - id: step-008
+    title: White-label AI support agent
+    status: shaping
+    executable: true
+    timing:
+      to: 2027-Q2
+      confidence: tentative
+    priority_refs:
+      - priority-002
+    plan_refs:
+      - EX-0005
+    acceptance_criteria:
+      - Discovery decides whether to build the agent.
+  - id: step-009
+    title: Mechanism evidence system
+    status: ready
+    executable: true
+    priority_refs:
+      - priority-001
+    plan_refs:
+      - EX-0007
+    notes: Not scheduled yet.
+    acceptance_criteria:
+      - Every mechanism claim links to its evidence.
