@@ -1,0 +1,126 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0015
+dev_code: EX-0015
+title: Pilot of a production Dolt database for app/v4 modules in the Services Environments
+status: shaping
+owner: organization-admin
+priority: medium
+priority_rank: 3
+created_at: '2026-11-03'
+updated_at: '2026-11-03'
+context: >-
+  Lazurio decided on 2026-11-03 that the generation of a module's App (app/v<N>) names its data layer: v3 keeps
+  its records in repository-db and v4 in a Dolt database (stack profile app-database, Lazurio/LazurioPlatform#821).
+  An Organization's production Dolt runs in the Services Environments of its servers. The primary Dolt SQL server
+  runs in one server's Services Environment and a hot standby in the other server's through Dolt's
+  direct-to-standby replication. Writes go to the primary only, failover is controlled with
+  dolt_assume_cluster_role, and a regular copy goes outside both servers, because a replica is not a backup. The
+  Conglomerate Host carries no module data. As Ring 0 and Lazurio's lab (EX-0014), this Organization runs the
+  pilot before any other Organization. Mission Control is the first module to move. Lazurio's internal plan
+  DEV-6695 holds the full design and the tasks in the Lazurio repositories. This plan is the Organization's own
+  record of the pilot and its results.
+current_problem: >-
+  State of 2026-11-03. The Organization has two Proxmox servers. Its permanent server carries no Environment since
+  the server-move rehearsal, and all five guests run on the temporary second server, which is to be cancelled
+  after the way back. It has one Services Environment, services-01. Because it carries the public entry, it is
+  not a tailnet node (root decision 0213, addendum of 2026-10-25, point d). Lazurio's Machines have no service kind
+  for a database, and root decision 0209 still says that production databases live outside the server services
+  (evening addendum of 2026-10-19, point f; HumanAndMachines/Lazurio#715). Lazurio cannot yet hand a module its
+  database connection without an .env file (Lazurio/LazurioPlatform#818). Mission Control 4.0.0
+  (LazurioTemplates/mission-control#13) has the storage port and the shared contract tests that a Dolt store
+  must pass, with three Git-shaped members still to settle (LazurioTemplates/mission-control#14).
+target_state: >-
+  Mission Control of this Organization runs as app/v4 on Dolt in its Services Environments. A primary on one server
+  and a standby on a second server replicate every committed transaction, and the database is copied regularly
+  to storage outside both servers. The pilot shows each of the following on real servers, with measured values:
+  writing with drafts per Environment, replication, a planned and an emergency failover, a restore from the
+  off-server copy, latency over the network between the servers, access control, and the move of the
+  Organization's Mission Control data from v3 to v4 with a tested way back. Every change to a server is a pull
+  request in the Organization's Deployment Repo with its CI Plan, review and the Owner's merge.
+scope:
+  in:
+    - >-
+      The database service on two servers (primary and standby) in the Organization's Services Environments, sized
+      for it, and the Organization's off-server backup storage, once Lazurio's Machines support the kind.
+    - >-
+      Adopting Mission Control with app/v4 from the Marketplace, moving this Organization's Mission Control data
+      from repository-db to Dolt with a proof of counts and round trip, and switching the default App by the
+      Owner's decision.
+    - >-
+      Acceptance runs A1 to A8 below and a public report of the measured values, without addresses, keys or
+      private inventory.
+  out:
+    - Any other module of the Organization; each move of a module has its own plan.
+    - Writing to both database nodes at once and automatic failover.
+    - The rollout to other Organizations, which Lazurio plans separately after this pilot passes.
+    - A second Services Environment on the same server (root decision 0209, point 1).
+acceptance_criteria:
+  - >-
+    A1 Writing: two Environments (Bob's and Alena's) edit Mission Control at the same time. Each sees only its own
+    draft and both publications pass. A concurrent change to the same record is refused with record_changed and
+    nothing is written. Each publication carries its author and summary in the database's log.
+  - >-
+    A2 Replication: after each publication the standby has the same head of main. The lag is measured and
+    recorded. The standby refuses writes. Users and grants exist on both nodes.
+  - >-
+    A3 Planned failover: one Deployment Repo pull request moves the primary to the second server and back. No
+    published commit is lost, the time without writes is recorded, and the module reconnects with no change in
+    any Environment.
+  - >-
+    A4 Emergency failover: after the primary is stopped abruptly, an Owner promotes the standby by the runbook.
+    The time and any lost transactions are recorded. The old primary returns as a standby at a higher epoch, and
+    the Deployment Repo matches the result.
+  - >-
+    A5 Restore: the database, drafts included, and its users and grants are restored from the off-server copy
+    into a clean Dolt, including an older point of the rotation. The restore time and the age of the newest
+    copy are recorded.
+  - >-
+    A6 Performance: latency of the typical Mission Control operations is recorded locally on the server's network
+    and across the link between the servers, together with the replication throughput and the import time.
+  - >-
+    A7 Security: an Environment without a grant cannot connect, and a new token generation removes access in one
+    apply. Only the peer node reaches the replication port. No secret is in Git, a Plan, evidence or a log.
+  - >-
+    A8 v3 to v4: the shared contract tests pass against repository-db and Dolt. The data move proves counts and
+    a round trip, and the export from v4 back to v3 works on a copy.
+validation:
+  - npm run validate
+  - Acceptance runs A1 to A8 with metadata-only evidence in the Deployment Repo and a report in this repository.
+risk_notes:
+  - >-
+    The data here is fictional and the server is not backed up (EX-0014). The pilot proves the mechanism and
+    measures latency, not the behaviour under a real company's load.
+  - >-
+    The Organization's plans are public on GitHub today. After the switch to v4 the source of truth is a private
+    database, so the public repository would go stale unless plans are exported from Dolt. The Owner decides
+    before the switch.
+  - >-
+    Keeping the temporary second server for the pilot has a monthly cost and delays its cancellation. Lazurio's
+    operator decides.
+assumptions: []
+decisions: []
+open_questions:
+  - >-
+    Where does the standby run: on the temporary second server kept for the pilot (proposed), or in a second
+    database container on the same server, which proves the protocol but not a second server?
+  - Do the Organization's plans stay publicly readable after the switch to v4 (a regular export from Dolt)?
+dependencies:
+  - EX-0014 (the Lazurio lab, Ring 0)
+  - "HumanAndMachines/Lazurio#715 (root decision addendum for a production Dolt in the server services)"
+  - "Lazurio/LazurioPlatform#818 (database connection without .env)"
+  - "LazurioTemplates/mission-control#13 and #14 (Mission Control 4.0.0 and its storage port)"
+links:
+  - label: "Stack profile app-database (Lazurio/LazurioPlatform#821)"
+    url: https://github.com/Lazurio/LazurioPlatform/pull/821
+  - label: "Database connection without .env (Lazurio/LazurioPlatform#818)"
+    url: https://github.com/Lazurio/LazurioPlatform/issues/818
+  - label: "Root decision addendum needed (HumanAndMachines/Lazurio#715)"
+    url: https://github.com/HumanAndMachines/Lazurio/issues/715
+  - label: "Mission Control 4.0.0 (LazurioTemplates/mission-control#13)"
+    url: https://github.com/LazurioTemplates/mission-control/pull/13
+  - label: "Storage port before app/v4 (LazurioTemplates/mission-control#14)"
+    url: https://github.com/LazurioTemplates/mission-control/issues/14
+  - label: "Dolt: replication"
+    url: https://www.dolthub.com/docs/sql-reference/server/replication
+  - label: "Dolt: backups"
+    url: https://www.dolthub.com/docs/sql-reference/server/backups
