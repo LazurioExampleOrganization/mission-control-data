@@ -1,7 +1,7 @@
 schema_version: companiesascode.mission_control.plan.v2
 id: mcplan-ex-0015
 dev_code: EX-0015
-title: Pilot of a production Dolt database for app/v4 modules in the Services Environments
+title: Pilot of the Dolt database for app/v4 workspace modules in the Services Environments
 status: shaping
 owner: organization-admin
 priority: medium
@@ -11,37 +11,50 @@ updated_at: '2026-11-03'
 context: >-
   Lazurio decided on 2026-11-03 that the generation of a module's App (app/v<N>) names its data layer: v3 keeps
   its records in repository-db and v4 in a Dolt database (stack profile app-database, Lazurio/LazurioPlatform#821).
-  An Organization's production Dolt runs in the Services Environments of its servers. The primary Dolt SQL server
-  runs in one server's Services Environment and a hot standby in the other server's through Dolt's
-  direct-to-standby replication. Writes go to the primary only, failover is controlled with
-  dolt_assume_cluster_role, and a regular copy goes outside both servers, because a replica is not a backup. The
-  Conglomerate Host carries no module data. As Ring 0 and Lazurio's lab (EX-0014), this Organization runs the
-  pilot before any other Organization. Mission Control is the first module to move. Lazurio's internal plan
-  DEV-6695 holds the full design and the tasks in the Lazurio repositories. This plan is the Organization's own
-  record of the pilot and its results.
+  This Dolt is the database of an Organization's workspace modules, for its internal work, and not a production
+  database; production databases that serve an Organization's customers stay outside the server services. It runs
+  in the Services Environments of the Organization's servers. The primary Dolt SQL server runs in one server's
+  Services Environment and a hot standby in the other server's through Dolt's direct-to-standby replication.
+  Writes go to the primary only, failover is controlled with dolt_assume_cluster_role, and a regular copy goes
+  outside the servers, because a replica is not a backup. The Conglomerate Host carries no module data. As Ring 0
+  and Lazurio's lab (EX-0014), this Organization runs the pilot before any other Organization. Mission Control is
+  the first module to move. Lazurio's internal plan LZD-0006 holds the full design and the tasks in the Lazurio
+  repositories. This plan is the Organization's own record of the pilot and its results.
 current_problem: >-
   State of 2026-11-03. The Organization has two Proxmox servers. Its permanent server carries no Environment since
-  the server-move rehearsal, and all five guests run on the temporary second server, which is to be cancelled
+  the server-move rehearsal, and all five guests run on the temporary second server, which was to be cancelled
   after the way back. It has one Services Environment, services-01. Because it carries the public entry, it is
   not a tailnet node (root decision 0213, addendum of 2026-10-25, point d). Lazurio's Machines have no service kind
-  for a database, and root decision 0209 still says that production databases live outside the server services
-  (evening addendum of 2026-10-19, point f; HumanAndMachines/Lazurio#715). Lazurio cannot yet hand a module its
-  database connection without an .env file (Lazurio/LazurioPlatform#818). Mission Control 4.0.0
-  (LazurioTemplates/mission-control#13) has the storage port and the shared contract tests that a Dolt store
-  must pass, with three Git-shaped members still to settle (LazurioTemplates/mission-control#14).
+  for a database yet. The text of decision 0209 says that production databases live outside the server services
+  and does not cover a link between the Services Environments of two servers or the backup of a service's data
+  (HumanAndMachines/Lazurio#715); the amendment that settles both is proposed in Lazurio/LazurioPlatform#838.
+  Lazurio cannot yet hand a module its database connection without an .env file (Lazurio/LazurioPlatform#818).
+  Mission Control 4.0.0 (LazurioTemplates/mission-control#13) has the storage port and the shared contract tests
+  that a Dolt store must pass, with three Git-shaped members still to settle (LazurioTemplates/mission-control#14).
 target_state: >-
-  Mission Control of this Organization runs as app/v4 on Dolt in its Services Environments. A primary on one server
-  and a standby on a second server replicate every committed transaction, and the database is copied regularly
-  to storage outside both servers. The pilot shows each of the following on real servers, with measured values:
-  writing with drafts per Environment, replication, a planned and an emergency failover, a restore from the
-  off-server copy, latency over the network between the servers, access control, and the move of the
-  Organization's Mission Control data from v3 to v4 with a tested way back. Every change to a server is a pull
-  request in the Organization's Deployment Repo with its CI Plan, review and the Owner's merge.
+  Mission Control of this Organization runs as app/v4 on Dolt in its Services Environments. The primary runs in
+  services-01 on the permanent server and the standby in a new services-02 on the temporary second server, and
+  the standby receives every committed transaction. Every Environment connects only to the database service of
+  its own server; on the second server that service forwards writes to the primary. Only the two Services
+  Environments talk to each other across the servers, over the tailnet of the Proxmox hosts and only on the
+  replication and forwarding ports, so services-01 stays off the tailnet and a failover changes no Environment.
+  Every 15 minutes the whole database, drafts included, is copied with Dolt's backup sync to Google Cloud Storage
+  in the Organization's own project in the EU, rotated through hourly and daily copies, together with a dump of
+  its users and grants. The pilot shows each of the following on real servers, with measured values: writing
+  with drafts per Environment, replication, a planned and an emergency failover, a restore from the off-server
+  copy, latency from both servers, access control, and the move of the Organization's Mission Control data from
+  v3 to v4 with a tested way back. Every change to a server is a pull request in the Organization's Deployment
+  Repo with its CI Plan, review and the Owner's merge.
 scope:
   in:
     - >-
-      The database service on two servers (primary and standby) in the Organization's Services Environments, sized
-      for it, and the Organization's off-server backup storage, once Lazurio's Machines support the kind.
+      After the way back of the server-move rehearsal, the database service as primary in services-01 on the
+      permanent server and as standby in a new services-02 on the temporary second server, each Services
+      Environment sized for it, and the link between them over the hosts' tailnet, once Lazurio's Machines
+      support the kind.
+    - >-
+      The Organization's Google Cloud Storage project in the EU for the off-server copies, with hourly and daily
+      rotation.
     - >-
       Adopting Mission Control with app/v4 from the Marketplace, moving this Organization's Mission Control data
       from repository-db to Dolt with a proof of counts and round trip, and switching the default App by the
@@ -52,8 +65,12 @@ scope:
   out:
     - Any other module of the Organization; each move of a module has its own plan.
     - Writing to both database nodes at once and automatic failover.
+    - >-
+      A direct connection from an Environment to a service of the other server, and any tailnet grant for an
+      Environment to reach a Services Environment.
     - The rollout to other Organizations, which Lazurio plans separately after this pilot passes.
     - A second Services Environment on the same server (root decision 0209, point 1).
+    - Cancelling the temporary second server before the pilot ends.
 acceptance_criteria:
   - >-
     A1 Writing: two Environments (Bob's and Alena's) edit Mission Control at the same time. Each sees only its own
@@ -61,25 +78,29 @@ acceptance_criteria:
     nothing is written. Each publication carries its author and summary in the database's log.
   - >-
     A2 Replication: after each publication the standby has the same head of main. The lag is measured and
-    recorded. The standby refuses writes. Users and grants exist on both nodes.
+    recorded. The standby refuses writes. Users and grants exist on both nodes. The run records whether drafts
+    (working sets) replicate.
   - >-
     A3 Planned failover: one Deployment Repo pull request moves the primary to the second server and back. No
-    published commit is lost, the time without writes is recorded, and the module reconnects with no change in
-    any Environment.
+    published commit is lost, the time without writes is recorded, and the module reconnects through its own
+    server's service with no change in any Environment.
   - >-
     A4 Emergency failover: after the primary is stopped abruptly, an Owner promotes the standby by the runbook.
     The time and any lost transactions are recorded. The old primary returns as a standby at a higher epoch, and
     the Deployment Repo matches the result.
   - >-
-    A5 Restore: the database, drafts included, and its users and grants are restored from the off-server copy
-    into a clean Dolt, including an older point of the rotation. The restore time and the age of the newest
-    copy are recorded.
+    A5 Restore: the database, drafts included, and its users and grants are restored from Google Cloud Storage
+    into a clean Dolt, including an older point of the hourly and of the daily rotation. The restore time and the
+    age of the newest copy are recorded; the newest copy is at most 15 minutes old.
   - >-
-    A6 Performance: latency of the typical Mission Control operations is recorded locally on the server's network
-    and across the link between the servers, together with the replication throughput and the import time.
+    A6 Performance: latency of the typical Mission Control operations is recorded from an Environment on the
+    primary's server and from one on the second server (through its own server's service and the link between
+    the Services Environments), together with the replication throughput and the import time.
   - >-
-    A7 Security: an Environment without a grant cannot connect, and a new token generation removes access in one
-    apply. Only the peer node reaches the replication port. No secret is in Git, a Plan, evidence or a log.
+    A7 Security: an Environment without a grant cannot connect, and no Environment reaches a service of the
+    other server or a Services Environment over the tailnet. A new token generation removes access in one apply.
+    Only the other Services Environment reaches the replication and forwarding ports. No secret is in Git, a
+    Plan, evidence or a log.
   - >-
     A8 v3 to v4: the shared contract tests pass against repository-db and Dolt. The data move proves counts and
     a round trip, and the export from v4 back to v3 works on a copy.
@@ -95,18 +116,59 @@ risk_notes:
     database, so the public repository would go stale unless plans are exported from Dolt. The Owner decides
     before the switch.
   - >-
-    Keeping the temporary second server for the pilot has a monthly cost and delays its cancellation. Lazurio's
-    operator decides.
-assumptions: []
-decisions: []
-open_questions:
+    The temporary second server stays until the pilot ends, which keeps its monthly cost for longer. The pilot
+    also waits for the way back of the server-move rehearsal, which returns services-01 to the permanent server.
   - >-
-    Where does the standby run: on the temporary second server kept for the pilot (proposed), or in a second
-    database container on the same server, which proves the protocol but not a second server?
+    Writes from the second server pass through two services and the hosts' tailnet. They are slower than on the
+    primary's server and fail while the link between the servers is down, even with the standby running. A6
+    measures it.
+assumptions:
+  - >-
+    The Proxmox hosts of both servers are nodes of the Organization's tailnet, so the two Services Environments
+    can talk through them without services-01 becoming a tailnet node.
+decisions:
+  - date: '2026-11-03'
+    decision: >-
+      Lazurio (network): an Environment connects only to the services of its own server, as root decision 0209,
+      point 4 says. The services of the second server forward writes to the primary. Only the Services
+      Environments talk to each other over the tailnet of the hosts, for replication and that forwarding. A
+      failover changes no Environment.
+    rationale: >-
+      services-01 carries the public entry and stays off the tailnet, the Environments get no new tailnet grant,
+      and the database address an Environment uses stays the same through a failover.
+  - date: '2026-11-03'
+    decision: >-
+      Lazurio (copies outside the servers): Dolt's backup sync of the whole database, drafts included, every
+      15 minutes with rotation (hourly and daily targets) to Google Cloud Storage in the Organization's own
+      project in the EU, together with a dump of users and grants.
+    rationale: >-
+      A push of main does not carry drafts, and a sync overwrites its target, so only the rotation keeps history.
+      Dolt backs up neither users nor grants. Dolt supports Google Cloud Storage directly.
+  - date: '2026-11-03'
+    decision: >-
+      Lazurio (pilot topology): the primary runs in services-01 on the permanent server and the standby in
+      services-02 on the temporary second server. Cancelling the temporary server is postponed until after the
+      pilot.
+    rationale: >-
+      The pilot proves replication and failover between two real servers of two providers without ordering a new
+      server and without a second Services Environment on one server.
+  - date: '2026-11-03'
+    decision: >-
+      Lazurio (Organizations with one server): v4 may run on a single server with the primary and the off-server
+      copy. The standby comes with the second server.
+    rationale: >-
+      Most Organizations have one server today. The module and the service are the same; only the declaration in
+      the Deployment Repo differs. This pilot uses two servers so that the standby and the failovers are proven.
+open_questions:
   - Do the Organization's plans stay publicly readable after the switch to v4 (a regular export from Dolt)?
+  - >-
+    How many hourly and daily copies does the Organization keep (Lazurio proposes 24 hourly and 14 daily), and
+    who creates its Google Cloud Storage project and bucket? Proposed: the Owner, with a key for the database
+    service that can write copies but cannot delete older ones.
 dependencies:
   - EX-0014 (the Lazurio lab, Ring 0)
-  - "HumanAndMachines/Lazurio#715 (root decision addendum for a production Dolt in the server services)"
+  - The way back of the server-move rehearsal, which returns services-01 to the permanent server
+  - "HumanAndMachines/Lazurio#715 and Lazurio/LazurioPlatform#838 (amendment to root decision 0209)"
   - "Lazurio/LazurioPlatform#818 (database connection without .env)"
   - "LazurioTemplates/mission-control#13 and #14 (Mission Control 4.0.0 and its storage port)"
 links:
@@ -114,8 +176,10 @@ links:
     url: https://github.com/Lazurio/LazurioPlatform/pull/821
   - label: "Database connection without .env (Lazurio/LazurioPlatform#818)"
     url: https://github.com/Lazurio/LazurioPlatform/issues/818
-  - label: "Root decision addendum needed (HumanAndMachines/Lazurio#715)"
+  - label: "Root decision 0209 and the workspace modules' database (HumanAndMachines/Lazurio#715)"
     url: https://github.com/HumanAndMachines/Lazurio/issues/715
+  - label: "Amendment to 0209 of 2026-11-03 (Lazurio/LazurioPlatform#838)"
+    url: https://github.com/Lazurio/LazurioPlatform/pull/838
   - label: "Mission Control 4.0.0 (LazurioTemplates/mission-control#13)"
     url: https://github.com/LazurioTemplates/mission-control/pull/13
   - label: "Storage port before app/v4 (LazurioTemplates/mission-control#14)"
