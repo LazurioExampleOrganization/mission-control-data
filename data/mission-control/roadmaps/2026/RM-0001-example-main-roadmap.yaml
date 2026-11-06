@@ -7,24 +7,21 @@ status: in_progress
 owner: organization-admin
 priority: high
 created_at: 2026-11-01
-updated_at: 2026-11-01
+updated_at: 2026-11-06
 source_plan: EX-0002
-summary: >-
-  Fictional reference roadmap: when the Organization's own plans land,
+summary: "Fictional reference roadmap: when the Organization's own plans land,
   approximately, from its move to Lazurio to its first paid offers. It shows
-  Lazurio's main roadmap on this Organization's fictional data.
+  Lazurio's main roadmap on this Organization's fictional data."
 priorities:
   - id: priority-001
     title: Run the Organization on Lazurio
     rank: 1
-    rationale: >-
-      The reference Organization is Lazurio's lab and showcase, so its own
+    rationale: The reference Organization is Lazurio's lab and showcase, so its own
       work runs on the current Lazurio first.
   - id: priority-002
     title: First paid offers
     rank: 2
-    rationale: >-
-      The fictional business needs offers that customers can buy before it
+    rationale: The fictional business needs offers that customers can buy before it
       grows its team.
 steps:
   - id: step-001
@@ -71,7 +68,8 @@ steps:
       - EX-0011
       - EX-0008
     acceptance_criteria:
-      - Plans, tasks and this roadmap are kept in Mission Control and nowhere else.
+      - Plans, tasks and this roadmap are kept in Mission Control and nowhere
+        else.
   - id: step-004
     title: The Organization becomes the Lazurio lab
     status: shaping
@@ -149,3 +147,15 @@ steps:
     notes: Not scheduled yet.
     acceptance_criteria:
       - Every mechanism claim links to its evidence.
+  - id: step-010
+    title: Team time tracker
+    status: in_progress
+    executable: true
+    plan_refs:
+      - EX-0016
+    notes: "First version is in review. Hosted use waits on the gateway identity
+      rollout and deployment verification in time-tracker issue #2; rollout is
+      not scheduled."
+    acceptance_criteria:
+      - The reviewed time tracking module is published with user consent and
+        verified with authorized worker and manager sessions.
