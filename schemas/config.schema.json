@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "companiesascode.mission_control.config.v1",
+  "title": "Mission Control settings",
+  "$comment": "Generated from the Zod schemas of Mission Control (app/v3/src/domain) by `bun run schema:export`. Do not edit.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "companiesascode.mission_control.config.v1"
+    },
+    "plan_prefix": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,6}$"
+    },
+    "organization_admin": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "plan_prefix"
+  ]
+}
