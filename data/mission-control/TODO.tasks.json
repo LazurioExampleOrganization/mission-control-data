@@ -631,7 +631,7 @@
     "priority_rank": 50,
     "assignee": "agent",
     "priority_decider": "alexmorgan",
-    "priority_reason": "We are testing Mission Control by planning the further development of Mission Control in it. The goal is to walk the whole loop: a plan is created as YAML, the plan contains decisions and proposed tasks, the export creates implemen…",
+    "priority_reason": "We are testing Mission Control by planning the further development of Mission Control in it. The goal is to walk the whole loop: a plan is created as YAML, the plan contains decisions and proposed tasks, the export creates implemen\u2026",
     "created_at": "2026-05-23",
     "updated_at": "2026-05-23",
     "tags": [
@@ -690,7 +690,7 @@
     "priority_rank": 102,
     "assignee": "agent",
     "priority_decider": "alexmorgan",
-    "priority_reason": "We are testing Mission Control by planning the further development of Mission Control in it. The goal is to walk the whole loop: a plan is created as YAML, the plan contains decisions and proposed tasks, the export creates implemen…",
+    "priority_reason": "We are testing Mission Control by planning the further development of Mission Control in it. The goal is to walk the whole loop: a plan is created as YAML, the plan contains decisions and proposed tasks, the export creates implemen\u2026",
     "created_at": "2026-05-23",
     "updated_at": "2026-05-23",
     "tags": [
@@ -1791,13 +1791,13 @@
   },
   {
     "id": "task-2026-10-23-002",
-    "title": "L1: the external guest Václav Vacek as a member with a service entry to Bob's and Alena's Environments",
+    "title": "L1: the external guest V\u00e1clav Vacek as a member with a service entry to Bob's and Alena's Environments",
     "status": "todo",
     "priority": "high",
     "priority_rank": 60,
     "assignee": "Example thread",
     "priority_decider": "organization-admin",
-    "priority_reason": "The Owner wants Václav to watch how Bob and Alena work from 2026-10-23.",
+    "priority_reason": "The Owner wants V\u00e1clav to watch how Bob and Alena work from 2026-10-23.",
     "tags": [
       "EX-0014",
       "lab",
@@ -1805,7 +1805,7 @@
       "github"
     ],
     "acceptance_criteria": [
-      "Václav is a member of the GitHub Organization and of Teams `lazurio-bob` and `lazurio-alena` only, has no Environment of his own, and enters Bob's and Alena's Work Environments with his Lazurio login; verified in a browser (0178) or confirmed by him."
+      "V\u00e1clav is a member of the GitHub Organization and of Teams `lazurio-bob` and `lazurio-alena` only, has no Environment of his own, and enters Bob's and Alena's Work Environments with his Lazurio login; verified in a browser (0178) or confirmed by him."
     ],
     "risk_notes": [
       "Inside Bob's and Alena's Environments he can do everything they can, including acting with their GitHub accounts (root decision 0192); watching only is an agreement with him."
@@ -1829,5 +1829,51 @@
     },
     "source": "mission-control",
     "dev_code": "EX-0014"
+  },
+  {
+    "id": "task-2026-11-06-001",
+    "title": "Deliver the Time Tracker first version",
+    "status": "open",
+    "priority": "medium",
+    "priority_rank": 100,
+    "assignee": "agent",
+    "priority_decider": "lazurio-bob",
+    "priority_reason": "Create and verify the module, server access enforcement, timer workflow, corrections, CSV and draft publication; register its slots.",
+    "created_at": "2026-11-06",
+    "updated_at": "2026-11-06",
+    "tags": [
+      "EX-0016",
+      "mission-control",
+      "time-tracker"
+    ],
+    "dev_code": "EX-0016",
+    "summary": "Create and verify the module, server access enforcement, timer workflow, corrections, CSV and draft publication; register its slots.",
+    "risk_notes": [
+      "Live identity and background alert delivery remain rollout dependencies."
+    ],
+    "acceptance_criteria": [
+      "Meet the plan acceptance criteria and hand off reviewed pull requests with verification evidence."
+    ],
+    "links": [
+      {
+        "label": "Mission Control plan",
+        "path": "data/mission-control/plans/2026/11/EX-0016-team-time-tracker.yaml"
+      },
+      {
+        "label": "Identity interface dependency",
+        "url": "https://github.com/Lazurio/LazurioPlatform/issues/474"
+      },
+      {
+        "label": "Module registration PR",
+        "url": "https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/pull/25"
+      }
+    ],
+    "planning": {
+      "plan_id": "mcplan-ex-0016",
+      "path": "data/mission-control/plans/2026/11/EX-0016-team-time-tracker.yaml",
+      "source": "mission-control",
+      "role": "planning_source"
+    },
+    "source": "mission-control"
   }
 ]

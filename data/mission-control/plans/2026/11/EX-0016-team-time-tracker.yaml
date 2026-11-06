@@ -1,0 +1,101 @@
+schema_version: companiesascode.mission_control.plan.v2
+id: mcplan-ex-0016
+dev_code: EX-0016
+title: Team time tracker
+status: shaping
+owner: lazurio-bob
+priority: medium
+priority_rank: 100
+created_at: 2026-11-06
+updated_at: 2026-11-06
+context: The user approved a new Workspace module for simple project time
+  tracking by several people on their own devices. The purpose and creation plan
+  were confirmed in the task thread before module creation.
+current_problem: The team needs a reliable start/stop workflow, correction of
+  forgotten timers and spreadsheet reporting without manual reconstruction of
+  working time.
+target_state: A responsive Time Tracker module with one active timer per person,
+  per-user records, a manager overview, corrections and CSV export. Time is
+  capped at eight hours even while the app is closed. Persisted drafts use
+  repository-db and only a manager can publish the whole draft.
+scope:
+  in:
+    - Private time-tracker and time-tracker-data repositories; Workspace Team
+      Write access.
+    - React/TypeScript app and server using supported Lazurio appAccess identity.
+    - Start, stop, history, correction audit, filters, totals and CSV.
+    - Eight-hour deadline and documented Lazurio Automate routine for
+      reconciliation and notifications.
+    - Shared repository-db sync host, restricted views and manager publication
+      review.
+  out:
+    - Google Sheets integration.
+    - Payroll, billing, employee surveillance and idle detection.
+    - A new database, scheduler or sign-in system.
+    - Gateway deployment or changing live access grants.
+acceptance_criteria:
+  - A verified user can start only one timer and stop or edit only their own
+    records.
+  - An application admin can review and edit all records; unknown identity
+    exposes no records.
+  - Timers never count beyond eight hours, including after restart; automatic
+    stops remain marked after a correction.
+  - CSV includes filtered records, explicit UTC times and durations, and
+    neutralizes spreadsheet formulas.
+  - Stale edits and stale draft publication are rejected without losing the
+    draft.
+  - The interface works at 390px and 1280px, with long project names and reduced
+    motion.
+validation:
+  - Run strict TypeScript, Biome, meaningful domain/API/data tests and a
+    production build.
+  - Verify start, health, foreign Host refusal and graceful shutdown.
+  - Check the UI and its main actions in the Environment browser with explicitly
+    fictional demonstration data.
+  - Live per-user access needs a gateway rollout and two authorized test
+    sessions before real team use.
+risk_notes:
+  - The current gateway does not forward appAccess identity; production APIs
+    must fail closed. See Lazurio/LazurioPlatform#474.
+  - All Environment operators can access the mounted data; record-level
+    restrictions protect app-only visitors.
+  - Automatic notifications require a routine in the Organization automation
+    Environment. No module scheduler will be created.
+  - Repository-db stores published history; use fictional data for this
+    reference Organization.
+assumptions: []
+decisions:
+  - date: 2026-11-06
+    decision: Use vite-react, repository-db and private repositories; Workspace Team
+      gets Write.
+    rationale: The user confirmed the exact creation plan.
+  - date: 2026-11-06
+    decision: Automatically stop after eight hours, flag the record and allow correction.
+    rationale: The user chose an alert plus automatic stop with an editable record.
+open_questions: []
+dependencies: []
+github:
+  branches: []
+  prs: []
+todo_outputs: []
+links:
+  - label: Identity interface dependency
+    url: https://github.com/Lazurio/LazurioPlatform/issues/474
+  - label: Module registration PR
+    url: https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/pull/25
+planning_target:
+  scope: lazurio-example-organization
+  todo_tasks_path: data/mission-control/TODO.tasks.json
+proposed_tasks:
+  - title: Deliver the Time Tracker first version
+    summary: Create and verify the module, server access enforcement, timer
+      workflow, corrections, CSV and draft publication; register its slots.
+    priority: medium
+    tags:
+      - EX-0016
+      - time-tracker
+    acceptance_criteria:
+      - Meet the plan acceptance criteria and hand off reviewed pull requests
+        with verification evidence.
+    risk_notes:
+      - Live identity and background alert delivery remain rollout dependencies.
