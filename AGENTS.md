@@ -20,7 +20,7 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
    a pull request.
 2. Change only domain data under `data/mission-control/`. No secrets, tokens,
    OAuth or session files, personal caches or host-specific runtime state.
-3. Run `npm run validate` before publishing. A commit has exactly one parent
+3. Run `bun scripts/validate.ts` before publishing. A commit has exactly one parent
    and contains only the intended canonical change.
 4. Publish only with a normal, non-force fast-forward push to `v3` or a pull
    request. A concurrent remote advance is a normal collision: pull, validate
@@ -31,10 +31,13 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
 ## Control plane
 
 `mission-control.config.json`, `repository-db.yaml`, the validator, the schemas
-and these agent rules are the control plane. Change them in a dedicated pull
-request without unrelated domain data, with validation of the old and new
-shape and a described rollback. `publish_policy.protected_paths` stays
-concrete and non-empty.
+and these agent rules are the control plane. `schemas/` and
+`scripts/validate.ts` come from Mission Control's `templates/data-repo/` and
+are generated there (`bun run schema:export` in its `app/v3`); take a new copy
+with the release that changes them and never edit them here by hand. Change
+them in a dedicated pull request without unrelated domain data, with validation
+of the old and new shape and a described rollback.
+`publish_policy.protected_paths` stays concrete and non-empty.
 
 ## Language
 

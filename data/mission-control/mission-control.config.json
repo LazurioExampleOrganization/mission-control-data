@@ -12,8 +12,8 @@
   "issues_resolved_path": "data/mission-control/ISSUES.resolved.json",
   "todo_tasks_path": "data/mission-control/TODO.tasks.json",
   "done_tasks_path": "data/mission-control/DONE.tasks.json",
-  "schema_path": "schemas/mission-control-plan.schema.json",
-  "roadmap_schema_path": "schemas/mission-control-roadmap.schema.json",
+  "schema_path": "schemas/plan.schema.json",
+  "roadmap_schema_path": "schemas/roadmap.schema.json",
   "publish_policy": {
     "writer_mode": "local-principal-v1",
     "pending_changesets_dir": "data/mission-control/changesets/pending",
