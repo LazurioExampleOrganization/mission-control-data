@@ -7,7 +7,7 @@ owner: organization-admin
 priority: high
 priority_rank: 2
 created_at: 2026-10-18
-updated_at: 2026-10-22
+updated_at: 2026-11-06
 context: |
   Lazurio Example Organization is Lazurio's public reference Organization (root
   decision 0204): fictional data, public repositories, its own dedicated server,
@@ -395,7 +395,7 @@ scope:
     - A third test account; scenario 3 deletes and re-onboards Alena instead (D29).
     - AI for visitors other than GPT-6 Luna through the capped gateway, and the members' AI pool for visitors (D34, D39).
     - The Lazurio product work the lab depends on (Dashboard self-service, account deletion or reset, Environment removal in Machines, the vault route and the nightly vault wipe, `try-01`'s preset with its vault page and guide, the capped AI gateway, Buddy on the web (DEV-6676), Team Environment content); the lab consumes it and records the gaps it finds.
-    - An English locale of the Mission Control UI (Lazurio/mission-control#1).
+    - An English locale of the Mission Control UI (LazurioTemplates/mission-control#1).
     - The close-out of EX-0001 (A1), which stays in EX-0001.
 acceptance_criteria:
   - GitHub Teams and grants match the public access matrix; the default branch of every public repository requires a pull request, an approval and CI and forbids force pushes and deletion; every repository has CODEOWNERS.
