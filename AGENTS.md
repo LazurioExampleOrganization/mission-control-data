@@ -18,10 +18,15 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
 
 1. Work from a clean, up-to-date checkout of `v3`, or from a task worktree for
    a pull request.
-2. Change only domain data under `data/mission-control/`. No secrets, tokens,
+2. Change only plans, roadmaps and settings under `data/mission-control/`.
+   The task and issue ledgers, `changesets/`, `import-reviews/` and
+   `reports/` are history: never change them. New tasks are a plan's
+   `proposed_tasks`, and the work itself is GitHub Issues of the owning
+   repository, linked to the plan (root `AGENTS.md`). No secrets, tokens,
    OAuth or session files, personal caches or host-specific runtime state.
-3. Run `bun scripts/validate.ts` before publishing. A commit has exactly one parent
-   and contains only the intended canonical change.
+3. Run `bun scripts/validate.ts` before publishing. It is the App's own check:
+   when it fails, the App would refuse or skip the record. A commit has
+   exactly one parent and contains only the intended canonical change.
 4. Publish only with a normal, non-force fast-forward push to `v3` or a pull
    request. A concurrent remote advance is a normal collision: pull, validate
    again, then push again.
@@ -31,10 +36,12 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
 ## Control plane
 
 `mission-control.config.json`, `repository-db.yaml`, the validator, the schemas
-and these agent rules are the control plane. `schemas/` and
-`scripts/validate.ts` come from Mission Control's `templates/data-repo/` and
-are generated there (`bun run schema:export` in its `app/v3`); take a new copy
-with the release that changes them and never edit them here by hand. Change
+and these agent rules are the control plane. `schemas/`,
+`scripts/validate.ts` and `scripts/mission-control-check.js` come from Mission
+Control's `templates/data-repo/`; the schemas and the check bundle are
+generated there (`bun run schema:export` in its `app/v3`). Take a new copy
+when the Organization takes the release that changes them, in the same window
+as the App's merge, and never edit them here by hand. Change
 them in a dedicated pull request without unrelated domain data, with validation
 of the old and new shape and a described rollback.
 `publish_policy.protected_paths` stays concrete and non-empty.
