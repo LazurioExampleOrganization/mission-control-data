@@ -7,7 +7,7 @@ owner: organization-admin
 priority: high
 priority_rank: 1
 created_at: 2026-10-16
-updated_at: 2026-10-16
+updated_at: 2026-11-06
 context: |
   Lazurio Example Organization is Lazurio's public reference Organization. All
   of its data is fictional. It started from a cleaned snapshot of a GEN2
@@ -56,10 +56,12 @@ decisions:
     decision: Module port pool 25300-25399.
   - date: 2026-10-16
     decision: Mission Control v3 comes from the public upstream Lazurio/mission-control at v3.0.0; its Czech-only UI is a known gap.
+  - date: 2026-11-06
+    decision: The upstream moved to LazurioTemplates/mission-control, the publisher of the Lazurio Marketplace templates; the Organization takes its releases as a Marketplace subscriber, from v4.0.0 (plan DEV-6593).
 open_questions:
   - Whether a public read-only install path for people outside the Organization is wanted.
 links:
   - label: Migration plan and benchmark ledger
     url: https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/blob/main/MIGRATION.md
-  - label: Mission Control upstream
-    url: https://github.com/Lazurio/mission-control
+  - label: Mission Control template (formerly Lazurio/mission-control)
+    url: https://github.com/LazurioTemplates/mission-control
