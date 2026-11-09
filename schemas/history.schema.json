@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mission-control.history.v1",
+  "title": "Mission Control frozen history (history.lock.json)",
+  "$comment": "Generated from the Zod schemas of Mission Control (app/v3/src/domain) by `bun run schema:export`. Do not edit.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "mission-control.history.v1"
+    },
+    "generated_by": {
+      "type": "string",
+      "const": "bun scripts/validate.ts --freeze-history"
+    },
+    "files": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_by",
+    "files"
+  ],
+  "additionalProperties": false
+}

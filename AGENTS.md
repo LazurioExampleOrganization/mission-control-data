@@ -20,10 +20,18 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
    a pull request.
 2. Change only plans, roadmaps and settings under `data/mission-control/`.
    The task and issue ledgers, `changesets/`, `import-reviews/` and
-   `reports/` are history: never change them. New tasks are a plan's
+   `reports/` are the frozen 3.x history
+   (`data/mission-control/history.lock.json` names every file): never change,
+   add or remove a file there, add nothing else beside the records and never
+   edit the lock. A deliberate change of the history is
+   `bun scripts/validate.ts --freeze-history` on your Operator's instruction,
+   in a pull request of its own that says why. New tasks are a plan's
    `proposed_tasks`, and the work itself is GitHub Issues of the owning
    repository, linked to the plan (root `AGENTS.md`). No secrets, tokens,
    OAuth or session files, personal caches or host-specific runtime state.
+   Evidence of a roadmap step is a file of this repository, named by a
+   portable relative path; no URL carries a credential (a token, a key, user
+   info).
 3. Run `bun scripts/validate.ts` before publishing. It is the App's own check:
    when it fails, the App would refuse or skip the record. A commit has
    exactly one parent and contains only the intended canonical change.
@@ -35,8 +43,8 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
 
 ## Control plane
 
-`mission-control.config.json`, `repository-db.yaml`, the validator, the schemas
-and these agent rules are the control plane. `schemas/`,
+`mission-control.config.json`, `repository-db.yaml`, the history lock, the
+validator, the schemas and these agent rules are the control plane. `schemas/`,
 `scripts/validate.ts` and `scripts/mission-control-check.js` come from Mission
 Control's `templates/data-repo/`; the schemas and the check bundle are
 generated there (`bun run schema:export` in its `app/v3`). Take a new copy

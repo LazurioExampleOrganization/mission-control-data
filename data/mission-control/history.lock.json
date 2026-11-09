@@ -1,0 +1,16 @@
+{
+  "schema_version": "mission-control.history.v1",
+  "generated_by": "bun scripts/validate.ts --freeze-history",
+  "files": {
+    "data/mission-control/DONE.tasks.json": "sha256:fc15cfd82c96deceef95c165814c6187d6ee1e36f858c7ab0fab939a4ad09dad",
+    "data/mission-control/ISSUES.open.json": "sha256:ff407bb2a4759b52fa7efdb870dd36a29811fe23e37fadf43e219946d230db9a",
+    "data/mission-control/ISSUES.resolved.json": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/mission-control/TODO.tasks.json": "sha256:6bb28ef47b03bfbe6f1a50e803a46e252d47469e8f15b85a50c61c3eedf50aff",
+    "data/mission-control/changesets/pending/.gitkeep": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mission-control/changesets/published/.gitkeep": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mission-control/changesets/superseded/.gitkeep": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mission-control/import-reviews/.gitkeep": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mission-control/import-reviews/2026-10-16-v1-import/parity-report.md": "sha256:248f141b05dc1e2f3550c3f62d335b463bbc631f9144493ba528f42e5de2917c",
+    "data/mission-control/reports/.gitkeep": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
