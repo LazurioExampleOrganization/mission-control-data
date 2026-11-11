@@ -8,7 +8,7 @@ It is a `repository-db` v3 data repository on branch `v3`, mounted in the
 Organization root at `mission-control/db/` inside the Mission Control app
 checkout. The app code is the Organization's copy of the Lazurio Marketplace
 template [LazurioTemplates/mission-control](https://github.com/LazurioTemplates/mission-control)
-(release 4.1.1, in `LazurioExampleOrganization/mission-control`); this
+(release 4.1.2, in `LazurioExampleOrganization/mission-control`); this
 repository holds only the Organization's data and the control plane taken
 from that release's `templates/data-repo/`.
 
@@ -40,7 +40,11 @@ issue) and the rules across records (unique codes, references, the prefix,
 at most one main roadmap). A step's local evidence and a link's `path` are
 portable paths relative to this repository, and the evidence is a regular
 file that exists here with exactly that name, outside `.git/`,
-`.repository-db/` and `generated/`. No URL in a record carries a credential
+`.repository-db/` and `generated/`, which Git would publish: no rule of a
+`.gitignore` on its path or of `.git/info/exclude` leaves it out
+(`evidence_ignored`; this repository ignores `.env`, `*.secret`, `*.token`
+and more). Keep new evidence outside `data/mission-control/`, for example in
+`evidence/`. No URL in a record carries a credential
 (user info, a parameter such as `token` or `api_key`, a value shaped like a
 secret). The frozen history must match `history.lock.json`, and nothing else
 may sit under `data/mission-control/` beside the settings, the plans, the
@@ -54,10 +58,10 @@ Changing the frozen history on purpose is a new freeze
 a pull request of its own that says why; the change of `history.lock.json` is
 what that pull request's review checks.
 
-## Mission Control 4.1.1 (2026-11-09)
+## Mission Control 4.1.2 (2026-11-11)
 
-The control plane is that of Mission Control 4.1.1 (`templates/data-repo/` of
-the tag `v4.1.1`, commit `fe5000722a308e6aa0f6786f1b93e4d508556038`), which
+The control plane is that of Mission Control 4.1.2 (`templates/data-repo/` of
+the tag `v4.1.2`, commit `42141bbd3d59f05e1de950530f68119eecd6736e`), which
 the App takes in LazurioExampleOrganization/mission-control#7: the generated
 schemas, `scripts/validate.ts` with the check bundle
 `scripts/mission-control-check.js`, `.gitattributes`, the workflow and the
@@ -74,7 +78,7 @@ revert the App's merge in `LazurioExampleOrganization/mission-control` with a
 pull request (`git revert -m 1 <merge commit>`; the first parent is the
 previous `main`) and this repository's pull request the same way, in one short
 window. Every step is a new commit through a pull request, never a reset or a
-force push, so data published in between stays. Taking 4.1.1 again later
+force push, so data published in between stays. Taking 4.1.2 again later
 means reverting those reverts.
 
 ## Writing

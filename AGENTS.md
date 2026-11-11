@@ -30,8 +30,10 @@ another Organization. The rules of the Organization root `AGENTS.md` apply.
    repository, linked to the plan (root `AGENTS.md`). No secrets, tokens,
    OAuth or session files, personal caches or host-specific runtime state.
    Evidence of a roadmap step is a file of this repository, named by a
-   portable relative path; no URL carries a credential (a token, a key, user
-   info).
+   portable relative path; keep new evidence outside `data/mission-control/`
+   (for example `evidence/`), and never in a file that `.gitignore` or
+   `.git/info/exclude` leaves out: Git would never publish it. No URL carries
+   a credential (a token, a key, user info).
 3. Run `bun scripts/validate.ts` before publishing. It is the App's own check:
    when it fails, the App would refuse or skip the record. A commit has
    exactly one parent and contains only the intended canonical change.

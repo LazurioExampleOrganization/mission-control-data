@@ -25,6 +25,8 @@ import { pathToFileURL } from "node:url";
 export interface Issue {
   record: string;
   code: string;
+  /** Values the issue names (a step, a path, a rule); never translated. */
+  params?: Record<string, string>;
   message: string;
 }
 
