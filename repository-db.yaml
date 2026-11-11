@@ -5,11 +5,11 @@ data_repo:
   branch: v3
 schema:
   name: mission-control-data
-  version: 3.0.0-alpha.0
+  version: 3.1.0
 layout:
   data: data
   generated: generated
   scripts: scripts
 generated_manifest: []
 validate:
-  - node scripts/validate-mission-control-data.mjs
+  - bun scripts/validate.ts
