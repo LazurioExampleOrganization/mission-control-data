@@ -7,7 +7,7 @@ owner: organization-admin
 priority: high
 priority_rank: 2
 created_at: 2026-10-18
-updated_at: 2026-11-06
+updated_at: 2026-11-15
 context: |
   Lazurio Example Organization is Lazurio's public reference Organization (root
   decision 0204): fictional data, public repositories, its own dedicated server,
@@ -68,7 +68,7 @@ current_problem: |
     maintainer and the two test accounts. Rulesets forbid deletion and force
     pushes and require CI where it exists; nothing requires a pull request, an
     approval or a code owner. The remaining governance questions are open in
-    infra#2.
+    infra-example#2.
   - Environments. The dedicated server runs the public entry `edge-01`, Bob's
     Work Environment `admin-01`, the Team Environment `team-01` (Team
     `workspace`) and the visitor Environment `try-01`, reached by a direct link
@@ -201,7 +201,7 @@ scope:
       review automations of L4 run, so work does not stall. Freedom: Team names
       beyond the per-person pattern, the exact matrix, CODEOWNERS granularity,
       required check names and the merge method, which must keep the noreply
-      author. Owner: Example thread. Closes infra#2.
+      author. Owner: Example thread. Closes infra-example#2.
     - >-
       L2 Environments. Outcome: each person has a place to live, the difference
       between the three kinds of Environment is visible, and the two faces of
@@ -558,6 +558,7 @@ decisions:
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D30 and D31 stand? They apply unless the Owner overrides them. (D28's cap and place of the pool are settled by D40.)"
   - "Q14 The shape of the account deletion or reset that D29 needs; it is designed in the maintainers' plan."
+  - "Q17 Where does task-2026-10-18-006 (L2's public access matrix per Environment kind) publish the matrix since the rename of 2026-11-14 (root decision 0204, point 10)? Before it, the public access documentation was the public `infra`. That repository is now `infra-example`, a public copy that is not kept current, so it cannot match the deployed state that the task's acceptance asks for. The authoritative access records are in the private `infra`, which visitors cannot read. Until the Owner decides, task-2026-10-18-006 waits; the rest of L2 does not depend on this question."
 dependencies:
   - "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization's content, so `team-01` is empty; it blocks `team-01` in L2 and the Team Environment onboarding scenario."
   - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); visitors and scenario 3 can hit it."
@@ -584,8 +585,8 @@ dependencies:
 links:
   - label: GEN3 migration plan and benchmark ledger (MIGRATION.md, EX-0001)
     url: https://github.com/LazurioExampleOrganization/LazurioExampleOrganization_GEN3/blob/main/MIGRATION.md
-  - label: "infra#2: the remaining GitHub governance of the Organization (closed by L1)"
-    url: https://github.com/LazurioExampleOrganization/infra/issues/2
+  - label: "infra-example#2: the remaining GitHub governance of the Organization (closed by L1)"
+    url: https://github.com/LazurioExampleOrganization/infra-example/issues/2
   - label: "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization"
     url: https://github.com/Lazurio/LazurioPlatform/issues/483
   - label: Root decision register (0154, 0155, 0171, 0173, 0178, 0181, 0192, 0203, 0204, 0205, 0207, 0209, 0210)
@@ -635,7 +636,7 @@ todo_outputs:
 proposed_tasks:
   - id: task-2026-10-18-001
     title: "L1: Teams, grants and the public access matrix"
-    summary: "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra`). Team `lazurio-alena` (closed, Alena only, no grants) exists; an Admin created it on 2026-10-18. Create the closed Teams `finance` (Bob only; Write on finance) and `sales` (shares the sales modules with `workspace`, D30). Give each Team its grants from one matrix of module, Team and right, where restricted means read without Write (D23), and publish that matrix. Visitors get no Team and no GitHub membership (D20). Nothing starts before the Owner approves EX-0014."
+    summary: "Repositories: the GitHub Organization settings and the public access documentation (`access/` in `infra-example`). Team `lazurio-alena` (closed, Alena only, no grants) exists; an Admin created it on 2026-10-18. Create the closed Teams `finance` (Bob only; Write on finance) and `sales` (shares the sales modules with `workspace`, D30). Give each Team its grants from one matrix of module, Team and right, where restricted means read without Write (D23), and publish that matrix. Visitors get no Team and no GitHub membership (D20). Nothing starts before the Owner approves EX-0014."
     priority: high
     priority_rank: 61
     assignee: Example thread
@@ -645,7 +646,7 @@ proposed_tasks:
     acceptance_criteria:
       - "The Teams exist as closed Teams with the grants of the published matrix, read back via gh."
       - "The matrix lists every module and root application repository with the right of each Team and person."
-      - "infra#2 is answered and closed with a link to the matrix."
+      - "infra-example#2 is answered and closed with a link to the matrix."
     risk_notes:
       - "Members are only the Lazurio maintainers and the test accounts, so no visitor's data enters the Organization; visitors enter `try-01` with their Lazurio login and never appear in the Organization's GitHub or repositories (D33)."
     blocked_by: []
@@ -715,7 +716,7 @@ proposed_tasks:
     blocked_by: [task-2026-10-21-002]
   - id: task-2026-10-18-006
     title: "L2: public access matrix per Environment kind"
-    summary: "Repository: the public access documentation (`infra`). For each Environment kind (Personal, Work, Team), the visitor path and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what visitors never get."
+    summary: "Repository: open since the rename of 2026-11-14 (Q17); this task waits for that decision. For each Environment kind (Personal, Work, Team), the visitor path and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what visitors never get."
     priority: medium
     priority_rank: 66
     assignee: Example thread
