@@ -558,7 +558,7 @@ decisions:
 open_questions:
   - "Q13 Do the proposed defaults D25, D26, D30 and D31 stand? They apply unless the Owner overrides them. (D28's cap and place of the pool are settled by D40.)"
   - "Q14 The shape of the account deletion or reset that D29 needs; it is designed in the maintainers' plan."
-  - "Q15 Where does L2 (task-2026-10-18-006) publish its public access matrix since the rename of 2026-11-14 (root decision 0204, point 10)? Before it, the public access documentation was the public `infra`. That repository is now `infra-example`, a public copy that is not kept current, so it cannot match the deployed state that L2's acceptance asks for. The authoritative access records are in the private `infra`, which visitors cannot read. Until the Owner decides, L2 does not start."
+  - "Q17 Where does task-2026-10-18-006 (L2's public access matrix per Environment kind) publish the matrix since the rename of 2026-11-14 (root decision 0204, point 10)? Before it, the public access documentation was the public `infra`. That repository is now `infra-example`, a public copy that is not kept current, so it cannot match the deployed state that the task's acceptance asks for. The authoritative access records are in the private `infra`, which visitors cannot read. Until the Owner decides, task-2026-10-18-006 waits; the rest of L2 does not depend on this question."
 dependencies:
   - "Lazurio/LazurioPlatform#483: a Team Environment never offers installing the Organization's content, so `team-01` is empty; it blocks `team-01` in L2 and the Team Environment onboarding scenario."
   - "The sign-in service: the first sign-in fails its name validation for some GitHub display names (parentheses or a single word); visitors and scenario 3 can hit it."
@@ -716,7 +716,7 @@ proposed_tasks:
     blocked_by: [task-2026-10-21-002]
   - id: task-2026-10-18-006
     title: "L2: public access matrix per Environment kind"
-    summary: "Repository: open since the rename of 2026-11-14 (Q15); the task waits for that decision. For each Environment kind (Personal, Work, Team), the visitor path and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what visitors never get."
+    summary: "Repository: open since the rename of 2026-11-14 (Q17); this task waits for that decision. For each Environment kind (Personal, Work, Team), the visitor path and each Environment of the lab, state who enters, which GitHub identity acts, which modules are installed, and how AI, the vault and Integrations work there, including what visitors never get."
     priority: medium
     priority_rank: 66
     assignee: Example thread
